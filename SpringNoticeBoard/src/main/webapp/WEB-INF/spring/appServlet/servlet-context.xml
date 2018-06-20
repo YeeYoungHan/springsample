@@ -23,6 +23,6 @@
 	
 	<context:component-scan base-package="com.notice.board" />
 	
-	
+	<resources mapping="/css/**" location="/resources/css/" />
 	
 </beans:beans>

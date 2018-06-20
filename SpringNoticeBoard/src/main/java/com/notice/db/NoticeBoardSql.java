@@ -18,10 +18,19 @@
 
 package com.notice.db;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 public interface NoticeBoardSql
 {
 	@Insert("INSERT INTO NoticeBoard( nbSubject, nbContent, nbInsertDate ) VALUES( #{m_strSubject}, #{m_strContent}, now() )")
 	public void Insert( );
+	
+	@Select("SELECT nbId, nbSubject, nbInsertDate, nbReadCount FROM NoticeBoard")
+	public List<NoticeBoardRow> SelectList( int iPage );
+	
+	@Select("SELECT nbId, nbSubject, nbContent, nbInsertDate FROM NoticeBoard WHERE nbId = #{iId}")
+	public List<NoticeBoardRow> Select( int iId );
 }
