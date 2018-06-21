@@ -17,5 +17,9 @@
  * spring 데이터베이스에 접근할 수 있는 spring 계정을 생성한다.
   - spring 계정의 비밀번호를 spring 으로 설정한다.
 
+4. 폴더 설명
+
+ * SpringNoticeBoard
+  - 스프링 프레임워크 기반 게시판 개발 프로젝트
 
  
