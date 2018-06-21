@@ -23,6 +23,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
+/** annotation 기반 MyBatis 기능을 이용한 테이블 INSERT, SELECT 등의 기능을 수행하는 인터페이스 
+ * @author 이영한 ( http://blog.naver.com/websearch )
+ *
+ */
 public interface NoticeBoardSql
 {
 	@Insert("INSERT INTO NoticeBoard( nbSubject, nbContent, nbInsertDate ) VALUES( #{m_strSubject}, #{m_strContent}, now() )")
