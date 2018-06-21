@@ -43,6 +43,19 @@ public class BoardController
 		return "insert";
 	}
 	
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	public String insertAction( @RequestParam("subject") String strSubject, @RequestParam("content") String strContent, Model model )
+	{
+		int iRet = m_clsSession.insert( "Insert", new NoticeBoardRow( strSubject, strContent ) );
+		
+		if( iRet == 1 )
+		{
+			return "redirect:list";
+		}
+		
+		return "insert";
+	}
+	
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public String update( Model model )
 	{

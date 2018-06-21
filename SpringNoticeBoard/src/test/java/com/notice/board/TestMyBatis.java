@@ -18,20 +18,15 @@
 
 package com.notice.board;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.notice.db.NoticeBoardRow;
-import com.notice.db.NoticeBoardSql;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration( locations = { "file:src/main/webapp/WEB-INF/spring/**/*.xml" } )
@@ -39,25 +34,11 @@ public class TestMyBatis
 {
 	@Inject
 	SqlSession m_clsSession;
-	
-	@Before
-	public void Before()
-	{
-		// XML ÆÄÀÏ¿¡ SQL ¹®À» ÀúÀåÇÏÁö ¾Ê°í annotation interface ·Î SQL ¹®À» ÀúÀåÇÑ´Ù.
-		m_clsSession.getConfiguration( ).addMapper( NoticeBoardSql.class );
 		
-		
-	}
-	
 	@Test
 	public void TestInsert()
 	{
-		Date clsDate = new Date();
-		SimpleDateFormat clsFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		String strDate = clsFormat.format(clsDate);
-		
-		int iRet = m_clsSession.insert( "Insert", new NoticeBoardRow( "subject-" + strDate, "content-" + strDate ) );
+		int iRet = m_clsSession.insert( "Insert", new NoticeBoardRow( "ì œëª©", "ë‚´ìš©" ) );
 		System.out.println( "ret = " + iRet );
 	}
 }

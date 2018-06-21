@@ -33,6 +33,14 @@
 			
 			</tbody>
 		</table>
+		
+		<div class="row" >
+    		<div class="col-sm-2">
+				<button class="btn btn-block" onclick="window.location='insert'">
+					글쓰기
+				</button>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
