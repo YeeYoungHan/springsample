@@ -81,26 +81,44 @@ public class BoardController
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public String insertAction( @RequestParam("subject") String strSubject, @RequestParam("content") String strContent, Model model )
 	{
-		int iRet = m_clsSession.insert( "Insert", new NoticeBoardRow( strSubject, strContent ) );
+		m_clsSession.insert( "Insert", new NoticeBoardRow( strSubject, strContent ) );
 		
-		if( iRet == 1 )
-		{
-			return "redirect:list";
-		}
-		
-		return "insert";
+		return "redirect:list";
 	}
 	
+	/** 게시글 수정 화면 보여주기
+	 * @param model	view 로 전달할 객체
+	 * @return 게시글 수정 JSP 파일 이름
+	 */
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public String update( Model model )
+	public String update( @RequestParam("id") int iId, Model model )
 	{
+		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
+		model.addAttribute( "row", clsRow );
+		
 		return "update";
 	}
 	
-	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete( Model model )
+	/** 게시글 수정하기
+	 * @param strSubject	제목
+	 * @param strContent	내용
+	 * @param model			view 로 전달할 객체
+	 * @return 성공하면 게시글 리스트 JSP 파일로 redirect 하고 그렇지 않으면 게시글 추가 JSP 파일을 리턴한다.
+	 */
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String updateAction( @RequestParam("id") int iId, @RequestParam("subject") String strSubject, @RequestParam("content") String strContent, Model model )
 	{
-		return "delete";
+		m_clsSession.update( "Update", new NoticeBoardRow( iId, strSubject, strContent ) );
+		
+		return "redirect:list";
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String delete( @RequestParam("id") int iId, Model model )
+	{
+		m_clsSession.delete( "Delete", iId );
+		
+		return "redirect:list";
 	}
 	
 	/** 게시글 상세 보여주기
@@ -113,7 +131,11 @@ public class BoardController
 	{
 		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
 		
-		model.addAttribute( "row", clsRow );
+		if( clsRow != null )
+		{
+			m_clsSession.update( "UpdateReadCount", iId );
+			model.addAttribute( "row", clsRow );
+		}
 		
 		return "select";
 	}

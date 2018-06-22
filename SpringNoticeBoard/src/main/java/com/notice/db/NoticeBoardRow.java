@@ -31,12 +31,22 @@ public class NoticeBoardRow
 	
 	private static SimpleDateFormat m_clsDateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 	
+	// INSERT 遂 持失切
 	public NoticeBoardRow( String strSubject, String strContent )
 	{
 		m_strSubject = strSubject;
 		m_strContent = strContent;
 	}
 	
+	// UPDATE 遂 持失切
+	public NoticeBoardRow( long iId, String strSubject, String strContent )
+	{
+		m_iId = iId;
+		m_strSubject = strSubject;
+		m_strContent = strContent;
+	}
+	
+	// SELECT LIST 遂 持失切
 	public NoticeBoardRow( long iId, String strSubject, Timestamp clsInsertDate, long iReadCount )
 	{
 		m_iId = iId;
@@ -45,6 +55,7 @@ public class NoticeBoardRow
 		m_iReadCount = iReadCount;
 	}
 	
+	// SELECT 遂 持失切
 	public NoticeBoardRow( long iId, String strSubject, String strContent, Timestamp clsInsertDate )
 	{
 		m_iId = iId;

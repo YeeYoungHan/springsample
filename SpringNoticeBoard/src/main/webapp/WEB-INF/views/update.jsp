@@ -6,6 +6,61 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	게시글
+
+	<div class="container">
+	
+		<h3>게시글 수정</h3>
+	
+		<form action="update" method="post" class="form-horizontal">
+			<input type="hidden" id="id" name="id" value="${row.id}">
+		
+			<div class="form-inline form-group" >
+				<label for="num" class="col-sm-2 control-label">제목:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="subject" name="subject" size="60" value="${row.subject}" >
+				</div>
+			</div>
+			<div class="form-inline form-group" >
+				<label for="num" class="col-sm-2 control-label">내용:</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="content" name="content" rows="10" cols="62">${row.content}</textarea>
+				</div>
+			</div>
+			
+			<div class="form-inline form-group" >
+				<div class="col-sm-offset-3 col-sm-3">
+					<button class="btn btn-default" type="submit" >
+						<span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;저장
+					</button>
+					<button class="btn btn-default" type="button" onclick="window.location='list'">
+						<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;취소
+					</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+	
+	<script>
+		$("form").submit( function() {
+			var strSubject = $("#subject").val();
+			var strContent = $("#content" ).val();
+			
+			if( strSubject.length == 0 )
+			{
+				alert("제목을 입력해 주세요!!!")
+				return false;
+			}
+			
+			if( strContent.length == 0 )
+			{
+				alert("내용을 입력해 주세요!!!")
+				return false;
+			}
+			
+			return true;
+		} );
+	</script>
+	
 </body>
 </html>

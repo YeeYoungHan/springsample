@@ -36,6 +36,12 @@
 				${row.insertDate}
 			</div>
 		</div>
+		
+		<div class="row" >
+    		<div class="col-sm-2"><button class="btn btn-block" onclick="window.location='update?id=${row.id}'">수정</button></div>
+			<div class="col-sm-2"><button class="btn btn-block" onclick="window.location='delete?id=${row.id}'">삭제</button></div>
+			<div class="col-sm-2"><button class="btn btn-block" onclick="window.location='list'">리스트</button></div>
+		</div>
 	</div>
 
 </body>
