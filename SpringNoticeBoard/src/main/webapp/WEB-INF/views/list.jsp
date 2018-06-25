@@ -7,8 +7,11 @@
 	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+
 	<div class="container">
-		<h3>게시글 리스트</h3>
+	
+		<div style="margin-top:20px"></div>
+	
 		<table class="table table-striped">
 			<thead>
 			<tr>

@@ -10,33 +10,18 @@
 
 	<div class="container">
 	
-		<h3>게시글 상세보기</h3>
-	
-		<div class="form-inline form-group" >
-			<label for="num" class="col-sm-2 control-label">번호:</label>
-			<div class="col-sm-10">
-				${row.id}
-			</div>
-		</div>
-		<div class="form-inline form-group" >
-			<label for="num" class="col-sm-2 control-label">주제:</label>
-			<div class="col-sm-10">
-				${row.subject}
-			</div>
-		</div>
-		<div class="form-inline form-group" >
-			<label for="num" class="col-sm-2 control-label">내용:</label>
-			<div class="col-sm-10">
-				${row.content}
-			</div>
-		</div>
-		<div class="form-inline form-group" >
-			<label for="num" class="col-sm-2 control-label">저장일:</label>
-			<div class="col-sm-10">
-				${row.insertDate}
-			</div>
+		<div style="margin-top:20px"></div>
+		
+		<div style="border-bottom: 2px solid black; padding-bottom:10px;">
+			${row.subject}
+			
+			<span style="float:right; font-size:8px;">${row.insertDate}</span>
 		</div>
 		
+		<div style="padding-top:10px; padding-bottom:10px;">
+			${row.content}
+		</div>
+				
 		<div class="row" >
     		<div class="col-sm-2"><button class="btn btn-block" onclick="window.location='update?id=${row.id}'">수정</button></div>
 			<div class="col-sm-2"><button class="btn btn-block" onclick="window.location='delete?id=${row.id}'">삭제</button></div>

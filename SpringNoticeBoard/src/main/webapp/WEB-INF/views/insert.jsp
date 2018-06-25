@@ -11,8 +11,8 @@
 
 	<div class="container">
 	
-		<h3>게시글 추가</h3>
-	
+		<div style="margin-top:20px"></div>
+		
 		<form action="insert" method="post" class="form-horizontal">
 			<div class="form-inline form-group" >
 				<label for="num" class="col-sm-2 control-label">제목:</label>

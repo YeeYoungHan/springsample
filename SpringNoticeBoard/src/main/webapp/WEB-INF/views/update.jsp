@@ -4,12 +4,14 @@
 <head>
 	<title>게시글 수정</title>
 	<meta charset="UTF-8">
+	<link href="./resources/css/bootstrap.min.css" rel="stylesheet">
+	<script src="./resources/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
 	<div class="container">
 	
-		<h3>게시글 수정</h3>
+		<div style="margin-top:20px"></div>
 	
 		<form action="update" method="post" class="form-horizontal">
 			<input type="hidden" id="id" name="id" value="${row.id}">
