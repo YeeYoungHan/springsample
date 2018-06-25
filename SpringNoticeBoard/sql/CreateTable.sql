@@ -12,3 +12,14 @@ CREATE TABLE  `spring`.`noticeboard` (
   PRIMARY KEY (`nbId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `spring`.`noticeboardcomment`;
+CREATE TABLE  `spring`.`noticeboardcomment` (
+  `nbcId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nbId` int(10) unsigned NOT NULL,
+  `nbcComment` text NOT NULL,
+  `nbcInsertDate` datetime NOT NULL,
+  PRIMARY KEY (`nbcId`),
+  KEY `FK_noticeboardcomment_1` (`nbId`),
+  CONSTRAINT `FK_noticeboardcomment_1` FOREIGN KEY (`nbId`) REFERENCES `noticeboard` (`nbId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

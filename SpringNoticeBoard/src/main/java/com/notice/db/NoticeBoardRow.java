@@ -28,6 +28,7 @@ public class NoticeBoardRow
 	public String m_strContent;
 	public long m_iReadCount;
 	public String m_strInsertDate;
+	public long m_iCommentCount;
 	
 	private static SimpleDateFormat m_clsDateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 	
@@ -87,5 +88,10 @@ public class NoticeBoardRow
 	public long getReadCount()
 	{
 		return m_iReadCount;
+	}
+	
+	public long getCommentCount()
+	{
+		return m_iCommentCount;
 	}
 }

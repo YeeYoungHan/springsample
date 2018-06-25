@@ -87,6 +87,7 @@ public class BoardController
 	}
 	
 	/** 게시글 수정 화면 보여주기
+	 * @param iId		게시글 아이디
 	 * @param model	view 로 전달할 객체
 	 * @return 게시글 수정 JSP 파일 이름
 	 */
@@ -113,8 +114,12 @@ public class BoardController
 		return "redirect:list";
 	}
 	
+	/** 게시글 삭제하기
+	 * @param iId		게시글 아이디
+	 * @return 게시글 수정 JSP 파일 이름
+	 */
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
-	public String delete( @RequestParam("id") int iId, Model model )
+	public String delete( @RequestParam("id") int iId )
 	{
 		m_clsSession.delete( "Delete", iId );
 		

@@ -27,7 +27,12 @@
 			
 				<tr>
 					<td>${row.id}</td>
-					<td><a href="./select?id=${row.id}">${row.subject}</a></td>
+					<td>
+						<a href="./select?id=${row.id}">${row.subject}</a>
+						<c:if test="${row.commentCount > 0}">
+							[${row.commentCount}]
+						</c:if>
+					</td>
 					<td>${row.insertDate}</td>
 					<td>${row.readCount}</td>
 				</tr>

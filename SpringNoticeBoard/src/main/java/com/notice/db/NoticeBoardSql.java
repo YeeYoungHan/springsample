@@ -31,21 +31,27 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface NoticeBoardSql
 {
-	@Insert("INSERT INTO NoticeBoard( nbSubject, nbContent, nbInsertDate ) VALUES( #{m_strSubject}, #{m_strContent}, now() )")
+	@Insert("INSERT INTO noticeboard( nbSubject, nbContent, nbInsertDate ) VALUES( #{m_strSubject}, #{m_strContent}, now() )")
 	public void Insert( NoticeBoardRow clsRow );
 	
-	@Update("UPDATE NoticeBoard SET nbSubject = #{m_strSubject}, nbContent = #{m_strContent} WHERE nbId = #{m_iId}" )
+	@Update("UPDATE noticeboard SET nbSubject = #{m_strSubject}, nbContent = #{m_strContent} WHERE nbId = #{m_iId}" )
 	public void Update( NoticeBoardRow clsRow );
 	
-	@Update("UPDATE NoticeBoard SET nbReadCount = nbReadCount + 1 WHERE nbId = #{iId}")
+	@Update("UPDATE noticeboard SET nbReadCount = nbReadCount + 1 WHERE nbId = #{iId}")
 	public void UpdateReadCount( int iId );
 	
-	@Delete("DELETE FROM NoticeBoard WHERE nbId = #{iId}")
+	@Delete("DELETE FROM noticeboard WHERE nbId = #{iId}")
 	public void Delete( int iId );
 	
-	@Select("SELECT nbId, nbSubject, nbInsertDate, nbReadCount FROM NoticeBoard ORDER BY nbId DESC")
+	@Select("SELECT nbId, nbSubject, nbInsertDate, nbReadCount FROM noticeboard ORDER BY nbId DESC")
 	public List<NoticeBoardRow> SelectList( int iPage );
 	
-	@Select("SELECT nbId, nbSubject, nbContent, nbInsertDate FROM NoticeBoard WHERE nbId = #{iId}")
+	@Select("SELECT nbId, nbSubject, nbContent, nbInsertDate FROM noticeboard WHERE nbId = #{iId}")
 	public List<NoticeBoardRow> Select( int iId );
+	
+	@Insert("INSERT INTO noticeboardcomment( nbId, nbcComment, nbcInsertDate ) VALUES( #{m_iParentId}, #{m_strComment}, now() )")
+	public void InsertComment( NoticeBoardCommentRow clsRow );
+	
+	@Select("SELECT nbcId, nbcComment, nbcInsertDate FROM noticeboardcomment WHERE nbId = #{iId} ORDER BY nbcId DESC")
+	public List<NoticeBoardCommentRow> SelectCommentList( int iId );
 }
