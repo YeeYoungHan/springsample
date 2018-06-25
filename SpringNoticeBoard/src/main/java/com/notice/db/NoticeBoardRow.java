@@ -48,12 +48,13 @@ public class NoticeBoardRow
 	}
 	
 	// SELECT LIST 遂 持失切
-	public NoticeBoardRow( long iId, String strSubject, Timestamp clsInsertDate, long iReadCount )
+	public NoticeBoardRow( long iId, String strSubject, Timestamp clsInsertDate, long iReadCount, long iCommentCount )
 	{
 		m_iId = iId;
 		m_strSubject = strSubject;
 		m_strInsertDate = m_clsDateFormat.format( clsInsertDate );
 		m_iReadCount = iReadCount;
+		m_iCommentCount = iCommentCount;
 	}
 	
 	// SELECT 遂 持失切

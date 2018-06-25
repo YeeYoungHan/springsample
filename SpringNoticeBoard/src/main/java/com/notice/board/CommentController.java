@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,7 @@ public class CommentController
 		return clsResponse;
 	}
 	
+	@Transactional
 	@RequestMapping(value = "insert_comment", method = RequestMethod.POST)
 	public ResponseEntity<String> insertAction( @RequestBody NoticeBoardCommentData clsRow )
 	{
@@ -66,6 +68,7 @@ public class CommentController
 		try
 		{
 			m_clsSession.insert( "InsertComment", new NoticeBoardCommentRow( clsRow.m_iParentId, clsRow.m_strComment ) );
+			m_clsSession.update( "UpdateCommentCount", clsRow.m_iParentId );
 			clsResponse = new ResponseEntity<>( "SUCCESS", HttpStatus.OK );
 		}
 		catch( Exception e )

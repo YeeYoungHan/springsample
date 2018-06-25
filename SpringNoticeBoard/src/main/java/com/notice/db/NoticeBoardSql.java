@@ -40,10 +40,13 @@ public interface NoticeBoardSql
 	@Update("UPDATE noticeboard SET nbReadCount = nbReadCount + 1 WHERE nbId = #{iId}")
 	public void UpdateReadCount( int iId );
 	
+	@Update("UPDATE noticeboard SET nbCommentCount = nbCommentCount + 1 WHERE nbId = #{iId}")
+	public void UpdateCommentCount( long iId );
+	
 	@Delete("DELETE FROM noticeboard WHERE nbId = #{iId}")
 	public void Delete( int iId );
 	
-	@Select("SELECT nbId, nbSubject, nbInsertDate, nbReadCount FROM noticeboard ORDER BY nbId DESC")
+	@Select("SELECT nbId, nbSubject, nbInsertDate, nbReadCount, nbCommentCount FROM noticeboard ORDER BY nbId DESC")
 	public List<NoticeBoardRow> SelectList( int iPage );
 	
 	@Select("SELECT nbId, nbSubject, nbContent, nbInsertDate FROM noticeboard WHERE nbId = #{iId}")

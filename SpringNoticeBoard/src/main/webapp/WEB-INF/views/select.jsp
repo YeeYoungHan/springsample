@@ -62,6 +62,7 @@
 				data : JSON.stringify( { parentId:${row.id}, comment:strComment } ),
 				success : function(result){
 						if( result == "SUCCESS" ){
+							$("#comment").val('');
 							getComment();
 						}
 				},
