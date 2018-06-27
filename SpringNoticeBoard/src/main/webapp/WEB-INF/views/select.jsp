@@ -57,7 +57,7 @@
 			$.ajax( { 
 				type:'post', 
 				url:'insert_comment', 
-				headers: { "Content-Type" : "application/json", "X-HTTP-Method-Override" : "POST" },
+				headers: { "Content-Type" : "application/json" },
 				dataType: 'text',
 				data : JSON.stringify( { parentId:${row.id}, comment:strComment } ),
 				success : function(result){
