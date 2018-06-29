@@ -35,12 +35,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.notice.db.NoticeBoardCommentRow;
 
+/** 댓글 관리 컨트롤러
+ * @author 이영한 ( http://blog.naver.com/websearch )
+ */
 @RestController
 public class CommentController
 {
 	@Inject
 	SqlSession m_clsSession;
 	
+	/** 댓글 리스트 요청에 대한 응답을 전송한다.
+	 * @param iId		게시물 아이디
+	 * @param model	view 로 전달할 객체
+	 * @return 댓글 리스트 및 HTTP 응답 코드를 저장한 객체
+	 */
 	@RequestMapping(value = "list_comment", method = RequestMethod.GET)
 	public ResponseEntity<List<NoticeBoardCommentRow>> listComment( @RequestParam("id") int iId, Model model )
 	{
@@ -59,6 +67,10 @@ public class CommentController
 		return clsResponse;
 	}
 	
+	/** 댓글 저장 요청에 대한 응답을 전송한다.
+	 * @param clsRow 댓글 정보 저장 객체
+	 * @return 성공 여부 및 HTTP 응답 코드를 저장한 객체
+	 */
 	@Transactional
 	@RequestMapping(value = "insert_comment", method = RequestMethod.POST)
 	public ResponseEntity<String> insertAction( @RequestBody NoticeBoardCommentData clsRow )

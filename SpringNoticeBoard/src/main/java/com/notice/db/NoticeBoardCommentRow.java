@@ -21,6 +21,9 @@ package com.notice.db;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+/** 댓글 저장 클래스
+ * @author 이영한 ( http://blog.naver.com/websearch )
+ */
 public class NoticeBoardCommentRow
 {
 	public long m_iId;
