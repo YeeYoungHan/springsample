@@ -44,8 +44,11 @@ public class FileUploadController
 	}
 	
 	@RequestMapping(value = "file_upload", method = RequestMethod.POST)
-	public String FileUploadAction( @RequestParam(value = "file", required = false) MultipartFile clsUpload, Model model ) throws Exception
+	public String FileUploadAction( @RequestParam(value = "id", required = false) String strId, @RequestParam(value = "pw", required = false) String strPw, @RequestParam(value = "file", required = false) MultipartFile clsUpload, Model model ) throws Exception
 	{
+		System.out.println( "id[" + strId + "]" );
+		System.out.println( "pw[" + strPw + "]" );
+		
 		System.out.println( "getOriginalFilename[" + clsUpload.getOriginalFilename( ) + "]" );
 		System.out.println( "getName[" + clsUpload.getName( ) + "]" );
 		System.out.println( "getContentType[" + clsUpload.getContentType( ) + "]" );
