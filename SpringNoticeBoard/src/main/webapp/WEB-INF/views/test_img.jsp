@@ -2,9 +2,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Tiff Convert</title>
+	<title>TestImg</title>
 </head>
 <body>
-	Tiff Convert
+	<img src="get_img" >
 </body>
 </html>
