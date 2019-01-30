@@ -3,6 +3,8 @@ package com.notice.board;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
+import java.awt.image.IndexColorModel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -58,5 +60,28 @@ public class TiffConvertController
 	public String TestImg()
 	{
 		return "test_img";
+	}
+	
+	@RequestMapping(value = "1bit", method = RequestMethod.GET)
+	public String Convert1bitImage()
+	{
+		try
+		{
+			final BufferedImage clsInput = ImageIO.read(new File("C:\\temp\\1.jpg"));
+			
+			IndexColorModel clsICM = new IndexColorModel(1, 2, new byte[] { (byte) 0, (byte) 0xFF }, new byte[] { (byte) 0, (byte) 0xFF }, new byte[] { (byte) 0, (byte) 0xFF });
+	    BufferedImage clsOutput = new BufferedImage( clsInput.getWidth(), clsInput.getHeight(), BufferedImage.TYPE_BYTE_BINARY, clsICM );
+	    ColorConvertOp cco = new ColorConvertOp( clsInput.getColorModel().getColorSpace(), clsOutput.getColorModel().getColorSpace(), null );
+
+	    cco.filter( clsInput, clsOutput );
+	    
+	    ImageIO.write( clsOutput, "tiff", new File("c:\\temp\\1.tiff") );
+		}
+		catch( Exception e )
+		{
+			
+		}
+		
+		return "tiff_convert";
 	}
 }
