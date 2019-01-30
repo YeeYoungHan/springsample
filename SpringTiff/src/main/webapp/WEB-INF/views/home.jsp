@@ -75,22 +75,23 @@
 				
 				var canvas = document.getElementById("main_canvas");
 				var ctx = canvas.getContext("2d");
-				var bb = canvas.getBoundingClientRect();
 				ctx.strokeStyle = "#000000";
 				ctx.lineJoin = "round";
 				ctx.lineWidth = 2;
 			
 				$('#main_canvas').mousedown(function(e){
-					iX = ( e.clientX - bb.left ) * 1728 / 800;
-					iY = ( e.clientY - bb.top ) * 2440 / 1072;
+					var bb = canvas.getBoundingClientRect();
+					iX = ( e.clientX - bb.left ) * canvas.width / 800;
+					iY = ( e.clientY - bb.top ) * canvas.height / 1072;
 					bDraw = true;
 				});
 				
 				$('#main_canvas').mousemove(function(e){
 					if( bDraw )
 					{
-						var iNewX = ( e.clientX - bb.left ) * 1728 / 800;
-						var iNewY = ( e.clientY - bb.top ) * 2440 / 1072;
+						var bb = canvas.getBoundingClientRect();
+						var iNewX = ( e.clientX - bb.left ) * canvas.width / 800;
+						var iNewY = ( e.clientY - bb.top ) * canvas.height / 1072;
 					
 						ctx.beginPath();
 						ctx.moveTo( iX, iY );
