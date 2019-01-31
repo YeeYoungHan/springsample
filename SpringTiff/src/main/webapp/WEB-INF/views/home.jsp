@@ -32,7 +32,8 @@
 			  Tiff.initialize({TOTAL_MEMORY: 16777216 * 10});
 			  var xhr = new XMLHttpRequest();
 			  var tiff;
-			  xhr.open('GET', './resources/img/5.tiff');
+			  //xhr.open('GET', './resources/img/5.tiff');
+			  xhr.open('GET', './get_img');
 			  xhr.responseType = 'arraybuffer';
 			  xhr.onload = function (e) {
 			    var buffer = xhr.response;

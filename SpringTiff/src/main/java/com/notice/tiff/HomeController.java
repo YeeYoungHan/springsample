@@ -5,11 +5,15 @@ import java.awt.image.ColorConvertOp;
 import java.awt.image.IndexColorModel;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Base64;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -31,9 +36,31 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "home", method = RequestMethod.GET)
-	public String home2(Locale locale, Model model) {
-		return "home";
+	public boolean IsWindow()
+	{
+		String strOS = System.getProperty("os.name");
+		if( strOS.startsWith("Windows") )
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@RequestMapping(value = "get_img", method = RequestMethod.GET)
+	public @ResponseBody byte[] GetImage( final HttpServletResponse response ) throws IOException
+	{
+		response.setHeader("Cache-Control", "no-cache");
+		
+		String strFileName = "c:\\temp\\5.tiff";
+		
+		if( IsWindow() == false )
+	    {
+			strFileName = "/tmp/5.tiff";
+	    }
+		
+		FileInputStream in = new FileInputStream( new File(strFileName));
+		return IOUtils.toByteArray( in );
 	}
 	
 	@RequestMapping(value = "modify_tiff", method = RequestMethod.POST)
@@ -52,16 +79,23 @@ public class HomeController {
 		    ColorConvertOp cco = new ColorConvertOp( clsInput.getColorModel().getColorSpace(), clsOutput.getColorModel().getColorSpace(), null );
 	
 		    cco.filter( clsInput, clsOutput );
-		    		    
-		    ImageIO.write( clsOutput, "tiff", new File("c:\\temp\\1.tiff") );
 		    
-		    Runtime.getRuntime().exec("c:\\temp\\TiffSetPage.exe C:\\OpenProject\\SpringSample\\trunk\\SpringTiff\\src\\main\\webapp\\resources\\img\\5.tiff c:\\temp\\1.tiff " + iPage );
+		    if( IsWindow() )
+		    {
+		    	ImageIO.write( clsOutput, "tiff", new File("c:\\temp\\1.tiff") );
+			    Runtime.getRuntime().exec("c:\\temp\\TiffSetPage.exe C:\\temp\\5.tiff c:\\temp\\1.tiff " + iPage );
+		    }
+		    else
+		    {
+		    	ImageIO.write( clsOutput, "tiff", new File("/tmp/1.tiff") );
+			    Runtime.getRuntime().exec("/tmp/TiffSetPage.exe /tmp/5.tiff /tmp/1.tiff " + iPage );
+		    }
 		}
 		catch( Exception e )
 		{
 			
 		}
 		
-		return "redirect:home";
+		return "redirect:/";
 	}
 }
