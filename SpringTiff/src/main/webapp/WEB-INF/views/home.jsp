@@ -16,12 +16,18 @@
   	<div id='list'>
   	</div>
   	<div>
-  		<button type="button" onclick="Modify()">modify</button>
+  		<form action="modify_tiff" method="post">
+  			<input type="hidden" id="page" name="page">
+  			<input type="hidden" id="data" name="data">
+  			<button type="submit">modify</button>
+  		</form>
   	</div>
   
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="js/tiff.min.js"></script>
+    <script src="./resources/js/tiff.min.js"></script>
     <script type="text/javascript">
+    		var iCurPage = 0;
+    
 			$(function () {
 			  Tiff.initialize({TOTAL_MEMORY: 16777216 * 10});
 			  var xhr = new XMLHttpRequest();
@@ -49,6 +55,7 @@
 					$('#main').empty();
 			      	$('#main').append(dest);
 			      	SetCanvasEvent();
+			      	iCurPage = parseInt(id) + 1;
 			      }, false );
 			      
 			      $('#list').append(canvas);
@@ -62,6 +69,7 @@
 			      	$('#main').empty();
 			      	$('#main').append(canvas);
 			      	SetCanvasEvent();
+			      	iCurPage = 1;
 			      }
 			    }
 			  };
@@ -109,12 +117,17 @@
 				});			
 			}
 			
-			function Modify()
-			{
+			$("form").submit( function() {
 				
-			}
+				var canvas = document.getElementById("main_canvas");
+				
+				$('#page').val( iCurPage );
+				$('#data').val( canvas.toDataURL('image/png') );
+				
+				return true;
+			} );
 			
     </script>
-  </body>	
+
 </body>
 </html>
