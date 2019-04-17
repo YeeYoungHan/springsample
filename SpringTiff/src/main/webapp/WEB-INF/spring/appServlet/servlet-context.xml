@@ -22,5 +22,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.notice.tiff" />
-	
+		
 </beans:beans>
