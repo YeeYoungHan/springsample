@@ -26,67 +26,107 @@ public class WaveController {
 	public String play2(Locale locale, Model model) {
 		return "play2";
 	}
-	
-	@RequestMapping(value = "playaudio", method = RequestMethod.GET)
-	public void playAudio( HttpServletResponse response, @RequestParam("second") int iSecond ) throws Exception
+		
+	@RequestMapping(value = "getaudiofile", method = RequestMethod.GET)
+	public void GetAudioFile( HttpServletResponse response, @RequestParam("start") int iStartSecond, @RequestParam("second") int iPlaySecond ) throws Exception
 	{
 		response.setContentType("audio/wav");
 		OutputStream out = response.getOutputStream();
 
-		String strFileName = "C:\\temp\\sipcallapi\\record.wav";
-		
-		File clsFile = new File( strFileName );
+		File clsFile = new File( GetAudioFileName() );
 		InputStream in = new FileInputStream(clsFile);
 		
-		audioSend( in, out, iSecond );
+		audioSend( in, out, iStartSecond, iPlaySecond );
 		in.close();
 	}
 	
-	private void audioSend( InputStream in, OutputStream out, int iSecond )
+	@RequestMapping(value = "getaudiosecond", method = RequestMethod.GET)
+	public void GetAudioSecond( HttpServletResponse response ) throws Exception
 	{
-		int iLoopCount = 10;	// 오디오 play 시간 (초단위)
-		int iDataSize = iLoopCount * 8000; // 오디오 payload 크기
-		int iTotalSize = iDataSize + 12 + 8 * 2 + 18 - 8; // wave file header 에 저장하는 body 크기
-		byte[] arrBuf = new byte[8000];
-		int n;
+		response.setContentType("application/json");
+		OutputStream out = response.getOutputStream();
+		
+		byte[] arrBuf = new byte[50];
+		int iDataSize, iDataSizePos = 42, iPlaySecond;
+		
+		File clsFile = new File( GetAudioFileName() );
+		InputStream in = new FileInputStream(clsFile);
+		
+		in.read( arrBuf, 0, 46 );
+		
+		int iCodec = GetShort( arrBuf, 20 );
+		if( iCodec == 49 )
+		{
+			// GSM 코덱인 경우 2byte 를 더 읽는다.
+			in.read( arrBuf, 46, 2 );
+			iDataSizePos += 2;
+		}
+		
+		in.close();
+		
+		iDataSize = GetInt( arrBuf, iDataSizePos );
+		iPlaySecond = GetPlaySecond( iCodec, iDataSize );
+		
+		String strBuf = "{ \"second\" : " + iPlaySecond + " }";
+		
+		out.write( strBuf.getBytes() );
+	}
+	
+	private String GetAudioFileName()
+	{
+		if( IsWindow() )
+		{
+			return "C:\\temp\\sipcallapi\\record.wav";
+		}
+		
+		return "/tmp/record.wav";
+	}
+	
+	private void audioSend( InputStream in, OutputStream out, int iStartSecond, int iPlaySecond )
+	{
+		int iTotalSize, iDataSize, n, iDataSizePos = 42, iWantDataSize, iSkipSize, iReadSize;
+		byte[] arrBuf = new byte[16000];
 		
 		try
 		{
-			// Chunk ID 전송
-			in.read( arrBuf, 0, 4 );
-			out.write( arrBuf, 0, 4 );
+			in.read( arrBuf, 0, 46 );
 			
-			// Chunk Data Size 전송 - 위의 iTotalSize 로 변경하여서 전송한다.
-			in.read( arrBuf, 0, 4 );
-			SetByte( iTotalSize, arrBuf );
-			out.write( arrBuf, 0, 4 );
+			int iCodec = GetShort( arrBuf, 20 );
 			
-			in.read( arrBuf, 0, 34 );
-			out.write( arrBuf, 0, 34 );
-			
-			// Chunk Size 전송 - 위의 iDataSize 로 변경하여서 전송한다.
-			in.read( arrBuf, 0, 4 );
-			
-			int iValue = GetInt( arrBuf );
-			SetByte( iDataSize, arrBuf );
-			out.write( arrBuf, 0, 4 );
-			
-			if( iValue > ( iSecond * 80000 ) )
+			if( iCodec == 49 )
 			{
-				in.skip( 8000 * iSecond );
-			}
-			else
-			{
-				iValue -= 8000 * 10;
-				if( iValue > 0 )
-				{
-					in.skip( iValue );
-				}
+				// GSM 코덱인 경우 2byte 를 더 읽는다.
+				in.read( arrBuf, 46, 2 );
+				iDataSizePos += 2;
 			}
 			
-			for( int i = 0; i < iLoopCount; ++i )
+			iDataSize = GetInt( arrBuf, iDataSizePos );
+			
+			iWantDataSize = GetDataSize( iCodec, iStartSecond + iPlaySecond );
+						
+			if( iWantDataSize > iDataSize )
 			{
-				n = in.read( arrBuf, 0, 8000 );
+				iPlaySecond = 0;
+			}
+			
+			iDataSize = GetDataSize( iCodec, iPlaySecond );
+			iTotalSize = iDataSizePos + 4 + iDataSize;
+						
+			SetInt( iTotalSize, arrBuf, 4 );
+			SetInt( iDataSize, arrBuf, iDataSizePos );
+			
+			out.write( arrBuf, 0, iDataSizePos + 4 );
+			
+			if( iPlaySecond == 0 ) return;
+			
+			iSkipSize = GetDataSize( iCodec, iStartSecond );
+			in.skip( iSkipSize );
+			
+			iReadSize = GetDataSize( iCodec, 1 );
+						
+			for( int i = 0; i < iPlaySecond; ++i )
+			{
+				n = in.read( arrBuf, 0, iReadSize );
 				out.write( arrBuf, 0, n );
 			}
 
@@ -98,24 +138,89 @@ public class WaveController {
 		}
 	}
 	
-	private static void SetByte( int iValue, byte [] arrBuf )
+	private static void SetInt( int iValue, byte [] arrBuf, int iStart )
 	{
 		for( int i = 0; i < 4; i++ )
 		{
-			arrBuf[i] = (byte)( iValue );
+			arrBuf[iStart+i] = (byte)( iValue );
 			iValue >>= 8;
 		}
 	}
 	
-	private static int GetInt( byte [] arrBuf )
+	private static int GetInt( byte [] arrBuf, int iStart )
 	{
 		int iValue = 0;
 		
 		for( int i = 0; i < 4; i++ )
 		{
-			iValue += ( arrBuf[i] & 0xFF ) << ( i * 8 );
+			iValue += ( arrBuf[iStart+i] & 0xFF ) << ( i * 8 );
 		}
 		
 		return iValue;
+	}
+	
+	private static int GetShort( byte [] arrBuf, int iStart )
+	{
+		int iValue = 0;
+		
+		for( int i = 0; i < 2; i++ )
+		{
+			iValue += ( arrBuf[iStart+i] & 0xFF ) << ( i * 8 );
+		}
+		
+		return iValue;
+	}
+	
+	private static int GetDataSize( int iCodec, int iSecond )
+	{
+		if( iCodec == 0 )
+		{
+			// PCM
+			return 16000 * iSecond;
+		}
+		else if( iCodec == 7 || iCodec == 6 )
+		{
+			// PCMU/PCMUA
+			return 8000 * iSecond;
+		}
+		else if( iCodec == 49 )
+		{
+			// GSM
+			return 1625 * iSecond;
+		}
+
+		return 0;
+	}
+	
+	private static int GetPlaySecond( int iCodec, int iDataSize )
+	{
+		if( iCodec == 0 )
+		{
+			// PCM
+			return iDataSize / 16000;
+		}
+		else if( iCodec == 7 || iCodec == 6 )
+		{
+			// PCMU/PCMUA
+			return iDataSize / 8000;
+		}
+		else if( iCodec == 49 )
+		{
+			// GSM
+			return iDataSize / 1625;
+		}
+
+		return 0;
+	}
+	
+	public boolean IsWindow()
+	{
+		String strOS = System.getProperty("os.name");
+		if( strOS.startsWith("Windows") )
+		{
+			return true;
+		}
+		
+		return false;
 	}
 }
