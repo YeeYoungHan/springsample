@@ -38,7 +38,10 @@ public class TestMyBatisXml
 		
 		SqlSession clsSession = clsFactory.openSession( );
 		
-		return clsSession.selectOne( "com.test.TestMyBatis.SelectSubject", iId );
+		String strSubject = clsSession.selectOne( "com.test.TestMyBatis.SelectSubject", iId );
+		clsSession.close();
+		
+		return strSubject;
 	}
 	
 	public static void main( String [] args )
