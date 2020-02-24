@@ -95,6 +95,28 @@ public class TestMyBatisXml
 		return false;
 	}
 	
+	/** nbContent 컬럼을 수정하는 예제
+	 * 
+	 * @param clsRow NoticeRow 객체
+	 * @return 성공하면 true 를 리턴하고 그렇지 않으면 false 를 리턴한다.
+	 */
+	boolean UpdateContent( NoticeRow clsRow )
+	{
+		SqlSessionFactory clsFactory = CreateSqlSessionFactory();
+		if( clsFactory == null ) return false;
+		
+		try( SqlSession clsSession = clsFactory.openSession( ) )
+		{
+			if( clsSession.insert( "com.test.TestMyBatis.UpdateContent", clsRow ) > 0 )
+			{
+				clsSession.commit( );
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public static void main( String [] args )
 	{
 		TestMyBatisXml clsTest = new TestMyBatisXml();
@@ -109,6 +131,7 @@ public class TestMyBatisXml
 		System.out.println( clsRow.toString() );
 		*/
 		
+		/*
 		NoticeRow clsRow = new NoticeRow();
 		clsRow.m_strSubject = "MyBatis";
 		clsRow.m_strContent = "MyBatis Content";
@@ -117,5 +140,12 @@ public class TestMyBatisXml
 		clsRow.m_iCommentCount = 5;
 		
 		clsTest.InsertRow( clsRow );
+		*/
+		
+		NoticeRow clsRow = new NoticeRow();
+		clsRow.m_iId = 7;
+		clsRow.m_strContent = "MyBatis Content Updated";
+		
+		clsTest.UpdateContent( clsRow );
 	}
 }

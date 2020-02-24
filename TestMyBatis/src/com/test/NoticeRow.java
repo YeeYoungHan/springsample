@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class NoticeRow
 {
+	int m_iId;
 	String m_strSubject;
 	String m_strContent;
 	int m_iReadCount;
