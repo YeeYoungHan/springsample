@@ -12,4 +12,8 @@
 			nbCommentCount AS m_iCommentCount
 		FROM noticeboard WHERE nbId = #{iId}
 	</select>
+	<insert id="InsertRow" parameterType="com.test.NoticeRow">
+		INSERT INTO noticeboard( nbSubject, nbContent, nbReadCount, nbInsertDate, nbCommentCount )
+		VALUES( #{m_strSubject}, #{m_strContent}, #{m_iReadCount}, #{m_clsInsertDate}, #{m_iCommentCount} )
+	</insert>
 </mapper>
