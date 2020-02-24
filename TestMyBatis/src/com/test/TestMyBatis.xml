@@ -4,4 +4,12 @@
 	<select id="SelectSubject" parameterType="int" resultType="String">
 		SELECT nbSubject FROM noticeboard WHERE nbId = #{iId}
 	</select>
+	<select id="SelectRow" parameterType="int" resultType="com.test.NoticeRow">
+		SELECT nbSubject AS m_strSubject, 
+			nbContent AS m_strContent,
+			nbReadCount AS m_iReadCount,
+			nbInsertDate AS m_clsInsertDate,
+			nbCommentCount AS m_iCommentCount
+		FROM noticeboard WHERE nbId = #{iId}
+	</select>
 </mapper>
