@@ -117,6 +117,28 @@ public class TestMyBatisXml
 		return false;
 	}
 	
+	/** 입력된 ID 와 일치하는 ROW 를 삭제한다.
+	 * 
+	 * @param iId noticeboard 테이블의 nbId 컬럼값
+	 * @return 성공하면 true 를 리턴하고 그렇지 않으면 false 를 리턴한다.
+	 */
+	boolean DeleteRow( int iId )
+	{
+		SqlSessionFactory clsFactory = CreateSqlSessionFactory();
+		if( clsFactory == null ) return false;
+		
+		try( SqlSession clsSession = clsFactory.openSession( ) )
+		{
+			if( clsSession.delete( "com.test.TestMyBatis.DeleteRow", iId ) > 0 )
+			{
+				clsSession.commit( );
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public static void main( String [] args )
 	{
 		TestMyBatisXml clsTest = new TestMyBatisXml();
@@ -142,10 +164,14 @@ public class TestMyBatisXml
 		clsTest.InsertRow( clsRow );
 		*/
 		
+		/*
 		NoticeRow clsRow = new NoticeRow();
 		clsRow.m_iId = 7;
 		clsRow.m_strContent = "MyBatis Content Updated";
 		
 		clsTest.UpdateContent( clsRow );
+		*/
+		
+		clsTest.DeleteRow( 8 );
 	}
 }

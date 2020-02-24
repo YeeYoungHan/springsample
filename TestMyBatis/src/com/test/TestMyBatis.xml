@@ -19,4 +19,7 @@
 	<update id="UpdateContent" parameterType="com.test.NoticeRow">
 		UPDATE noticeboard SET nbContent = #{m_strContent} WHERE nbId = #{m_iId}
 	</update>
+	<delete id="DeleteRow" parameterType="int">
+		DELETE FROM noticeboard WHERE nbId = #{iId}
+	</delete>
 </mapper>
