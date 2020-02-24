@@ -73,6 +73,22 @@ public class TestMyBatisXml
 		}
 	}
 	
+	/** 하나의 ROW 에 포함된 모든 컬럼들을 가져오는 예제
+	 * 
+	 * @param clsCondition 조건을 저장하는 객체
+	 * @return NoticeRow 객체를 리턴한다.
+	 */
+	NoticeRow SelectRowCondition( NoticeRow clsCondition )
+	{
+		SqlSessionFactory clsFactory = CreateSqlSessionFactory();
+		if( clsFactory == null ) return null;
+		
+		try( SqlSession clsSession = clsFactory.openSession( ) )
+		{
+			return clsSession.selectOne( "com.test.TestMyBatis.SelectRowCondition", clsCondition );
+		}
+	}
+	
 	/** 하나의 ROW 를 INSERT 하는 예제
 	 * 
 	 * @param clsRow NoticeRow 객체
@@ -153,6 +169,13 @@ public class TestMyBatisXml
 		System.out.println( clsRow.toString() );
 		*/
 		
+		NoticeRow clsCondition = new NoticeRow();
+		clsCondition.m_iId = 7;
+		clsCondition.m_strSubject = "MyBatis";
+		
+		NoticeRow clsRow = clsTest.SelectRowCondition( clsCondition );
+		System.out.println( clsRow.toString() );
+		
 		/*
 		NoticeRow clsRow = new NoticeRow();
 		clsRow.m_strSubject = "MyBatis";
@@ -172,6 +195,8 @@ public class TestMyBatisXml
 		clsTest.UpdateContent( clsRow );
 		*/
 		
+		/*
 		clsTest.DeleteRow( 8 );
+		*/
 	}
 }

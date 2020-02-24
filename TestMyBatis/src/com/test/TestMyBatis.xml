@@ -10,7 +10,25 @@
 			nbReadCount AS m_iReadCount,
 			nbInsertDate AS m_clsInsertDate,
 			nbCommentCount AS m_iCommentCount
-		FROM noticeboard WHERE nbId = #{iId}
+		FROM noticeboard
+		WHERE nbId = #{iId}
+	</select>
+	<select id="SelectRowCondition" parameterType="com.test.NoticeRow" resultType="com.test.NoticeRow">
+		SELECT nbSubject AS m_strSubject, 
+			nbContent AS m_strContent,
+			nbReadCount AS m_iReadCount,
+			nbInsertDate AS m_clsInsertDate,
+			nbCommentCount AS m_iCommentCount
+		FROM noticeboard
+		<where>
+			1 = 1
+			<if test="m_iId != 0">
+				AND nbId = #{m_iId}
+			</if>
+			<if test="m_strSubject != null">
+				AND nbSubject = #{m_strSubject}
+			</if>
+		</where>
 	</select>
 	<insert id="InsertRow" parameterType="com.test.NoticeRow">
 		INSERT INTO noticeboard( nbSubject, nbContent, nbReadCount, nbInsertDate, nbCommentCount )
