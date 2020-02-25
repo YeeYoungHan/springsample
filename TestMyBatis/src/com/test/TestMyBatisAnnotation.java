@@ -160,22 +160,22 @@ public class TestMyBatisAnnotation
 	{
 		TestMyBatisAnnotation clsTest = new TestMyBatisAnnotation();
 
+		/*
 		String strName = clsTest.SelectSubject( 3 );
 		System.out.println( "SelectName(3) => (" + strName + ")" );
+		*/
 		
 		/*
 		NoticeRow clsRow = clsTest.SelectRow( 3 );
 		System.out.println( clsRow.toString() );
 		*/
 
-		/*
 		NoticeRow clsCondition = new NoticeRow();
 		clsCondition.m_iId = 7;
 		//clsCondition.m_strSubject = "MyBatis";
 		
 		NoticeRow clsRow = clsTest.SelectRowCondition( clsCondition );
 		System.out.println( clsRow.toString() );
-		*/
 		
 		/*
 		NoticeRow clsRow = new NoticeRow();
