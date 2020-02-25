@@ -30,6 +30,7 @@ public class TestMyBatisAnnotation
 			{
 				InputStream clsInput = Resources.getResourceAsStream( m_strConfigPath );
 				m_clsFactory = new SqlSessionFactoryBuilder().build( clsInput );
+				m_clsFactory.getConfiguration( ).addMapper( NoticeBoard.class );
 			}
 			catch( Exception e )
 			{
@@ -159,10 +160,8 @@ public class TestMyBatisAnnotation
 	{
 		TestMyBatisAnnotation clsTest = new TestMyBatisAnnotation();
 
-		/*
 		String strName = clsTest.SelectSubject( 3 );
 		System.out.println( "SelectName(3) => (" + strName + ")" );
-		*/
 		
 		/*
 		NoticeRow clsRow = clsTest.SelectRow( 3 );
@@ -197,6 +196,6 @@ public class TestMyBatisAnnotation
 		clsTest.UpdateContent( clsRow );
 		*/
 		
-		clsTest.DeleteRow( 9 );
+		//clsTest.DeleteRow( 9 );
 	}
 }
