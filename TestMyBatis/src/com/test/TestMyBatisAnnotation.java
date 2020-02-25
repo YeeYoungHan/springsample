@@ -8,6 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+/** 애노테이션 기반 마이바티스 테스트 클래스
+ * 
+ * @author 이영한 ( http://blog.naver.com/websearch )
+ *
+ */
 public class TestMyBatisAnnotation
 {
 	String m_strConfigPath = "com/test/Config.xml";
