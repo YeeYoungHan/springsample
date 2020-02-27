@@ -90,6 +90,10 @@ public class TestMyBatisXml
 		}
 	}
 	
+	/** N 개의 ROW 를 가져오는 예제
+	 * 
+	 * @return N 개의 ROW 를 저장한 객체를 리턴한다.
+	 */
 	List<NoticeRow> SelectRowList( )
 	{
 		SqlSessionFactory clsFactory = CreateSqlSessionFactory();
