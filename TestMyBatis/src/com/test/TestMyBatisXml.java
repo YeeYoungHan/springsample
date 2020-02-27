@@ -2,6 +2,7 @@ package com.test;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -89,6 +90,17 @@ public class TestMyBatisXml
 		}
 	}
 	
+	List<NoticeRow> SelectRowList( )
+	{
+		SqlSessionFactory clsFactory = CreateSqlSessionFactory();
+		if( clsFactory == null ) return null;
+		
+		try( SqlSession clsSession = clsFactory.openSession( ) )
+		{
+			return clsSession.selectList( "com.test.TestMyBatis.SelectRowList" );
+		}
+	}
+	
 	/** 하나의 ROW 를 INSERT 하는 예제
 	 * 
 	 * @param clsRow NoticeRow 객체
@@ -169,12 +181,20 @@ public class TestMyBatisXml
 		System.out.println( clsRow.toString() );
 		*/
 		
+		/*
 		NoticeRow clsCondition = new NoticeRow();
 		clsCondition.m_iId = 7;
 		clsCondition.m_strSubject = "MyBatis";
 		
 		NoticeRow clsRow = clsTest.SelectRowCondition( clsCondition );
 		System.out.println( clsRow.toString() );
+		*/
+		
+		List<NoticeRow> clsList = clsTest.SelectRowList();
+		for( NoticeRow clsRow : clsList )
+		{
+			System.out.println( clsRow.toString() );
+		}
 		
 		/*
 		NoticeRow clsRow = new NoticeRow();

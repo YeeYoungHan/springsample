@@ -30,6 +30,14 @@
 			</if>
 		</where>
 	</select>
+	<select id="SelectRowList" resultType="com.test.NoticeRow">
+		SELECT nbSubject AS m_strSubject, 
+			nbContent AS m_strContent,
+			nbReadCount AS m_iReadCount,
+			nbInsertDate AS m_clsInsertDate,
+			nbCommentCount AS m_iCommentCount
+		FROM noticeboard
+	</select>
 	<insert id="InsertRow" parameterType="com.test.NoticeRow">
 		INSERT INTO noticeboard( nbSubject, nbContent, nbReadCount, nbInsertDate, nbCommentCount )
 		VALUES( #{m_strSubject}, #{m_strContent}, #{m_iReadCount}, #{m_clsInsertDate}, #{m_iCommentCount} )
