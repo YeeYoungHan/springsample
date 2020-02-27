@@ -1,5 +1,7 @@
 package com.test;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -21,6 +23,9 @@ public interface NoticeBoard
 	
 	@SelectProvider(type=NoticeBoardProvider.class, method="SelectRowCondition")
 	NoticeRow SelectRowCondition( NoticeRow clsCondition );
+	
+	@Select({"SELECT nbSubject AS m_strSubject, nbContent AS m_strContent, nbReadCount AS m_iReadCount, nbInsertDate AS m_clsInsertDate, nbCommentCount AS m_iCommentCount FROM noticeboard"})
+	List<NoticeRow> SelectRowList( );
 	
 	@Insert({"INSERT INTO noticeboard( nbSubject, nbContent, nbReadCount, nbInsertDate, nbCommentCount ) VALUES( #{m_strSubject}, #{m_strContent}, #{m_iReadCount}, #{m_clsInsertDate}, #{m_iCommentCount} )"})
 	int InsertRow( NoticeRow clsRow );
