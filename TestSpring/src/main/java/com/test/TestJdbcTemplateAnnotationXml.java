@@ -2,6 +2,7 @@ package com.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,5 +52,7 @@ public class TestJdbcTemplateAnnotationXml
 		TestJdbcTemplate3 clsTest = context.getBean( "getJdbcTemplate", TestJdbcTemplate3.class );
 		
 		clsTest.Delete( 4 );
+		
+		((ConfigurableApplicationContext) context).close();
 	}
 }

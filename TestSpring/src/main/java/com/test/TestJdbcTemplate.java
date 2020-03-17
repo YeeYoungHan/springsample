@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -136,5 +137,7 @@ public class TestJdbcTemplate
 		{
 			System.out.println( "not found" ); 
 		}
+		
+		((ConfigurableApplicationContext) context).close();
 	}
 }
