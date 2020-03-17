@@ -2,6 +2,7 @@ package com.test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -55,6 +56,15 @@ public class TestJdbcTemplate
 		return jdbcTemplate.queryForObject( "SELECT nbId, nbSubject, nbContent FROM noticeboard WHERE nbId = ?", new Object[] { iId }, noticeMapper );
 	}
 	
+	/** 테이블에 존재하는 모든 ROW 를 가져온다.
+	 * 
+	 * @return 테이블에 존재하는 모든 ROW 를 저장한 객체를 리턴한다.
+	 */
+	public List<Notice> SelectAll()
+	{
+		return jdbcTemplate.query( "SELECT nbId, nbSubject, nbContent FROM noticeboard", noticeMapper );
+	}
+	
 	RowMapper<Notice> noticeMapper = new RowMapper<Notice>() {
 
 		@Override
@@ -71,6 +81,10 @@ public class TestJdbcTemplate
 		
 	};
 	
+	/** 하나의 ROW 를 저장할 클래스
+	 * 
+	 * @author 이영한 ( http://blog.naver.com/websearch )
+	 */
 	public static class Notice
 	{
 		public int m_iId;
@@ -89,16 +103,34 @@ public class TestJdbcTemplate
 		
 		TestJdbcTemplate clsTest = context.getBean( "testJdbcTemplate", TestJdbcTemplate.class );
 		
+		// ROW 삭제 테스트
 		clsTest.Delete( 7 );
 		
+		// 테이블 ROW 개수를 가져오는 테스트
 		int iCount = clsTest.GetCount( );
 		
 		System.out.println( "count = " + iCount );
 		
+		// 하나의 ROW 를 가져오는 테스트
 		try
 		{
 			Notice clsNotice = clsTest.Select( 7 );
 			System.out.println( clsNotice.toString( ) );
+		}
+		catch( EmptyResultDataAccessException e )
+		{
+			System.out.println( "not found" ); 
+		}
+		
+		// N 개의 ROW 를 가져오는 테스트
+		try
+		{
+			List<Notice> arrNotice = clsTest.SelectAll( );
+			
+			for( Notice clsNotice : arrNotice )
+			{
+				System.out.println( clsNotice.toString( ) );
+			}
 		}
 		catch( EmptyResultDataAccessException e )
 		{
