@@ -5,6 +5,11 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
+/** GenericXmlApplicationContext 기반으로 JdbcTemplate 을 사용하는 예제
+ * 
+ * @author 이영한 ( http://blog.naver.com/websearch )
+ *
+ */
 public class TestJdbcTemplate 
 {
 	SimpleDriverDataSource dataSource;
