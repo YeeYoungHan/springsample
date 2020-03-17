@@ -27,6 +27,11 @@ public class TestJdbcTemplate
 		jdbcTemplate.update( "DELETE FROM noticeboard WHERE nbId = ?", iId );
 	}
 	
+	public int GetCount()
+	{
+		return jdbcTemplate.queryForObject( "SELECT count(*) FROM noticeboard", Integer.class );
+	}
+	
 	public static void main( String [] args )
 	{
 		ApplicationContext context = new GenericXmlApplicationContext("com/test/bean.xml");
@@ -34,5 +39,9 @@ public class TestJdbcTemplate
 		TestJdbcTemplate clsTest = context.getBean( "testJdbcTemplate", TestJdbcTemplate.class );
 		
 		clsTest.Delete( 7 );
+		
+		int iCount = clsTest.GetCount( );
+		
+		System.out.println( "count = " + iCount );
 	}
 }
