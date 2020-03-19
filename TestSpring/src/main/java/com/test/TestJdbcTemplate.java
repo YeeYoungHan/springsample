@@ -10,7 +10,6 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -22,16 +21,13 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  */
 public class TestJdbcTemplate 
 {
-	SimpleDriverDataSource dataSource;
-	
 	JdbcTemplate jdbcTemplate;
 	
 	PlatformTransactionManager transactionManager;
 		
-	public void setDataSource( SimpleDriverDataSource dataSource )
+	public void setJdbcTemplate( JdbcTemplate jdbcTemplate )
 	{
-		this.dataSource = dataSource;
-		jdbcTemplate = new JdbcTemplate( dataSource );
+		this.jdbcTemplate = jdbcTemplate;
 	}
 	
 	public void setTransactionManager( PlatformTransactionManager transactionManager )
