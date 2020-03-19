@@ -10,8 +10,13 @@
 		<property name="password" value="spring" />
 	</bean>
 	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
 	<bean id="testJdbcTemplate" class="com.test.TestJdbcTemplate" >
 		<property name="dataSource" ref="dataSource" />
+		<property name="transactionManager" ref="transactionManager" />
 	</bean>
 
 </beans>

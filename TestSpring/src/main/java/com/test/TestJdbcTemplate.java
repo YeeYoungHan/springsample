@@ -11,6 +11,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /** GenericXmlApplicationContext 기반으로 JdbcTemplate 을 사용하는 예제
  * 
@@ -22,11 +25,18 @@ public class TestJdbcTemplate
 	SimpleDriverDataSource dataSource;
 	
 	JdbcTemplate jdbcTemplate;
+	
+	PlatformTransactionManager transactionManager;
 		
 	public void setDataSource( SimpleDriverDataSource dataSource )
 	{
 		this.dataSource = dataSource;
 		jdbcTemplate = new JdbcTemplate( dataSource );
+	}
+	
+	public void setTransactionManager( PlatformTransactionManager transactionManager )
+	{
+		this.transactionManager = transactionManager; 
 	}
 	
 	/** 하나의 ROW 를 삭제한다.
@@ -79,7 +89,6 @@ public class TestJdbcTemplate
 			
 			return clsNotice;
 		}
-		
 	};
 	
 	/** 하나의 ROW 를 저장할 클래스
@@ -96,6 +105,34 @@ public class TestJdbcTemplate
 		{
 			return "id[" + m_iId + "] subject[" + m_strSubject + "] content[" + m_strContent + "]";
 		}
+	}
+	
+	/** transaction 테스트 */
+	public void TestTransaction()
+	{
+		TransactionStatus clsStatus = transactionManager.getTransaction( new DefaultTransactionDefinition() );
+		
+		try
+		{
+			List<Notice> arrNotice = SelectAll( );
+			int iIndex = 0;
+			
+			for( Notice clsNotice : arrNotice )
+			{
+				System.out.println( clsNotice.toString( ) );
+				jdbcTemplate.update( "DELETE FROM noticeboard WHERE nbId = ?", clsNotice.m_iId );
+				++iIndex;
+				if( iIndex == 2 ) throw new RuntimeException();
+			}
+			
+			transactionManager.commit( clsStatus );
+			System.out.println( "commit" );
+		}
+		catch( RuntimeException e )
+		{
+			transactionManager.rollback( clsStatus );
+			System.out.println( "rollback" ); 
+		}		
 	}
 	
 	public static void main( String [] args )
@@ -138,6 +175,9 @@ public class TestJdbcTemplate
 			System.out.println( "not found" ); 
 		}
 		
+		// Transaction 테스트
+		clsTest.TestTransaction( );
+				
 		((ConfigurableApplicationContext) context).close();
 	}
 }
