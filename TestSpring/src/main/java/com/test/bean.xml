@@ -23,9 +23,33 @@
 		<property name="transactionManager" ref="transactionManager" />
 	</bean>
 	
+	<!-- Dynamic Proxy 테스트 -->
 	<bean id="testDynamicProxy" class="com.test.TestDynamicProxy" >
 		<property name="transactionManager" ref="transactionManager" />
 		<property name="testJdbcTemplate" ref="testJdbcTemplate" />
+	</bean>
+	
+	<!-- ProxyFactoryBean 테스트 -->
+	<bean id="transactionAdvice" class="com.test.TestProxyFactoryBean" >
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<bean id="transactionPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut" >
+		<property name="mappedName" value="DeleteAll*" />
+	</bean>
+	
+	<bean id="advicePointcut" class="org.springframework.aop.support.DefaultPointcutAdvisor" >
+		<property name="advice" ref="transactionAdvice" />
+		<property name="pointcut" ref="transactionPointcut" />
+	</bean>
+	
+	<bean id="testProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean" >
+		<property name="target" ref="testJdbcTemplate" />
+		<property name="interceptorNames">
+			<list>
+				<value>advicePointcut</value>
+			</list>
+		</property>
 	</bean>
 
 </beans>
