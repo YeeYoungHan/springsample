@@ -69,7 +69,7 @@ public class TestDynamicProxy implements FactoryBean<Object>
 			String strName = method.getName( );
 			Object clsRet = null;
 			
-			// 메소드 이름으로 트랜잭선이 필요한지 검사한다.
+			// 메소드 이름으로 트랜잭션이 필요한지 검사한다.
 			if( strName.equals( "DeleteAllException" ) )
 			{
 				bUseTransaction = true;
@@ -77,7 +77,7 @@ public class TestDynamicProxy implements FactoryBean<Object>
 			
 			if( bUseTransaction )
 			{
-				// 트랜잭선이 필요하면 트랜잭선을 시작한다.
+				// 트랜잭선이 필요하면 트랜잭션을 시작한다.
 				TransactionStatus clsStatus = transactionManager.getTransaction( new DefaultTransactionDefinition() );
 				
 				try
