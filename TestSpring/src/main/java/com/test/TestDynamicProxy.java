@@ -110,7 +110,14 @@ public class TestDynamicProxy implements FactoryBean<Object>
 		
 		TestJdbcTemplateInterface clsTest = context.getBean( "testDynamicProxy", TestJdbcTemplateInterface.class );
 		
-		clsTest.DeleteAllException( );
+		try
+		{
+			clsTest.DeleteAllException( );
+		}
+		catch( RuntimeException e )
+		{
+			System.out.println( "exception - " + e );
+		}
 		
 		((ConfigurableApplicationContext) context).close();
 	}
