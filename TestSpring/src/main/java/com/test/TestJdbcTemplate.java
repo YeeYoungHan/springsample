@@ -19,7 +19,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  * @author 이영한 ( http://blog.naver.com/websearch )
  *
  */
-public class TestJdbcTemplate 
+public class TestJdbcTemplate implements TestJdbcTemplateInterface
 {
 	JdbcTemplate jdbcTemplate;
 	
@@ -110,16 +110,7 @@ public class TestJdbcTemplate
 		
 		try
 		{
-			List<Notice> arrNotice = SelectAll( );
-			int iIndex = 0;
-			
-			for( Notice clsNotice : arrNotice )
-			{
-				System.out.println( clsNotice.toString( ) );
-				jdbcTemplate.update( "DELETE FROM noticeboard WHERE nbId = ?", clsNotice.m_iId );
-				++iIndex;
-				if( iIndex == 2 ) throw new RuntimeException();
-			}
+			DeleteAllException();
 			
 			transactionManager.commit( clsStatus );
 			System.out.println( "commit" );
@@ -128,7 +119,21 @@ public class TestJdbcTemplate
 		{
 			transactionManager.rollback( clsStatus );
 			System.out.println( "rollback" ); 
-		}		
+		}
+	}
+	
+	public void DeleteAllException()
+	{
+		List<Notice> arrNotice = SelectAll( );
+		int iIndex = 0;
+		
+		for( Notice clsNotice : arrNotice )
+		{
+			System.out.println( clsNotice.toString( ) );
+			jdbcTemplate.update( "DELETE FROM noticeboard WHERE nbId = ?", clsNotice.m_iId );
+			++iIndex;
+			if( iIndex == 2 ) throw new RuntimeException();
+		}
 	}
 	
 	public static void main( String [] args )

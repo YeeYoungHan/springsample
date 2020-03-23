@@ -22,5 +22,10 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 		<property name="transactionManager" ref="transactionManager" />
 	</bean>
+	
+	<bean id="testDynamicProxy" class="com.test.TestDynamicProxy" >
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="testJdbcTemplate" ref="testJdbcTemplate" />
+	</bean>
 
 </beans>
