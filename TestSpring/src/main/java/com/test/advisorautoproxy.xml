@@ -23,7 +23,6 @@
 		<property name="transactionManager" ref="transactionManager" />
 	</bean>
 	
-	<!-- ProxyFactoryBean 테스트 -->
 	<bean id="transactionAdvice" class="com.test.TestProxyFactoryBean" >
 		<property name="transactionManager" ref="transactionManager" />
 	</bean>
