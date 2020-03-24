@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" >
+		<property name="driverClass" value="org.mariadb.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/spring" />
+		<property name="username" value="spring" />
+		<property name="password" value="spring" />
+	</bean>
+	
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="testJdbcTemplate" class="com.test.TestJdbcTemplate" >
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<!-- ProxyFactoryBean 테스트 -->
+	<bean id="transactionAdvice" class="com.test.TestProxyFactoryBean" >
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	
+	<bean id="transactionPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut" >
+		<property name="mappedName" value="DeleteAll*" />
+	</bean>
+	
+	<bean id="advicePointcut" class="org.springframework.aop.support.DefaultPointcutAdvisor" >
+		<property name="advice" ref="transactionAdvice" />
+		<property name="pointcut" ref="transactionPointcut" />
+	</bean>
+	
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+	
+</beans>
