@@ -39,6 +39,7 @@ public class TestProxyFactoryBean implements MethodInterceptor
 		{
 			transactionManager.rollback( clsStatus );
 			System.out.println( "rollback" );
+			e.printStackTrace( );
 			throw e;
 		}
 	}

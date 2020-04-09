@@ -4,15 +4,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-/** DefaultAdvisorAutoProxyCreator 테스트
+/** AOP 를 이용한 DefaultAdvisorAutoProxyCreator 테스트
  * 
  * @author 이영한 ( http://blog.naver.com/websearch )
  */
-public class TestDefaultAdvisorAuthProxyCreator
+public class TestDefaultAdvisorAutoProxyCreatorAop
 {
 	public static void main( String [] args )
 	{
-		ApplicationContext context = new GenericXmlApplicationContext("com/test/advisorautoproxy.xml");
+		ApplicationContext context = new GenericXmlApplicationContext("com/test/advisorautoproxyaop.xml");
 		
 		TestJdbcTemplateInterface clsTest = context.getBean( "testJdbcTemplate", TestJdbcTemplateInterface.class );
 		
