@@ -33,8 +33,4 @@
 		<aop:advisor advice-ref="transactionAdvice" pointcut="execution(* *..*.DeleteAll*(..))" />
 	</aop:config>
 		
-	<!-- org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator 를 사용하면 rollback 이 2번 호출된다. -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
-	<!-- -->
-	
 </beans>
