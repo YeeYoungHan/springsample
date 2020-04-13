@@ -72,7 +72,7 @@ public class TestJdbcTemplate implements TestJdbcTemplateInterface
 		return jdbcTemplate.query( "SELECT nbId, nbSubject, nbContent FROM noticeboard", noticeMapper );
 	}
 	
-	RowMapper<Notice> noticeMapper = new RowMapper<Notice>() {
+	static RowMapper<Notice> noticeMapper = new RowMapper<Notice>() {
 
 		@Override
 		public Notice mapRow( ResultSet rs, int rowNum ) throws SQLException
