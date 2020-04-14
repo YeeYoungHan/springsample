@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="test" class="com.test.TestMap" >
+		<property name="map">
+			<map>
+				<entry key="key1" value="value1" />
+				<entry key="key2" value="value2" />
+			</map>
+		</property>
+	</bean>
+
+</beans>
