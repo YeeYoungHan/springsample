@@ -13,10 +13,17 @@ import org.springframework.context.support.GenericXmlApplicationContext;
  */
 public class TestPostConstruct
 {
+	String m_strName;
+	
+	public void setName( String strName )
+	{
+		m_strName = strName;
+	}
+	
 	@PostConstruct
 	public void Init()
 	{
-		System.out.println( "TestPostConstruct.Init()" );
+		System.out.println( "TestPostConstruct.Init() - name(" + m_strName + ")" );
 	}
 	
 	public void Print()
