@@ -6,6 +6,7 @@
 
 * 스프링 프레임워크 기반 게시판 개발
 * 마이바티스 테스트
+* 스프링 프레임워크 테스트
 
 ### 개발자 정보
 본 프로젝트를 진행하는 개발자 정보는 다음과 같습니다.
@@ -26,4 +27,13 @@
   * 스프링 프레임워크 기반 게시판 개발 프로젝트
 
 * TestMyBatis
-  * MyBatis 테스트 프로젝
+  * MyBatis 테스트 프로젝트
+
+* TestSpring
+  * 스프링 프레임워크 테스트
+
+* TestSpringMvc
+  * MVC 기반 스프링 웹 프로젝트 테스
+
+* TestSpringWeb
+  * Simple Spring Web Maven 프로젝트 테스트
