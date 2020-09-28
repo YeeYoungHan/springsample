@@ -6,9 +6,9 @@ import kr.dogfoot.hwplib.object.bodytext.paragraph.Paragraph;
 import kr.dogfoot.hwplib.tool.blankfilemaker.BlankFileMaker;
 import kr.dogfoot.hwplib.writer.HWPWriter;
 
-public class App
+public class TestSimpleHwp
 {
-	public static void main( String[] args )
+	static void WriteSimpleHwp()
 	{
 		try
 		{
@@ -23,5 +23,10 @@ public class App
 		{
 
 		}
+	}
+	
+	public static void main( String[] args )
+	{
+		WriteSimpleHwp();
 	}
 }
