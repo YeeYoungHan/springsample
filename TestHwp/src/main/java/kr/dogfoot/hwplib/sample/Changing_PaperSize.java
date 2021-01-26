@@ -24,20 +24,17 @@ public class Changing_PaperSize {
     }
 
 	public static void main(String[] args) throws Exception {
-        String filename = "sample_hwp" + File.separator + "test-blank.hwp";
+        String filename = "sample_hwp" + File.separator + "blank.hwp";
 
         HWPFile hwpFile = HWPReader.fromFile(filename);
         if (hwpFile != null) {
             ControlSectionDefine csd = getSectionDefineControl(hwpFile);
             Size paperSize = getPaperSize();
-            System.out.println(paperSize.cx);
-            System.out.println(paperSize.cy);
-
 
             csd.getPageDef().setPaperWidth(paperSize.cx);
             csd.getPageDef().setPaperHeight(paperSize.cy);
 
-            String writePath = "sample_hwp" + File.separator + "test-change-paper-size.hwp";
+            String writePath = "sample_hwp" + File.separator + "result-changing-paper-size.hwp";
             HWPWriter.toFile(hwpFile, writePath);
         }
     }

@@ -14,13 +14,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class Changing_ParagraphText {
-    private static final String source1 = "안녕하세요.";
-    private static final String target1 = "Hello.";
-    private static final String source2 = "이것은 샘플입니다.";
-    private static final String target2 = "This is Sample.";
+    private static final String source1 = "110111-2789985";
+    private static final String target1 = "******-*******";
+    private static final String source2 = "02-3397-7200";
+    private static final String target2 = "**-****-****";
 
     public static void main(String[] args) throws Exception {
-        String filename = "sample_hwp" + File.separator + "test-change-paragraph-text.hwp";
+        //String filename = "sample_hwp" + File.separator + "changing-paragraph-text.hwp";
+    	String filename = "sample_hwp" + File.separator + "a.hwp";
 
         HWPFile hwpFile = HWPReader.fromFile(filename);
         if (hwpFile != null) {
@@ -30,7 +31,7 @@ public class Changing_ParagraphText {
                 changeParagraphText(hwpFile.getBodyText().getSectionList().get(0).getParagraph(index));
             }
 
-            String filename2 = "sample_hwp" + File.separator + "edit_test-change-paragraph-text.hwp";
+            String filename2 = "sample_hwp" + File.separator + "result-changing-paragraph-text.hwp";
             HWPWriter.toFile(hwpFile, filename2);
         }
     }
@@ -121,6 +122,4 @@ public class Changing_ParagraphText {
             paragraph.getHeader().setCharShapeCount(1);
         }
     }
-
-
 }

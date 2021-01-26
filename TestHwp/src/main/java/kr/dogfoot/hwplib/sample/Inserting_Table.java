@@ -35,13 +35,13 @@ import java.io.UnsupportedEncodingException;
 public class Inserting_Table {
 
     public static void main(String[] args) throws Exception {
-        String filename = "sample_hwp" + File.separator + "test-blank.hwp";
+        String filename = "sample_hwp" + File.separator + "blank.hwp";
 
         HWPFile hwpFile = HWPReader.fromFile(filename);
         if (hwpFile != null) {
             Inserting_Table tmt = new Inserting_Table();
             tmt.makeTable(hwpFile);
-            String writePath = "sample_hwp" + File.separator + "test-making-table.hwp";
+            String writePath = "sample_hwp" + File.separator + "result-inserting-table.hwp";
             HWPWriter.toFile(hwpFile, writePath);
         }
 
@@ -141,7 +141,7 @@ public class Inserting_Table {
         bf.getBottomBorder().getColor().setValue(0x0);
         bf.setDiagonalSort(BorderType.None);
         bf.setDiagonalThickness(BorderThickness.MM0_5);
-		bf.getDiagonalColor().setValue(0x0);
+        bf.getDiagonalColor().setValue(0x0);
 
         bf.getFillInfo().getType().setPatternFill(true);
         bf.getFillInfo().createPatternFill();
@@ -180,7 +180,7 @@ public class Inserting_Table {
         bf.getBottomBorder().getColor().setValue(0x0);
         bf.setDiagonalSort(BorderType.None);
         bf.setDiagonalThickness(BorderThickness.MM0_5);
-		bf.getDiagonalColor().setValue(0x0);
+        bf.getDiagonalColor().setValue(0x0);
 
         bf.getFillInfo().getType().setPatternFill(true);
         bf.getFillInfo().createPatternFill();
@@ -242,7 +242,7 @@ public class Inserting_Table {
         ph.setParaShapeId(1);
         // 셀의 스타일을이미 만들어진 스타일으로 사용함
         ph.setStyleId((short) 1);
-		ph.getDivideSort().setDivideSection(false);
+        ph.getDivideSort().setDivideSection(false);
         ph.getDivideSort().setDivideMultiColumn(false);
         ph.getDivideSort().setDividePage(false);
         ph.getDivideSort().setDivideColumn(false);
@@ -279,7 +279,7 @@ public class Inserting_Table {
         ParaLineSeg pls = p.getLineSeg();
         LineSegItem lsi = pls.addNewLineSegItem();
 
-        lsi.setTextStartPositon(0);
+        lsi.setTextStartPosition(0);
         lsi.setLineVerticalPosition(0);
         lsi.setLineHeight(ptToLineHeight(10.0));
         lsi.setTextPartHeight(ptToLineHeight(10.0));

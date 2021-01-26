@@ -2,6 +2,7 @@ package kr.dogfoot.hwplib.object.bodytext;
 
 import kr.dogfoot.hwplib.object.bodytext.control.sectiondefine.BatangPageInfo;
 import kr.dogfoot.hwplib.object.bodytext.paragraph.Paragraph;
+import kr.dogfoot.hwplib.object.docinfo.ParaShape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -61,6 +62,14 @@ public class Section implements ParagraphListInterface {
     }
 
     /**
+     *  index 번째의 문단을 삭제한다.
+     * @param index 삭제할 문단의 순번
+     */
+    public void deleteParagraph(int index) {
+        paragraphList.remove(index);
+    }
+
+    /**
      * Iterator<Paragraph> 객체를 반환한다.
      *
      * @return Iterator<Paragraph> 객체
@@ -83,5 +92,22 @@ public class Section implements ParagraphListInterface {
      */
     public BatangPageInfo getLastBatangPageInfo() {
         return lastBatangPageInfo;
+    }
+
+    public Section clone() {
+        Section cloned = new Section();
+
+        cloned.paragraphList.clear();
+        for (Paragraph paragraph : paragraphList) {
+            cloned.paragraphList.add(paragraph.clone());
+        }
+
+        if (lastBatangPageInfo != null) {
+            cloned.lastBatangPageInfo = lastBatangPageInfo.clone();
+        } else {
+            cloned.lastBatangPageInfo = null;
+        }
+
+        return cloned;
     }
 }

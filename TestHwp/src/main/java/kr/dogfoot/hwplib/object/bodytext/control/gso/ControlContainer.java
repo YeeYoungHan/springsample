@@ -1,5 +1,7 @@
 package kr.dogfoot.hwplib.object.bodytext.control.gso;
 
+import kr.dogfoot.hwplib.object.bodytext.control.Control;
+import kr.dogfoot.hwplib.object.bodytext.control.FactoryForControl;
 import kr.dogfoot.hwplib.object.bodytext.control.ctrlheader.CtrlHeaderGso;
 import kr.dogfoot.hwplib.object.bodytext.control.gso.shapecomponent.ShapeComponentContainer;
 
@@ -37,6 +39,12 @@ public class ControlContainer extends GsoControl {
         childControlList = new ArrayList<GsoControl>();
     }
 
+    public GsoControl addNewChildControl(GsoControlType gsoType) {
+        GsoControl gc = FactoryForControl.createGso(gsoType.getId(), new CtrlHeaderGso());
+        childControlList.add(gc);
+        return gc;
+    }
+
     /**
      * 차일드 컨트롤을 리스트에 추가한다.
      *
@@ -53,5 +61,17 @@ public class ControlContainer extends GsoControl {
      */
     public ArrayList<GsoControl> getChildControlList() {
         return childControlList;
+    }
+
+    @Override
+    public Control clone() {
+        ControlContainer cloned = new ControlContainer();
+        cloned.copyGsoControlPart(this);
+
+        for (GsoControl childControl : childControlList) {
+            cloned.childControlList.add((GsoControl) (childControl.clone()));
+        }
+
+        return cloned;
     }
 }
