@@ -4,6 +4,7 @@ import kr.dogfoot.hwplib.object.HWPFile;
 import kr.dogfoot.hwplib.reader.HWPReader;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractMethod;
 import kr.dogfoot.hwplib.tool.textextractor.TextExtractor;
+import kr.dogfoot.hwplib.writer.HWPWriter;
 
 import java.io.File;
 
@@ -13,6 +14,8 @@ import java.io.File;
  */
 public class Extracting_Text {
     public static void main(String[] args) throws Exception {
+    	
+    	/*
         test("blank.hwp");
         test("etc.hwp");
         test("ole.hwp");
@@ -40,17 +43,22 @@ public class Extracting_Text {
         test("필드.hwp");
         test("필드-누름틀.hwp");
         test("호-곡선.hwp");
+      */
+    	
+    	test( "sample_hwp" + File.separator + "a.hwp" );
     }
 
     private static void test(String filename)
             throws Exception {
         TextExtractMethod tem = TextExtractMethod.InsertControlTextBetweenParagraphText;
-        HWPFile hwpFile = HWPReader.fromFile(fullPath(filename));
+        HWPFile hwpFile = HWPReader.fromFile(filename );
         System.out.println(filename + "  읽기 성공 !!");
         System.out.println();
         String hwpText = TextExtractor.extract(hwpFile, tem);
         System.out.println(hwpText);
         System.out.println("========================================================");
+        
+        HWPWriter.toFile(hwpFile, "sample_hwp" + File.separator + "b.hwp" );
     }
 
     private static String fullPath(String filename) {

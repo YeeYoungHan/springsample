@@ -9,6 +9,7 @@ import kr.dogfoot.hwplib.object.bodytext.paragraph.text.ParaText;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * 문단 리스트를 위한 텍스트 추출기 객체
@@ -138,6 +139,10 @@ public class ForParagraphList {
             controls(p.getControlList(), tem, sb);
         }
     }
+    
+    static LinkedList<HWPChar> garrCharList = new LinkedList<HWPChar>();
+    static String gstrNum = "";
+    static String gstrMask = "*";
 
     /**
      * 일반 문자에서 문자를 추출한다.
@@ -147,7 +152,31 @@ public class ForParagraphList {
      * @throws UnsupportedEncodingException
      */
     private static void normalText(HWPChar ch, StringBuffer sb) throws UnsupportedEncodingException {
-        sb.append(((HWPCharNormal) ch).getCh());
+    	
+    	String s = ((HWPCharNormal) ch).getCh();
+      sb.append( s );
+      
+      if( ( s.compareTo( "0" ) >= 0 && s.compareTo( "9" ) <= 0 ) || s.equals( "-" ) )
+      {
+      	garrCharList.addLast( ch );
+      	gstrNum += s;
+      	
+      	if( gstrNum.length( ) == 14 )
+      	{
+      		for( HWPChar c : garrCharList )
+      		{
+      			c.setCode( (short) gstrMask.codePointAt(0) );
+      		}
+      		
+      		garrCharList.clear( );
+        	gstrNum = "";
+      	}
+      }
+      else
+      {
+      	garrCharList.clear( );
+      	gstrNum = "";
+      }
     }
 
     /**

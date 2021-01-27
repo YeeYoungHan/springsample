@@ -6,6 +6,7 @@ import kr.dogfoot.hwplib.object.bodytext.paragraph.Paragraph;
 import kr.dogfoot.hwplib.object.bodytext.paragraph.text.HWPChar;
 import kr.dogfoot.hwplib.object.bodytext.paragraph.text.HWPCharNormal;
 import kr.dogfoot.hwplib.object.bodytext.paragraph.text.HWPCharType;
+import kr.dogfoot.hwplib.object.bodytext.paragraph.text.ParaText;
 import kr.dogfoot.hwplib.reader.HWPReader;
 import kr.dogfoot.hwplib.writer.HWPWriter;
 
@@ -25,11 +26,19 @@ public class Changing_ParagraphText {
 
         HWPFile hwpFile = HWPReader.fromFile(filename);
         if (hwpFile != null) {
-            Section s = hwpFile.getBodyText().getSectionList().get(0);
-            int count = s.getParagraphCount();
-            for (int index = 0; index < count; index++) {
-                changeParagraphText(hwpFile.getBodyText().getSectionList().get(0).getParagraph(index));
-            }
+        	
+        		ArrayList<Section> arrSection = hwpFile.getBodyText().getSectionList();
+        	
+        		for( int iS = 0; iS < arrSection.size(); ++iS )
+        		{
+        			Section s = arrSection.get( iS );
+              int count = s.getParagraphCount();
+              for (int index = 0; index < count; index++)
+              {
+                  changeParagraphText(hwpFile.getBodyText().getSectionList().get(0).getParagraph(index));
+              }
+        		}
+            
 
             String filename2 = "sample_hwp" + File.separator + "result-changing-paragraph-text.hwp";
             HWPWriter.toFile(hwpFile, filename2);
@@ -37,10 +46,13 @@ public class Changing_ParagraphText {
     }
 
     private static void changeParagraphText(Paragraph paragraph) throws UnsupportedEncodingException {
-        ArrayList<HWPChar> newCharList = getNewCharList(paragraph.getText().getCharList());
+    		ParaText clsText = paragraph.getText();
+    		if( clsText == null ) return;
+    	
+        ArrayList<HWPChar> newCharList = getNewCharList(clsText.getCharList());
         changeNewCharList(paragraph, newCharList);
-        removeLineSeg(paragraph);
-        removeCharShapeExceptFirstOne(paragraph);
+        //removeLineSeg(paragraph);
+        //removeCharShapeExceptFirstOne(paragraph);
     }
 
     public static ArrayList<HWPChar> getNewCharList(ArrayList<HWPChar> oldList) throws UnsupportedEncodingException {
@@ -55,7 +67,14 @@ public class Changing_ParagraphText {
                     listForText.clear();
                     String newText = changeText(text);
 
-                    newList.addAll(toHWPCharList(newText));
+                    if( newText == null )
+                    {
+                    	newList.addAll(toHWPCharList(text));
+                    }
+                    else
+                    {
+                    	newList.addAll(toHWPCharList(newText));
+                    }
                 }
                 newList.add(ch);
             }
@@ -66,8 +85,16 @@ public class Changing_ParagraphText {
             listForText.clear();
             String newText = changeText(text);
 
-            newList.addAll(toHWPCharList(newText));
+            if( newText == null )
+            {
+            	newList.addAll(toHWPCharList(text));
+            }
+            else
+            {
+            	newList.addAll(toHWPCharList(newText));
+            }
         }
+        
         return newList;
     }
 
@@ -81,6 +108,9 @@ public class Changing_ParagraphText {
     }
 
     private static String changeText(String text) {
+    	
+    		System.out.println( text );
+    	
         if (source1.equals(text)) {
             return target1;
         } else if (source2.equals(text)) {

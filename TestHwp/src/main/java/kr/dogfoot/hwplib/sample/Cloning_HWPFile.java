@@ -6,11 +6,7 @@ import kr.dogfoot.hwplib.writer.HWPWriter;
 
 import java.io.File;
 
-
-/**
- * 파일을 읽어서 다시 쓰는 기능을 테스트하는 프로그램.
- */
-public class ReWriting_HWPFile {
+public class Cloning_HWPFile {
     public static void main(String[] args) throws Exception {
         test("blank.hwp");
         test("etc.hwp");
@@ -44,12 +40,15 @@ public class ReWriting_HWPFile {
     private static void test(String filename) throws Exception {
         HWPFile hwpFile = HWPReader.fromFile(fullPath(filename));
         if (hwpFile != null) {
-            String filename2 =  "result-rewrite-" + filename;
-            HWPWriter.toFile(hwpFile, fullPath(filename2));
+            HWPFile clonedHWPFile = hwpFile.clone(false);
+            String filename2 =  "result-clone-" + filename;
+            HWPWriter.toFile(clonedHWPFile, fullPath(filename2));
+            System.out.println(filename + " ok !!!");
         }
     }
 
     private static String fullPath(String filename) {
         return "sample_hwp" + File.separator + "basic" + File.separator + filename;
     }
+
 }
