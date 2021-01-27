@@ -11,6 +11,11 @@ import org.apache.poi.xwpf.usermodel.XWPFTable;
 import org.apache.poi.xwpf.usermodel.XWPFTableCell;
 import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
+/** 워드 파일 (.docx) 을 읽어서 14자리 숫자 또는 '-' 로 구성된 문자열을 * 문자열로 수정한다.
+ * 
+ * @author 이영한 ( http://blog.naver.com/websearch )
+ *
+ */
 public class ChangeWord 
 {
 	public static void Change( IBody clsBody )
