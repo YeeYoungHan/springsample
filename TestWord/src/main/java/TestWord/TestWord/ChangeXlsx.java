@@ -8,6 +8,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+/** 엑셀 파일 (.xlsx) 을 읽어서 14자리 숫자 또는 '-' 로 구성된 문자열을 * 문자열로 수정한다.
+ * 
+ * @author 이영한 ( http://blog.naver.com/websearch )
+ *
+ */
 public class ChangeXlsx
 {
 	public static void Change( XSSFCell cell )
