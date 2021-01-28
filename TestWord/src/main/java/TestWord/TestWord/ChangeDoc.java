@@ -65,6 +65,7 @@ public class ChangeDoc
 			}
 			
 			document.write( new FileOutputStream( "c:/temp/2.doc" ) );
+			document.close();
 		}
 		catch (Exception e1) 
 		{
