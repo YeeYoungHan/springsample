@@ -61,30 +61,23 @@ public class ChangeWord
 		}
 	}
 	
-    public static void main( String[] args )
+    public static void main( String[] args ) throws Exception
     {
-		try 
+		XWPFDocument document = new XWPFDocument( new FileInputStream( "c:/temp/1.docx" ) );
+		
+		Change( document );
+		
+		for( XWPFTable table : document.getTables() )
 		{
-			XWPFDocument document = new XWPFDocument( new FileInputStream( "c:/temp/1.docx" ) );
-			
-			Change( document );
-			
-			for( XWPFTable table : document.getTables() )
+			for( XWPFTableRow row : table.getRows() )
 			{
-				for( XWPFTableRow row : table.getRows() )
+				for( XWPFTableCell cell : row.getTableCells() )
 				{
-					for( XWPFTableCell cell : row.getTableCells() )
-					{
-						Change( cell );
-					}
+					Change( cell );
 				}
-			}			
-			
-			document.write( new FileOutputStream( "c:/temp/2.docx" ) );
-		} 
-		catch (Exception e1) 
-		{
-			System.err.println(e1);
-		}
+			}
+		}			
+		
+		document.write( new FileOutputStream( "c:/temp/2.docx" ) );
     }
 }
