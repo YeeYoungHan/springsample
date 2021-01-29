@@ -3,9 +3,7 @@ package TestWord.TestWord;
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.LinkedList;
 
-import org.apache.poi.sl.usermodel.PaintStyle;
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFShape;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
