@@ -185,7 +185,7 @@ public class TestHwpTable
     ParaLineSeg pls = p.getLineSeg();
     LineSegItem lsi = pls.addNewLineSegItem();
 
-    lsi.setTextStartPositon(0);
+    lsi.setTextStartPosition(0);
     lsi.setLineVerticalPosition(0);
     lsi.setLineHeight(ptToLineHeight(10.0));
     lsi.setTextPartHeight(ptToLineHeight(10.0));
