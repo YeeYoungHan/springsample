@@ -33,12 +33,19 @@ import kr.dogfoot.hwplib.writer.HWPWriter;
 
 public class ChangeHwp
 {
-	public void paragraph( Paragraph p, TextExtractMethod tem, StringBuffer sb ) throws UnsupportedEncodingException
+	LinkedList<HWPChar> m_arrCharList = new LinkedList<HWPChar>();
+	String m_strNum = "";
+	String m_strMask = "*";
+	static boolean m_bDebug = false;
+	int m_iChangeCount = 0;
+	
+	void paragraph( Paragraph p, TextExtractMethod tem, StringBuffer sb ) throws UnsupportedEncodingException
 	{
 		ParaText pt = p.getText();
 		if( pt != null )
 		{
-			int controlIndex = 0;
+			int iControlIndex = 0;
+			
 			for( HWPChar ch : pt.getCharList() )
 			{
 				switch( ch.getType() )
@@ -49,15 +56,14 @@ public class ChangeHwp
 				case ControlExtend:
 					if( tem == TextExtractMethod.InsertControlTextBetweenParagraphText )
 					{
-						extract( p.getControlList().get(controlIndex), tem, sb );
-						controlIndex++;
+						extract( p.getControlList().get(iControlIndex), tem, sb );
+						++iControlIndex;
 					}
 					break;
 				default:
 					break;
 				}
 			}
-			sb.append("\n");
 		}
 		
 		if( tem == TextExtractMethod.AppendControlTextAfterParagraphText ) 
@@ -65,10 +71,6 @@ public class ChangeHwp
 			controls( p.getControlList(), tem, sb );
 		}
 	}
-
-	LinkedList<HWPChar> m_arrCharList = new LinkedList<HWPChar>();
-	String m_strNum = "";
-	String m_strMask = "*";
 
 	void normalText( HWPChar ch ) throws UnsupportedEncodingException
 	{
@@ -81,6 +83,11 @@ public class ChangeHwp
 			
 			if( PersonalInformation.Check( m_strNum ) )
 			{
+				if( m_bDebug )
+				{
+					System.out.println( "[" + m_strNum + "]" );
+				}
+				
 				for( HWPChar c : m_arrCharList )
 				{
 					c.setCode( (short) m_strMask.codePointAt(0) );
@@ -88,6 +95,7 @@ public class ChangeHwp
 
 				m_arrCharList.clear( );
 				m_strNum = "";
+				++m_iChangeCount;
 			}
 
 			if( m_strNum.length( ) >= 14 )
@@ -209,7 +217,7 @@ public class ChangeHwp
   	}
   }
 	
-	static void Change( HWPFile hwpFile, TextExtractMethod tem ) throws Exception
+	static boolean Change( HWPFile hwpFile, TextExtractMethod tem ) throws Exception
 	{
 		ChangeHwp clsChangeHwp = new ChangeHwp();
 		StringBuffer clsBuf = new StringBuffer();
@@ -217,6 +225,21 @@ public class ChangeHwp
     for( Section clsSection : hwpFile.getBodyText().getSectionList() )
     {
     	clsChangeHwp.Change( clsSection, tem, clsBuf );
+    }
+    
+    if( clsChangeHwp.m_iChangeCount > 0 ) return true;
+    
+    return false;
+	}
+	
+	static void Change( String strInputFile, String strOutputFile ) throws Exception
+	{
+		TextExtractMethod tem = TextExtractMethod.InsertControlTextBetweenParagraphText;
+		
+    HWPFile hwpFile = HWPReader.fromFile( strInputFile );
+    if( Change( hwpFile, tem ) )
+    {
+    	HWPWriter.toFile( hwpFile, strOutputFile );
     }
 	}
 	
