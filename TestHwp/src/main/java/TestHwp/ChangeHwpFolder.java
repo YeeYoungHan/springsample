@@ -49,7 +49,15 @@ public class ChangeHwpFolder
 				
 				String strOutputFile = strOutputFolder + "/" + files[i].getName( );
 				
-				ChangeHwp.Change( files[i].getAbsolutePath( ), strOutputFile );
+				try
+				{
+					ChangeHwp.Change( files[i].getAbsolutePath( ), strOutputFile );
+				}
+				catch( Exception e )
+				{
+					System.out.println( e );
+					e.printStackTrace( );
+				}
 			}
 		}
 	}
