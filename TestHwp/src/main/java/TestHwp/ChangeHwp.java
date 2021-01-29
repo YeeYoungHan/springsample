@@ -76,7 +76,7 @@ public class ChangeHwp
 	{
 		String s = ((HWPCharNormal) ch).getCh();
 
-		if( ( s.compareTo( "0" ) >= 0 && s.compareTo( "9" ) <= 0 ) || s.equals( "-" ) )
+		if( ( s.compareTo( "0" ) >= 0 && s.compareTo( "9" ) <= 0 ) || s.equals( "-" ) || s.equals( "(" ) || s.equals( ")" ) )
 		{
 			m_arrCharList.addLast( ch );
 			m_strNum += s;
@@ -247,6 +247,7 @@ public class ChangeHwp
 	{
 		TextExtractMethod tem = TextExtractMethod.InsertControlTextBetweenParagraphText;
 		
+		ChangeHwp.m_bDebug = true;
     HWPFile hwpFile = HWPReader.fromFile( "c:/temp/1.hwp" );
     Change( hwpFile, tem );
     

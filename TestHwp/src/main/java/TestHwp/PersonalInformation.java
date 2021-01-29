@@ -64,6 +64,28 @@ public class PersonalInformation
 				
 				return true;
 			}
+			else if( strBuf.charAt( 0 ) == '(' )
+			{
+				if( strBuf.charAt( 3 ) == ')' )
+				{
+					if( CheckDigit( strBuf, 1, 3 ) == false ) return false;
+					
+					if( strBuf.charAt( 7 ) == '-' )
+					{
+						if( CheckDigit( strBuf, 4, 7 ) == false ) return false;
+						if( CheckDigit( strBuf, 8, 12 ) == false ) return false;
+						
+						return true;
+					}
+					else if( strBuf.charAt( 8 ) == '-' )
+					{
+						if( CheckDigit( strBuf, 4, 8 ) == false ) return false;
+						if( CheckDigit( strBuf, 9, 12 ) == false ) return false;
+						
+						return true;
+					}
+				}
+			}
 		}
 		else if( iLen == 11 )
 		{
