@@ -7,7 +7,8 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
@@ -31,6 +32,31 @@
 	<tx:annotation-driven />
 	
 	<resources mapping="/css/**" location="/resources/css/" />
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<!-- 
+			<exclude-mapping path="/**/*.css" />
+			<exclude-mapping path="/**/*.js" />
+			<exclude-mapping path="/**/*.jpg" />
+			<exclude-mapping path="/**/*.gif" />
+			<exclude-mapping path="/**/*.png" />
+			<exclude-mapping path="/**/*.woff" />
+			<exclude-mapping path="/**/*.woff2" />
+			<exclude-mapping path="/**/*.ttf" />
+			<exclude-mapping path="/**/*.ico" />
+			 -->
+			<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+				<beans:property name="cacheSeconds" value="0"/>
+				<!-- 
+				<beans:property name="useExpiresHeader" value="true"/>
+				<beans:property name="useCacheControlHeader" value="true"/>
+				<beans:property name="useCacheControlNoStore" value="true"/>
+				 -->
+			</beans:bean>
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>
