@@ -62,5 +62,8 @@ public class TestMyBatisConfig
 
 		String strName = clsTest.SelectSubject( 3 );
 		System.out.println( "SelectName(3) => (" + strName + ")" );
+		
+		strName = clsTest.SelectSubject( 3 );
+		System.out.println( "SelectName(3) => (" + strName + ")" );
 	}
 }
