@@ -28,7 +28,10 @@
 		<beans:property name="maxUploadSize" value="10485760" />
 	</beans:bean>
 	
+	<beans:bean id="loginInterceptor" class="com.notice.login.LoginInterceptor"></beans:bean>
+	
 	<context:component-scan base-package="com.notice.board" />
+	<context:component-scan base-package="com.notice.login" />
 	<tx:annotation-driven />
 	
 	<resources mapping="/css/**" location="/resources/css/" />
@@ -55,6 +58,10 @@
 				<beans:property name="useCacheControlNoStore" value="true"/>
 				 -->
 			</beans:bean>
+		</interceptor>
+		<interceptor>
+			<mapping path="/html*"/>
+			<beans:ref bean="loginInterceptor" />
 		</interceptor>
 	</interceptors>
 	
