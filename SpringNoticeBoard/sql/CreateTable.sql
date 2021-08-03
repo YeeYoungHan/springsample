@@ -9,6 +9,7 @@ CREATE TABLE  `spring`.`noticeboard` (
   `nbContent` text NOT NULL,
   `nbReadCount` int(10) unsigned NOT NULL DEFAULT '0',
   `nbInsertDate` datetime NOT NULL,
+  `nbCommentCount` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`nbId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
