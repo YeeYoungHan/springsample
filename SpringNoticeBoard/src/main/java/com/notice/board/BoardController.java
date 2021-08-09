@@ -18,10 +18,12 @@
 
 package com.notice.board;
 
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Controller;
@@ -98,6 +100,36 @@ public class BoardController
 		model.addAttribute( "row", clsRow );
 		
 		return "update";
+	}
+	
+	@RequestMapping(value = "update_test", method = RequestMethod.GET)
+	public String updateTest( @RequestParam("id") int iId, Model model, HttpServletRequest clsRequest )
+	{
+		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
+		model.addAttribute( "row", clsRow );
+		
+		NoticeBoardRow clsOutput = (NoticeBoardRow)clsRequest.getAttribute( "row" );
+		if( clsOutput != null )
+		{
+			System.out.println( "row is found" );
+		}
+		else
+		{
+			System.out.println( "row is not found" );
+		}
+		
+		System.out.println( "### Controller ###" );
+		System.out.println( "Request = " + clsRequest );
+		
+		Enumeration<String> arrName = clsRequest.getAttributeNames( );
+		
+		while( arrName.hasMoreElements() )
+		{
+			String strName = arrName.nextElement( );
+			System.out.println( "[" + strName + "]" );
+		}
+		
+		return "update_test";
 	}
 	
 	/** 게시글 수정하기
