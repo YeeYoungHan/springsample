@@ -20,6 +20,7 @@ package com.notice.board;
 
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -102,37 +103,7 @@ public class BoardController
 		
 		return "update";
 	}
-	
-	@RequestMapping(value = "update_test", method = RequestMethod.GET)
-	public String updateTest( @RequestParam("id") int iId, Model model, HttpServletRequest clsRequest )
-	{
-		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
-		model.addAttribute( "row", clsRow );
 		
-		NoticeBoardRow clsOutput = (NoticeBoardRow)clsRequest.getAttribute( "row" );
-		if( clsOutput != null )
-		{
-			System.out.println( "row is found" );
-		}
-		else
-		{
-			System.out.println( "row is not found" );
-		}
-		
-		System.out.println( "### Controller ###" );
-		System.out.println( "Request = " + clsRequest );
-		
-		Enumeration<String> arrName = clsRequest.getAttributeNames( );
-		
-		while( arrName.hasMoreElements() )
-		{
-			String strName = arrName.nextElement( );
-			System.out.println( "[" + strName + "]" );
-		}
-		
-		return "update_test";
-	}
-	
 	/** 게시글 수정하기
 	 * @param strSubject	제목
 	 * @param strContent	내용
@@ -143,34 +114,6 @@ public class BoardController
 	public String updateAction( @RequestParam("id") int iId, @RequestParam("subject") String strSubject, @RequestParam("content") String strContent, Model model )
 	{
 		m_clsSession.update( "Update", new NoticeBoardRow( iId, strSubject, strContent ) );
-		
-		return "redirect:list";
-	}
-	
-	static class UpdateData
-	{
-		int id;
-		String subject;
-		String content;
-		
-		public void setId( int id )
-		{
-			this.id = id;
-		}
-		public void setSubject( String subject )
-		{
-			this.subject = subject;
-		}
-		public void setContent( String content )
-		{
-			this.content = content;
-		}
-	}
-	
-	@RequestMapping(value = "update_test", method = RequestMethod.POST)
-	public String updateTestAction( @ModelAttribute UpdateData clsInput )
-	{
-		m_clsSession.update( "Update", new NoticeBoardRow( clsInput.id, clsInput.subject, clsInput.content ) );
 		
 		return "redirect:list";
 	}
@@ -204,5 +147,83 @@ public class BoardController
 		}
 		
 		return "select";
+	}
+
+	// Model 객체에 저장된 값들이 HttpServletRequest 객체에 저장되는 기능을 확인한다.
+	@RequestMapping(value = "update_test", method = RequestMethod.GET)
+	public String updateTest( @RequestParam("id") int iId, Model model, HttpServletRequest clsRequest )
+	{
+		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
+		model.addAttribute( "row", clsRow );
+		
+		NoticeBoardRow clsOutput = (NoticeBoardRow)clsRequest.getAttribute( "row" );
+		if( clsOutput != null )
+		{
+			System.out.println( "row is found" );
+		}
+		else
+		{
+			System.out.println( "row is not found" );
+		}
+		
+		System.out.println( "### Controller ###" );
+		System.out.println( "Request = " + clsRequest );
+		
+		Enumeration<String> arrName = clsRequest.getAttributeNames( );
+		
+		while( arrName.hasMoreElements() )
+		{
+			String strName = arrName.nextElement( );
+			System.out.println( "[" + strName + "]" );
+		}
+		
+		return "update_test";
+	}
+
+	// @ModelAttribute 기능을 확인한다.
+	static class UpdateData
+	{
+		int id;
+		String subject;
+		String content;
+		
+		public void setId( int id )
+		{
+			this.id = id;
+		}
+		public void setSubject( String subject )
+		{
+			this.subject = subject;
+		}
+		public void setContent( String content )
+		{
+			this.content = content;
+		}
+	}
+	
+	@RequestMapping(value = "update_test", method = RequestMethod.POST)
+	public String updateTestAction( @ModelAttribute UpdateData clsInput )
+	{
+		m_clsSession.update( "Update", new NoticeBoardRow( clsInput.id, clsInput.subject, clsInput.content ) );
+		
+		return "redirect:list";
+	}
+	
+	// 
+	@RequestMapping(value = "update_test2", method = RequestMethod.GET)
+	public String updateTest2( @RequestParam("id") int iId, Model model )
+	{
+		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
+		model.addAttribute( "row", clsRow );
+				
+		return "update_test2";
+	}
+	
+	@RequestMapping(value = "update_test2", method = RequestMethod.POST)
+	public String updateTest2Action( @RequestParam Map<String,String> clsMap )
+	{
+		m_clsSession.update( "Update", new NoticeBoardRow( Integer.parseInt( clsMap.get( "id" ) ), clsMap.get( "subject" ), clsMap.get( "content" ) ) );
+		
+		return "redirect:list";
 	}
 }
