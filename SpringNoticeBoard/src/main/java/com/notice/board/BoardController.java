@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -142,6 +143,34 @@ public class BoardController
 	public String updateAction( @RequestParam("id") int iId, @RequestParam("subject") String strSubject, @RequestParam("content") String strContent, Model model )
 	{
 		m_clsSession.update( "Update", new NoticeBoardRow( iId, strSubject, strContent ) );
+		
+		return "redirect:list";
+	}
+	
+	static class UpdateData
+	{
+		int id;
+		String subject;
+		String content;
+		
+		public void setId( int id )
+		{
+			this.id = id;
+		}
+		public void setSubject( String subject )
+		{
+			this.subject = subject;
+		}
+		public void setContent( String content )
+		{
+			this.content = content;
+		}
+	}
+	
+	@RequestMapping(value = "update_test", method = RequestMethod.POST)
+	public String updateTestAction( @ModelAttribute UpdateData clsInput )
+	{
+		m_clsSession.update( "Update", new NoticeBoardRow( clsInput.id, clsInput.subject, clsInput.content ) );
 		
 		return "redirect:list";
 	}

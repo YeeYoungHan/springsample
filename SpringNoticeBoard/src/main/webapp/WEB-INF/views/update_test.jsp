@@ -28,7 +28,7 @@
 			}
 		%>
 	
-		<form action="update" method="post" class="form-horizontal">
+		<form action="update_test" method="post" class="form-horizontal">
 			<input type="hidden" id="id" name="id" value="<%=clsRow.m_iId %>">
 		
 			<div class="form-inline form-group" >
