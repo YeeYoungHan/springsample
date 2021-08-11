@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<!-- <include resource="org/springframework/boot/logging/logback/base.xml" />  -->
 	
-	<logger name="jdbc.sqlonly" level="DEBUG" />
-	<logger name="jdbc.sqltiming" level="INFO" />
-	<logger name="jdbc.audit" level="WARN" />
-	<logger name="jdbc.resultset" level="ERROR" />
-	<logger name="jdbc.resultsettable" level="ERROR" />
-	<logger name="jdbc.connection" level="INFO" />
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
+			</layout>
+		</encoder>
+	</appender>
+	
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${catalina.base}/logs/notice.log</file>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
+			</layout>
+		</encoder>
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="com.notice.board" level="info" />
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core" level="info" />
+	<logger name="org.springframework.beans" level="info" />
+	<logger name="org.springframework.context" level="info" />
+	<logger name="org.springframework.web" level="info" />
+
+	<!-- SQL -->	
+	<logger name="jdbc.sqlonly" level="info" />
+	<logger name="jdbc.sqltiming" level="warn" />
+	<logger name="jdbc.audit" level="warn" />
+	<logger name="jdbc.resultset" level="error" />
+	<logger name="jdbc.resultsettable" level="error" />
+	<logger name="jdbc.connection" level="error" />
+	
+	<!-- Root Logger -->
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+	
 </configuration>
