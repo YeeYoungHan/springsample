@@ -12,9 +12,10 @@
 		<property name="username" value="spring"></property>
 		<property name="password" value="spring"></property>
 		<property name="validationQuery" value="SELECT 1"></property>
-    </bean>
-     -->
-	 
+	</bean>
+	-->
+	
+	<!-- 아래와 같이 설정하면 SQL 쿼리를 전송하기 전에 SELECT 1 을 항상 전송하여서 DB connection 이 끊겼는지 검사하여서 DB connection 이 끊겨도 다시 연결하여서 정상적으로 동작한다. 
 	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
 		<property name="driver" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
@@ -23,6 +24,7 @@
 		<property name="poolPingEnabled" value="true"></property>
 		<property name="poolPingQuery" value="select 1"></property>
 	</bean>
+	-->
 
 	<!-- 아래와 같이 설정하면 DB connection 이 종료된 후, 20 초 이내에 SQL 쿼리를 전송하면 500 에러가 발생하고 20 초 이후에 SQL 쿼리를 전송하면 정상적으로 동작한다.
 	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
@@ -46,14 +48,23 @@
 	</bean>
 	 -->
 
-	<!--	
+	<!-- SQL 로그 기록	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="spring"></property>
 		<property name="password" value="spring"></property>
 	</bean>
-	 -->
+	-->
+	
+	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+		<property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
+		<property name="username" value="spring"></property>
+		<property name="password" value="spring"></property>
+		<property name="poolPingEnabled" value="true"></property>
+		<property name="poolPingQuery" value="select 1"></property>
+	</bean>
 		
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
