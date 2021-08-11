@@ -21,6 +21,7 @@ package com.notice.board;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -215,6 +216,12 @@ public class BoardController
 	{
 		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
 		model.addAttribute( "row", clsRow );
+		
+		// 설정 파일 읽기 테스트
+		ResourceBundle clsBundle = ResourceBundle.getBundle( "properties.env", java.util.Locale.getDefault() );
+		String strTest = clsBundle.getString( "TEST" );
+		
+		System.out.println( "strTest[" + strTest + "]" );
 				
 		return "update_test2";
 	}
