@@ -41,9 +41,24 @@ public class Setup
 	@Value("${TEST}")
 	String m_strTest;
 	
+	@Value("${INT_TEST}")
+	int m_iIntTest;
+	
+	@Value("${BOOL_TEST}")
+	boolean m_bBoolTest;
+	
+	@Value("${BOOL_TEST2}")
+	boolean m_bBoolTest2;
+	
 	// 설정파일에 존재하지 않는 값에 대한 기본값 설정 테스트
 	@Value("${NULL:}")
 	String m_strNull;
+	
+	@Value("${NULL:-1}")
+	int m_iIntNull;
+	
+	@Value("${NULL:false}")
+	boolean m_bBoolNull;
 	
 	public String Get( String strName )
 	{

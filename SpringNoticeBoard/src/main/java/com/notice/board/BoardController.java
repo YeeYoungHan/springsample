@@ -230,8 +230,13 @@ public class BoardController
 		strTest = m_clsSetup.Get( "TEST" );
 		
 		System.out.println( "Setup => strTest[" + strTest + "]" );
-		System.out.println( "Setup member => strText[" + m_clsSetup.m_strTest + "]" );
+		System.out.println( "Setup member => strTest[" + m_clsSetup.m_strTest + "]" );
+		System.out.println( "Setup member => iIntTest[" + m_clsSetup.m_iIntTest + "]" );
+		System.out.println( "Setup member => bBoolTest[" + m_clsSetup.m_bBoolTest + "]" );
+		System.out.println( "Setup member => bBoolTest2[" + m_clsSetup.m_bBoolTest2 + "]" );
 		System.out.println( "Setup member => strNull[" + m_clsSetup.m_strNull + "]" );
+		System.out.println( "Setup member => iIntNull[" + m_clsSetup.m_iIntNull + "]" );
+		System.out.println( "Setup member => bBoolNull[" + m_clsSetup.m_bBoolNull + "]" );
 				
 		return "update_test2";
 	}
