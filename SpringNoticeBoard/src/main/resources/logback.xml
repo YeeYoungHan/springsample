@@ -10,6 +10,7 @@
 		</encoder>
 	</appender>
 	
+	<!--
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
 		<file>${catalina.base}/logs/notice.log</file>
 		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
@@ -17,6 +18,23 @@
 				<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
 			</layout>
 		</encoder>
+	</appender>
+	-->
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.base}/logs/notice.log</file>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
+			</layout>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		  <fileNamePattern>${catalina.base}/logs/notice.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+		  <maxHistory>10</maxHistory>
+		  <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+		    <maxFileSize>5MB</maxFileSize>
+		  </timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
 	</appender>
 
 	<!-- Application Loggers -->
