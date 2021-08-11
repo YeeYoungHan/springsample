@@ -209,7 +209,7 @@ public class BoardController
 		return "redirect:list";
 	}
 	
-	// 
+	// @RequestParam Map<String,String> clsMap Å×½ºÆ®
 	@RequestMapping(value = "update_test2", method = RequestMethod.GET)
 	public String updateTest2( @RequestParam("id") int iId, Model model )
 	{
