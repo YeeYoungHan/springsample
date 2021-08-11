@@ -230,6 +230,8 @@ public class BoardController
 		strTest = m_clsSetup.Get( "TEST" );
 		
 		System.out.println( "Setup => strTest[" + strTest + "]" );
+		System.out.println( "Setup member => strText[" + m_clsSetup.m_strTest + "]" );
+		System.out.println( "Setup member => strNull[" + m_clsSetup.m_strNull + "]" );
 				
 		return "update_test2";
 	}

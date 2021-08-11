@@ -15,17 +15,6 @@
 	
 		<% 
 			com.notice.db.NoticeBoardRow clsRow = (com.notice.db.NoticeBoardRow)request.getAttribute("row");
-		
-			System.out.println( "### JSP ###" );
-			System.out.println( "Request = " + request );
-		
-			java.util.Enumeration<String> arrName = request.getAttributeNames();
-			
-			while( arrName.hasMoreElements() )
-			{
-				String strName = arrName.nextElement( );
-				System.out.println( "[" + strName + "]" );
-			}
 		%>
 	
 		<form action="update_test2" method="post" class="form-horizontal">

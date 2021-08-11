@@ -20,8 +20,11 @@ package com.notice.board;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
 /** 설정 파일을 읽는 bean 클래스
@@ -35,8 +38,21 @@ public class Setup
 	@Inject
 	Environment m_clsEnv;
 	
+	@Value("${TEST}")
+	String m_strTest;
+	
+	// 설정파일에 존재하지 않는 값에 대한 기본값 설정 테스트
+	@Value("${NULL:}")
+	String m_strNull;
+	
 	public String Get( String strName )
 	{
 		return m_clsEnv.getProperty( strName );
 	}
+	
+	@Bean
+  public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer()
+	{
+		return new PropertySourcesPlaceholderConfigurer();
+  }
 }
