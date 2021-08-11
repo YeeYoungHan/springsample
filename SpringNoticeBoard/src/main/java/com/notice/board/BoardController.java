@@ -47,6 +47,9 @@ public class BoardController
 	@Inject
 	SqlSession m_clsSession;
 	
+	@Inject
+	Setup m_clsSetup;
+	
 	@PostConstruct
 	public void Init()
 	{
@@ -217,11 +220,16 @@ public class BoardController
 		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
 		model.addAttribute( "row", clsRow );
 		
-		// 설정 파일 읽기 테스트
+		// ResourceBundle 로 설정 파일 읽기 테스트
 		ResourceBundle clsBundle = ResourceBundle.getBundle( "properties.env", java.util.Locale.getDefault() );
 		String strTest = clsBundle.getString( "TEST" );
 		
-		System.out.println( "strTest[" + strTest + "]" );
+		System.out.println( "ResourceBundle => strTest[" + strTest + "]" );
+		
+		// Setup bean 으로 설정 파일 읽기 테스트
+		strTest = m_clsSetup.Get( "TEST" );
+		
+		System.out.println( "Setup => strTest[" + strTest + "]" );
 				
 		return "update_test2";
 	}
