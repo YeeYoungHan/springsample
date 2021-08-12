@@ -7,8 +7,8 @@
 	
 	<!-- 아래와 같이 설정하면 SQL 쿼리를 전송하기 전에 SELECT 1 을 항상 전송하여서 DB connection 이 끊겼는지 검사하여서 DB connection 이 끊겨도 다시 연결하여서 정상적으로 동작한다. 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="spring"></property>
 		<property name="password" value="spring"></property>
 		<property name="validationQuery" value="SELECT 1"></property>
@@ -56,14 +56,13 @@
 		<property name="password" value="spring"></property>
 	</bean>
 	-->
-	
-	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
-		<property name="driver" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
-		<property name="username" value="spring"></property>
-		<property name="password" value="spring"></property>
-		<property name="poolPingEnabled" value="true"></property>
-		<property name="poolPingQuery" value="select 1"></property>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul" />
+		<property name="username" value="spring" />
+		<property name="password" value="spring" />
+		<property name="validationQuery" value="SELECT 1" />
 	</bean>
 		
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
