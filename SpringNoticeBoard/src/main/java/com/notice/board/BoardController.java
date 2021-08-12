@@ -28,6 +28,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,6 +51,8 @@ public class BoardController
 	
 	@Inject
 	Setup m_clsSetup;
+	
+	private static Logger LOG = LoggerFactory.getLogger( BoardController.class );
 	
 	@PostConstruct
 	public void Init()
@@ -163,22 +167,22 @@ public class BoardController
 		NoticeBoardRow clsOutput = (NoticeBoardRow)clsRequest.getAttribute( "row" );
 		if( clsOutput != null )
 		{
-			System.out.println( "row is found" );
+			LOG.info( "row is found" );
 		}
 		else
 		{
-			System.out.println( "row is not found" );
+			LOG.info( "row is not found" );
 		}
 		
-		System.out.println( "### Controller ###" );
-		System.out.println( "Request = " + clsRequest );
+		LOG.info( "### Controller ###" );
+		LOG.info( "Request = " + clsRequest );
 		
 		Enumeration<String> arrName = clsRequest.getAttributeNames( );
 		
 		while( arrName.hasMoreElements() )
 		{
 			String strName = arrName.nextElement( );
-			System.out.println( "[" + strName + "]" );
+			LOG.info( "[" + strName + "]" );
 		}
 		
 		return "update_test";

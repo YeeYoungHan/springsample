@@ -1,3 +1,4 @@
+<%@page import="org.slf4j.Logger"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -14,17 +15,19 @@
 		<div style="margin-top:20px"></div>
 	
 		<% 
+			org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger( "update_test.jsp" );
+		
 			com.notice.db.NoticeBoardRow clsRow = (com.notice.db.NoticeBoardRow)request.getAttribute("row");
 		
-			System.out.println( "### JSP ###" );
-			System.out.println( "Request = " + request );
+			LOG.info( "### JSP ###" );
+			LOG.info( "Request = " + request );
 		
 			java.util.Enumeration<String> arrName = request.getAttributeNames();
 			
 			while( arrName.hasMoreElements() )
 			{
 				String strName = arrName.nextElement( );
-				System.out.println( "[" + strName + "]" );
+				LOG.info( "[" + strName + "]" );
 			}
 		%>
 	
