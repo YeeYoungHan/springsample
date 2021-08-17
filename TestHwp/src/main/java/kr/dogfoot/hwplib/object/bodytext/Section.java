@@ -2,7 +2,6 @@ package kr.dogfoot.hwplib.object.bodytext;
 
 import kr.dogfoot.hwplib.object.bodytext.control.sectiondefine.BatangPageInfo;
 import kr.dogfoot.hwplib.object.bodytext.paragraph.Paragraph;
-import kr.dogfoot.hwplib.object.docinfo.ParaShape;
 
 import java.util.ArrayList;
 import java.util.Iterator;

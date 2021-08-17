@@ -1,7 +1,6 @@
 package kr.dogfoot.hwplib.object.bodytext.paragraph;
 
 import kr.dogfoot.hwplib.object.bodytext.ParagraphListInterface;
-import kr.dogfoot.hwplib.object.bodytext.paragraph.rangetag.ParaRangeTag;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

@@ -12,7 +12,6 @@ import kr.dogfoot.hwplib.writer.autosetter.InstanceID;
 import kr.dogfoot.hwplib.writer.bodytext.ForSection;
 import kr.dogfoot.hwplib.writer.docinfo.ForDocInfo;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 

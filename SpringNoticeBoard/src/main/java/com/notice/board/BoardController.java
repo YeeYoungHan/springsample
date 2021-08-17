@@ -177,11 +177,11 @@ public class BoardController
 		LOG.info( "### Controller ###" );
 		LOG.info( "Request = " + clsRequest );
 		
-		Enumeration<String> arrName = clsRequest.getAttributeNames( );
+		Enumeration<?> arrName = clsRequest.getAttributeNames( );
 		
 		while( arrName.hasMoreElements() )
 		{
-			String strName = arrName.nextElement( );
+			String strName = (String)arrName.nextElement( );
 			LOG.info( "[" + strName + "]" );
 		}
 		

@@ -5,7 +5,7 @@ import kr.dogfoot.hwplib.object.bodytext.control.ctrlheader.CtrlHeaderSectionDef
 import kr.dogfoot.hwplib.object.bodytext.control.sectiondefine.BatangPageInfo;
 import kr.dogfoot.hwplib.object.etc.HWPTag;
 import kr.dogfoot.hwplib.util.compoundFile.writer.StreamWriter;
-import kr.dogfoot.hwplib.writer.bodytext.paragraph.control.bookmark.ForCtrlData;
+//import kr.dogfoot.hwplib.writer.bodytext.paragraph.control.bookmark.ForCtrlData;
 import kr.dogfoot.hwplib.writer.bodytext.paragraph.control.secd.ForBatangPageInfo;
 import kr.dogfoot.hwplib.writer.bodytext.paragraph.control.secd.ForFootEndNoteShape;
 import kr.dogfoot.hwplib.writer.bodytext.paragraph.control.secd.ForPageBorderFill;
@@ -106,10 +106,12 @@ public class ForControlSectionDefine {
      * @param sw 스트림 라이터
      * @throws IOException
      */
+    /*
     private static void ctrlData(ControlSectionDefine sd, StreamWriter sw)
             throws IOException {
         if (sd.getCtrlData() != null) {
             ForCtrlData.write(sd.getCtrlData(), sw);
         }
     }
+    */
 }

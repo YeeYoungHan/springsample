@@ -25,6 +25,7 @@ public class ExcelController{
 			HSSFWorkbook clsBook = new HSSFWorkbook( new FileInputStream( "c:\\temp\\1.xlsx" ) );
 			Sheet clsSheet = clsBook.getSheetAt(0);
 			int iNum = clsSheet.getLastRowNum();
+			logger.debug( "lastRowNum=" + iNum );
 			clsBook.close();
 		}
 		catch( Exception e )

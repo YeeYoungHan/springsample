@@ -2,7 +2,6 @@ package kr.dogfoot.hwplib.tool.paragraphadder.control;
 
 import kr.dogfoot.hwplib.object.bodytext.control.ControlTable;
 import kr.dogfoot.hwplib.object.bodytext.control.ctrlheader.CtrlHeaderGso;
-import kr.dogfoot.hwplib.object.bodytext.control.ctrlheader.gso.GsoHeaderProperty;
 import kr.dogfoot.hwplib.object.bodytext.control.table.*;
 import kr.dogfoot.hwplib.tool.paragraphadder.ParagraphCopier;
 import kr.dogfoot.hwplib.tool.paragraphadder.docinfo.DocInfoAdder;

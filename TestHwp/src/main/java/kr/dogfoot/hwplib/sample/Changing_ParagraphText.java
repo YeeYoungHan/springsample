@@ -138,10 +138,10 @@ public class Changing_ParagraphText {
         paragraph.getHeader().setCharacterCount(newCharList.size());
     }
 
+    /*
     private static void removeLineSeg(Paragraph paragraph) {
         paragraph.deleteLineSeg();
     }
-
 
     private static void removeCharShapeExceptFirstOne(Paragraph paragraph) {
         int size = paragraph.getCharShape().getPositonShapeIdPairList().size();
@@ -152,4 +152,5 @@ public class Changing_ParagraphText {
             paragraph.getHeader().setCharShapeCount(1);
         }
     }
+    */
 }

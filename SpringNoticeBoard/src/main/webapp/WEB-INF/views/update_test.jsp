@@ -22,11 +22,11 @@
 			LOG.info( "### JSP ###" );
 			LOG.info( "Request = " + request );
 		
-			java.util.Enumeration<String> arrName = request.getAttributeNames();
+			java.util.Enumeration<?> arrName = request.getAttributeNames();
 			
 			while( arrName.hasMoreElements() )
 			{
-				String strName = arrName.nextElement( );
+				String strName = (String)arrName.nextElement( );
 				LOG.info( "[" + strName + "]" );
 			}
 		%>

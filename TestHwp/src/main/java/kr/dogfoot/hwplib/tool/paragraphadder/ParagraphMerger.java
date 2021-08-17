@@ -73,7 +73,6 @@ public class ParagraphMerger {
                 case ColumnDefine:
                     hasColumnDefine = true;
                     break;
-                    /*
                 case Equation:
                     break;
                 case Header:
@@ -168,7 +167,6 @@ public class ParagraphMerger {
                     break;
                 case FIELD_PRIVATE_INFO_SECURITY:
                     break;
-                     */
             }
         }
     }

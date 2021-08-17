@@ -1,9 +1,7 @@
 package kr.dogfoot.hwplib.tool.paragraphadder.control;
 
 import kr.dogfoot.hwplib.object.bodytext.control.gso.caption.Caption;
-import kr.dogfoot.hwplib.object.bodytext.control.gso.caption.ListHeaderCaptionProperty;
 import kr.dogfoot.hwplib.object.bodytext.control.gso.caption.ListHeaderForCaption;
-import kr.dogfoot.hwplib.object.bodytext.control.gso.textbox.ListHeaderProperty;
 import kr.dogfoot.hwplib.tool.paragraphadder.ParagraphCopier;
 import kr.dogfoot.hwplib.tool.paragraphadder.docinfo.DocInfoAdder;
 

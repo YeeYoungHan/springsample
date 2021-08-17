@@ -61,9 +61,10 @@ public class Extracting_Text {
         HWPWriter.toFile(hwpFile, "sample_hwp" + File.separator + "b.hwp" );
     }
 
+    /*
     private static String fullPath(String filename) {
         return "sample_hwp" + File.separator + "basic" + File.separator + filename;
     }
-
+		*/
 
 }

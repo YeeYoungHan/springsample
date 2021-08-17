@@ -1,7 +1,6 @@
 package com.test;
 
 import java.io.InputStream;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;

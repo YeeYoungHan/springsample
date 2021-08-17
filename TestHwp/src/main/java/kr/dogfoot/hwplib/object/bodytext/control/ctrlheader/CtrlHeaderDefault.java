@@ -1,7 +1,5 @@
 package kr.dogfoot.hwplib.object.bodytext.control.ctrlheader;
 
-import kr.dogfoot.hwplib.object.bodytext.control.Control;
-
 public class CtrlHeaderDefault extends CtrlHeader {
     /**
      * 생성자
