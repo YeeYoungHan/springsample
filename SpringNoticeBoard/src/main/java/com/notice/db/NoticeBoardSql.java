@@ -25,8 +25,8 @@ import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
-/** annotation ±â¹İ MyBatis ±â´ÉÀ» ÀÌ¿ëÇÑ Å×ÀÌºí INSERT, SELECT µîÀÇ ±â´ÉÀ» ¼öÇàÇÏ´Â ÀÎÅÍÆäÀÌ½º 
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+/** annotation ê¸°ë°˜ MyBatis ê¸°ëŠ¥ì„ ì´ìš©í•œ í…Œì´ë¸” INSERT, SELECT ë“±ì˜ ê¸°ëŠ¥ì„ ìˆ˜í–‰í•˜ëŠ” ì¸í„°í˜ì´ìŠ¤ 
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  *
  */
 public interface NoticeBoardSql

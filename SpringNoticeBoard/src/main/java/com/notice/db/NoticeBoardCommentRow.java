@@ -21,8 +21,8 @@ package com.notice.db;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
-/** ´ñ±Û ÀúÀå Å¬·¡½º
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+/** ëŒ“ê¸€ ì €ì¥ í´ë˜ìŠ¤
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  */
 public class NoticeBoardCommentRow
 {

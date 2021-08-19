@@ -6,9 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-/** ·Î±×ÀÎ »óÅÂ¿¡¼­¸¸ º¼ ¼ö ÀÖ´Â ÆäÀÌÁö¿¡ ·Î±×ÀÎµÇÁö ¾ÊÀº »óÅÂ¿¡¼­ Á¢±ÙÇÏ¸é ·Î±×ÀÎ È­¸éÀ» º¸¿©ÁØ´Ù.
+/** ë¡œê·¸ì¸ ìƒíƒœì—ì„œë§Œ ë³¼ ìˆ˜ ìˆëŠ” í˜ì´ì§€ì— ë¡œê·¸ì¸ë˜ì§€ ì•Šì€ ìƒíƒœì—ì„œ ì ‘ê·¼í•˜ë©´ ë¡œê·¸ì¸ í™”ë©´ì„ ë³´ì—¬ì¤€ë‹¤.
  * 
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter
 {
@@ -19,7 +19,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter
 	{
 		String strUrl = request.getRequestURI( );
 		
-		// ·Î±×ÀÎ ÆäÀÌÁö°¡ ¾Æ´Ï°í ·Î±×ÀÎ ¼¼¼ÇÀÌ ÀúÀåµÇ¾î ÀÖÁö ¾ÊÀ¸¸é ·Î±×ÀÎ ÆäÀÌÁö¸¦ º¸¿©ÁØ´Ù.
+		// ë¡œê·¸ì¸ í˜ì´ì§€ê°€ ì•„ë‹ˆê³  ë¡œê·¸ì¸ ì„¸ì…˜ì´ ì €ì¥ë˜ì–´ ìˆì§€ ì•Šìœ¼ë©´ ë¡œê·¸ì¸ í˜ì´ì§€ë¥¼ ë³´ì—¬ì¤€ë‹¤.
 		if( strUrl.equals( "login" ) == false )
 		{
 			HttpSession clsSession = request.getSession( );

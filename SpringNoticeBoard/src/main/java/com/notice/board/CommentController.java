@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.notice.db.NoticeBoardCommentRow;
 
-/** ´ñ±Û °ü¸® ÄÁÆ®·Ñ·¯
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+/** ëŒ“ê¸€ ê´€ë¦¬ ì»¨íŠ¸ë¡¤ëŸ¬
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  */
 @RestController
 public class CommentController
@@ -44,10 +44,10 @@ public class CommentController
 	@Inject
 	SqlSession m_clsSession;
 	
-	/** ´ñ±Û ¸®½ºÆ® ¿äÃ»¿¡ ´ëÇÑ ÀÀ´äÀ» Àü¼ÛÇÑ´Ù.
-	 * @param iId		°Ô½Ã¹° ¾ÆÀÌµğ
-	 * @param model	view ·Î Àü´ŞÇÒ °´Ã¼
-	 * @return ´ñ±Û ¸®½ºÆ® ¹× HTTP ÀÀ´ä ÄÚµå¸¦ ÀúÀåÇÑ °´Ã¼
+	/** ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ ìš”ì²­ì— ëŒ€í•œ ì‘ë‹µì„ ì „ì†¡í•œë‹¤.
+	 * @param iId		ê²Œì‹œë¬¼ ì•„ì´ë””
+	 * @param model	view ë¡œ ì „ë‹¬í•  ê°ì²´
+	 * @return ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ ë° HTTP ì‘ë‹µ ì½”ë“œë¥¼ ì €ì¥í•œ ê°ì²´
 	 */
 	@RequestMapping(value = "list_comment", method = RequestMethod.GET)
 	public ResponseEntity<List<NoticeBoardCommentRow>> listComment( @RequestParam("id") int iId, Model model )
@@ -67,9 +67,9 @@ public class CommentController
 		return clsResponse;
 	}
 	
-	/** ´ñ±Û ÀúÀå ¿äÃ»¿¡ ´ëÇÑ ÀÀ´äÀ» Àü¼ÛÇÑ´Ù.
-	 * @param clsRow ´ñ±Û Á¤º¸ ÀúÀå °´Ã¼
-	 * @return ¼º°ø ¿©ºÎ ¹× HTTP ÀÀ´ä ÄÚµå¸¦ ÀúÀåÇÑ °´Ã¼
+	/** ëŒ“ê¸€ ì €ì¥ ìš”ì²­ì— ëŒ€í•œ ì‘ë‹µì„ ì „ì†¡í•œë‹¤.
+	 * @param clsRow ëŒ“ê¸€ ì •ë³´ ì €ì¥ ê°ì²´
+	 * @return ì„±ê³µ ì—¬ë¶€ ë° HTTP ì‘ë‹µ ì½”ë“œë¥¼ ì €ì¥í•œ ê°ì²´
 	 */
 	@Transactional
 	@RequestMapping(value = "insert_comment", method = RequestMethod.POST)

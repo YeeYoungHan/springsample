@@ -32,14 +32,14 @@ public class NoticeBoardRow
 	
 	private static SimpleDateFormat m_clsDateFormat = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" );
 	
-	// INSERT ¿ë »ı¼ºÀÚ
+	// INSERT ìš© ìƒì„±ì
 	public NoticeBoardRow( String strSubject, String strContent )
 	{
 		m_strSubject = strSubject;
 		m_strContent = strContent;
 	}
 	
-	// UPDATE ¿ë »ı¼ºÀÚ
+	// UPDATE ìš© ìƒì„±ì
 	public NoticeBoardRow( long iId, String strSubject, String strContent )
 	{
 		m_iId = iId;
@@ -47,7 +47,7 @@ public class NoticeBoardRow
 		m_strContent = strContent;
 	}
 	
-	// SELECT LIST ¿ë »ı¼ºÀÚ
+	// SELECT LIST ìš© ìƒì„±ì
 	public NoticeBoardRow( long iId, String strSubject, Timestamp clsInsertDate, long iReadCount, long iCommentCount )
 	{
 		m_iId = iId;
@@ -57,7 +57,7 @@ public class NoticeBoardRow
 		m_iCommentCount = iCommentCount;
 	}
 	
-	// SELECT ¿ë »ı¼ºÀÚ
+	// SELECT ìš© ìƒì„±ì
 	public NoticeBoardRow( long iId, String strSubject, String strContent, Timestamp clsInsertDate )
 	{
 		m_iId = iId;

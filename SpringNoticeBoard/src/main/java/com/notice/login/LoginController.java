@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/** »ç¿ëÀÚ ·Î±×ÀÎ Å×½ºÆ®
+/** ì‚¬ìš©ì ë¡œê·¸ì¸ í…ŒìŠ¤íŠ¸
  * 
- * http://localhost:8080/board/html_a ·Î ¿¬°áÇÏ¸é http://localhost:8080/board/login ÆäÀÌÁö°¡ º¸¿©Áö°í ·Î±×ÀÎÇÒ ¼ö ÀÖ´Ù.
- * ·Î±×ÀÎ¿¡ ¼º°øÇÏ¸é http://localhost:8080/board/html_a ¿¡ Á¢±ÙÇÒ ¼ö ÀÖ´Ù.
+ * http://localhost:8080/board/html_a ë¡œ ì—°ê²°í•˜ë©´ http://localhost:8080/board/login í˜ì´ì§€ê°€ ë³´ì—¬ì§€ê³  ë¡œê·¸ì¸í•  ìˆ˜ ìˆë‹¤.
+ * ë¡œê·¸ì¸ì— ì„±ê³µí•˜ë©´ http://localhost:8080/board/html_a ì— ì ‘ê·¼í•  ìˆ˜ ìˆë‹¤.
  * 
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  */
 @Controller
 public class LoginController
 {
-	/** ·Î±×ÀÎ È­¸éÀ» º¸¿©ÁØ´Ù. 
-	 * @return ·Î±×ÀÎ È­¸é JSP ÆäÀÌÁö ÀÌ¸§
+	/** ë¡œê·¸ì¸ í™”ë©´ì„ ë³´ì—¬ì¤€ë‹¤. 
+	 * @return ë¡œê·¸ì¸ í™”ë©´ JSP í˜ì´ì§€ ì´ë¦„
 	 */
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login( )
@@ -26,15 +26,15 @@ public class LoginController
 		return "login";
 	}
 	
-	/** ·Î±×ÀÎ ÀÔ·Â°ªÀ» ºĞ¼®ÇÏ¿©¼­ ·Î±×ÀÎ ¼º°ø/½ÇÆĞ Ã³¸®ÇÑ´Ù. 
-	 * @return ·Î±×ÀÎ ¼º°øÇÏ¸é ÃÖÃÊ º¸¿©ÁÙ JSP ÆäÀÌÁö ÀÌ¸§À» ¸®ÅÏÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é ·Î±×ÀÎ È­¸é JSP ÆäÀÌÁö ÀÌ¸§À» ¸®ÅÏÇÑ´Ù.
+	/** ë¡œê·¸ì¸ ì…ë ¥ê°’ì„ ë¶„ì„í•˜ì—¬ì„œ ë¡œê·¸ì¸ ì„±ê³µ/ì‹¤íŒ¨ ì²˜ë¦¬í•œë‹¤. 
+	 * @return ë¡œê·¸ì¸ ì„±ê³µí•˜ë©´ ìµœì´ˆ ë³´ì—¬ì¤„ JSP í˜ì´ì§€ ì´ë¦„ì„ ë¦¬í„´í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ë¡œê·¸ì¸ í™”ë©´ JSP í˜ì´ì§€ ì´ë¦„ì„ ë¦¬í„´í•œë‹¤.
 	 */
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login( @RequestParam("id") String strUserId, @RequestParam("pw") String strPassWord, HttpSession clsSession )
 	{
 		if( strUserId.equals( "admin" ) && strPassWord.equals( "spring" ) )
 		{
-			// ·Î±×ÀÎ ¼º°ø => HTTP ¼¼¼Ç¿¡ ·Î±×ÀÎ Á¤º¸¸¦ ÀúÀåÇÑ´Ù.
+			// ë¡œê·¸ì¸ ì„±ê³µ => HTTP ì„¸ì…˜ì— ë¡œê·¸ì¸ ì •ë³´ë¥¼ ì €ì¥í•œë‹¤.
 			clsSession.setAttribute( LoginInterceptor.LOGIN, "ok" );
 			
 			return "redirect:html_a";

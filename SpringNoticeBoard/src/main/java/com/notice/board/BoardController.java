@@ -40,8 +40,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.notice.db.NoticeBoardRow;
 import com.notice.db.NoticeBoardSql;
 
-/** °Ô½ÃÆÇ ÄÁÆ®·Ñ·¯
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+/** ê²Œì‹œíŒ ì»¨íŠ¸ë¡¤ëŸ¬
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  */
 @Controller
 public class BoardController
@@ -60,9 +60,9 @@ public class BoardController
 		m_clsSession.getConfiguration( ).addMapper( NoticeBoardSql.class );
 	}
 	
-	/** °Ô½ÃÆÇ ¸®½ºÆ® º¸¿©ÁÖ±â
-	 * @param model view ·Î Àü´ŞÇÒ °´Ã¼
-	 * @return °Ô½ÃÆÇ ¸®½ºÆ® JSP ÆÄÀÏ ÀÌ¸§
+	/** ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ë³´ì—¬ì£¼ê¸°
+	 * @param model view ë¡œ ì „ë‹¬í•  ê°ì²´
+	 * @return ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ JSP íŒŒì¼ ì´ë¦„
 	 */
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String list( Model model )
@@ -74,9 +74,9 @@ public class BoardController
 		return "list";
 	}
 	
-	/** °Ô½Ã±Û Ãß°¡ È­¸é º¸¿©ÁÖ±â
-	 * @param model	view ·Î Àü´ŞÇÒ °´Ã¼
-	 * @return °Ô½Ã±Û Ãß°¡ JSP ÆÄÀÏ ÀÌ¸§
+	/** ê²Œì‹œê¸€ ì¶”ê°€ í™”ë©´ ë³´ì—¬ì£¼ê¸°
+	 * @param model	view ë¡œ ì „ë‹¬í•  ê°ì²´
+	 * @return ê²Œì‹œê¸€ ì¶”ê°€ JSP íŒŒì¼ ì´ë¦„
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.GET)
 	public String insert( Model model )
@@ -84,11 +84,11 @@ public class BoardController
 		return "insert";
 	}
 	
-	/** °Ô½Ã±Û ÀúÀåÇÏ±â
-	 * @param strSubject	Á¦¸ñ
-	 * @param strContent	³»¿ë
-	 * @param model			view ·Î Àü´ŞÇÒ °´Ã¼
-	 * @return ¼º°øÇÏ¸é °Ô½Ã±Û ¸®½ºÆ® JSP ÆÄÀÏ·Î redirect ÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é °Ô½Ã±Û Ãß°¡ JSP ÆÄÀÏÀ» ¸®ÅÏÇÑ´Ù.
+	/** ê²Œì‹œê¸€ ì €ì¥í•˜ê¸°
+	 * @param strSubject	ì œëª©
+	 * @param strContent	ë‚´ìš©
+	 * @param model			view ë¡œ ì „ë‹¬í•  ê°ì²´
+	 * @return ì„±ê³µí•˜ë©´ ê²Œì‹œê¸€ ë¦¬ìŠ¤íŠ¸ JSP íŒŒì¼ë¡œ redirect í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ê²Œì‹œê¸€ ì¶”ê°€ JSP íŒŒì¼ì„ ë¦¬í„´í•œë‹¤.
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public String insertAction( @RequestParam("subject") String strSubject, @RequestParam("content") String strContent, Model model )
@@ -98,10 +98,10 @@ public class BoardController
 		return "redirect:list";
 	}
 	
-	/** °Ô½Ã±Û ¼öÁ¤ È­¸é º¸¿©ÁÖ±â
-	 * @param iId		°Ô½Ã±Û ¾ÆÀÌµğ
-	 * @param model	view ·Î Àü´ŞÇÒ °´Ã¼
-	 * @return °Ô½Ã±Û ¼öÁ¤ JSP ÆÄÀÏ ÀÌ¸§
+	/** ê²Œì‹œê¸€ ìˆ˜ì • í™”ë©´ ë³´ì—¬ì£¼ê¸°
+	 * @param iId		ê²Œì‹œê¸€ ì•„ì´ë””
+	 * @param model	view ë¡œ ì „ë‹¬í•  ê°ì²´
+	 * @return ê²Œì‹œê¸€ ìˆ˜ì • JSP íŒŒì¼ ì´ë¦„
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public String update( @RequestParam("id") int iId, Model model )
@@ -112,11 +112,11 @@ public class BoardController
 		return "update";
 	}
 		
-	/** °Ô½Ã±Û ¼öÁ¤ÇÏ±â
-	 * @param strSubject	Á¦¸ñ
-	 * @param strContent	³»¿ë
-	 * @param model			view ·Î Àü´ŞÇÒ °´Ã¼
-	 * @return ¼º°øÇÏ¸é °Ô½Ã±Û ¸®½ºÆ® JSP ÆÄÀÏ·Î redirect ÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é °Ô½Ã±Û Ãß°¡ JSP ÆÄÀÏÀ» ¸®ÅÏÇÑ´Ù.
+	/** ê²Œì‹œê¸€ ìˆ˜ì •í•˜ê¸°
+	 * @param strSubject	ì œëª©
+	 * @param strContent	ë‚´ìš©
+	 * @param model			view ë¡œ ì „ë‹¬í•  ê°ì²´
+	 * @return ì„±ê³µí•˜ë©´ ê²Œì‹œê¸€ ë¦¬ìŠ¤íŠ¸ JSP íŒŒì¼ë¡œ redirect í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ê²Œì‹œê¸€ ì¶”ê°€ JSP íŒŒì¼ì„ ë¦¬í„´í•œë‹¤.
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String updateAction( @RequestParam("id") int iId, @RequestParam("subject") String strSubject, @RequestParam("content") String strContent, Model model )
@@ -126,9 +126,9 @@ public class BoardController
 		return "redirect:list";
 	}
 	
-	/** °Ô½Ã±Û »èÁ¦ÇÏ±â
-	 * @param iId		°Ô½Ã±Û ¾ÆÀÌµğ
-	 * @return °Ô½Ã±Û ¼öÁ¤ JSP ÆÄÀÏ ÀÌ¸§
+	/** ê²Œì‹œê¸€ ì‚­ì œí•˜ê¸°
+	 * @param iId		ê²Œì‹œê¸€ ì•„ì´ë””
+	 * @return ê²Œì‹œê¸€ ìˆ˜ì • JSP íŒŒì¼ ì´ë¦„
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String delete( @RequestParam("id") int iId )
@@ -138,10 +138,10 @@ public class BoardController
 		return "redirect:list";
 	}
 	
-	/** °Ô½Ã±Û »ó¼¼ º¸¿©ÁÖ±â
-	 * @param iId		°Ô½Ã±Û ¾ÆÀÌµğ
-	 * @param model	view ·Î Àü´ŞÇÒ °´Ã¼
-	 * @return °Ô½Ã±Û »ó¼¼ º¸¿©ÁÖ±â JSP ÆÄÀÏ ÀÌ¸§
+	/** ê²Œì‹œê¸€ ìƒì„¸ ë³´ì—¬ì£¼ê¸°
+	 * @param iId		ê²Œì‹œê¸€ ì•„ì´ë””
+	 * @param model	view ë¡œ ì „ë‹¬í•  ê°ì²´
+	 * @return ê²Œì‹œê¸€ ìƒì„¸ ë³´ì—¬ì£¼ê¸° JSP íŒŒì¼ ì´ë¦„
 	 */
 	@RequestMapping(value = "select", method = RequestMethod.GET)
 	public String select( @RequestParam("id") int iId, Model model )
@@ -157,7 +157,7 @@ public class BoardController
 		return "select";
 	}
 
-	// Model °´Ã¼¿¡ ÀúÀåµÈ °ªµéÀÌ HttpServletRequest °´Ã¼¿¡ ÀúÀåµÇ´Â ±â´ÉÀ» È®ÀÎÇÑ´Ù.
+	// Model ê°ì²´ì— ì €ì¥ëœ ê°’ë“¤ì´ HttpServletRequest ê°ì²´ì— ì €ì¥ë˜ëŠ” ê¸°ëŠ¥ì„ í™•ì¸í•œë‹¤.
 	@RequestMapping(value = "update_test", method = RequestMethod.GET)
 	public String updateTest( @RequestParam("id") int iId, Model model, HttpServletRequest clsRequest )
 	{
@@ -188,7 +188,7 @@ public class BoardController
 		return "update_test";
 	}
 
-	// @ModelAttribute ±â´ÉÀ» È®ÀÎÇÑ´Ù.
+	// @ModelAttribute ê¸°ëŠ¥ì„ í™•ì¸í•œë‹¤.
 	static class UpdateData
 	{
 		int id;
@@ -217,20 +217,20 @@ public class BoardController
 		return "redirect:list";
 	}
 	
-	// @RequestParam Map<String,String> clsMap Å×½ºÆ®
+	// @RequestParam Map<String,String> clsMap í…ŒìŠ¤íŠ¸
 	@RequestMapping(value = "update_test2", method = RequestMethod.GET)
 	public String updateTest2( @RequestParam("id") int iId, Model model )
 	{
 		NoticeBoardRow clsRow = m_clsSession.selectOne( "Select", iId );
 		model.addAttribute( "row", clsRow );
 		
-		// ResourceBundle ·Î ¼³Á¤ ÆÄÀÏ ÀĞ±â Å×½ºÆ®
+		// ResourceBundle ë¡œ ì„¤ì • íŒŒì¼ ì½ê¸° í…ŒìŠ¤íŠ¸
 		ResourceBundle clsBundle = ResourceBundle.getBundle( "properties.env", java.util.Locale.getDefault() );
 		String strTest = clsBundle.getString( "TEST" );
 		
 		System.out.println( "ResourceBundle => strTest[" + strTest + "]" );
 		
-		// Setup bean À¸·Î ¼³Á¤ ÆÄÀÏ ÀĞ±â Å×½ºÆ®
+		// Setup bean ìœ¼ë¡œ ì„¤ì • íŒŒì¼ ì½ê¸° í…ŒìŠ¤íŠ¸
 		strTest = m_clsSetup.Get( "TEST" );
 		
 		System.out.println( "Setup => strTest[" + strTest + "]" );

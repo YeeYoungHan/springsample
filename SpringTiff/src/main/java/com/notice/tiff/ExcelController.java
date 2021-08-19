@@ -30,13 +30,13 @@ public class ExcelController{
 		}
 		catch( Exception e )
 		{
-			// ¾ÏÈ£È­µÈ xlsx ÆÄÀÏÀÌ¸é ¾Æ·¡¿Í °°Àº ¿¡·¯ ¸Ş½ÃÁö°¡ Ãâ·ÂµÈ´Ù.
+			// ì•”í˜¸í™”ëœ xlsx íŒŒì¼ì´ë©´ ì•„ë˜ì™€ ê°™ì€ ì—ëŸ¬ ë©”ì‹œì§€ê°€ ì¶œë ¥ëœë‹¤.
 			// org.apache.poi.EncryptedDocumentException: The supplied spreadsheet seems to be an Encrypted .xlsx file. It must be decrypted before use by XSSF, it cannot be used by HSSF
 			
-			// ¾ÏÈ£È­µÇ¾î ÀÖÁö ¾Ê´Â xlsx ÆÄÀÏÀÌ¸é ¾Æ·¡¿Í °°Àº ¿¡·¯ ¸Ş½ÃÁö°¡ Ãâ·ÂµÈ´Ù.
+			// ì•”í˜¸í™”ë˜ì–´ ìˆì§€ ì•ŠëŠ” xlsx íŒŒì¼ì´ë©´ ì•„ë˜ì™€ ê°™ì€ ì—ëŸ¬ ë©”ì‹œì§€ê°€ ì¶œë ¥ëœë‹¤.
 			// org.apache.poi.poifs.filesystem.OfficeXmlFileException: The supplied data appears to be in the Office 2007+ XML. You are calling the part of POI that deals with OLE2 Office Documents. You need to call a different part of POI to process this data (eg XSSF instead of HSSF)
 			
-			// ¾ÏÈ£È­µÈ xls ÆÄÀÏÀÌ¸é ¾Æ·¡¿Í °°Àº ¿¡·¯ ¸Ş½ÃÁö°¡ Ãâ·ÂµÈ´Ù.
+			// ì•”í˜¸í™”ëœ xls íŒŒì¼ì´ë©´ ì•„ë˜ì™€ ê°™ì€ ì—ëŸ¬ ë©”ì‹œì§€ê°€ ì¶œë ¥ëœë‹¤.
 			// org.apache.poi.EncryptedDocumentException: Default password is invalid for salt/verifier/verifierHash
 			String strError = e.toString();
 			

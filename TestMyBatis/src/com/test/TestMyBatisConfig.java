@@ -7,9 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-/** MyBatis ¼³Á¤ ÆÄÀÏ Å×½ºÆ® Å¬·¡½º
+/** MyBatis ì„¤ì • íŒŒì¼ í…ŒìŠ¤íŠ¸ í´ë˜ìŠ¤
  * 
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  *
  */
 public class TestMyBatisConfig
@@ -17,9 +17,9 @@ public class TestMyBatisConfig
 	String m_strConfigPath = "com/test/ConfigProperties.xml";
 	SqlSessionFactory m_clsFactory = null;
 	
-	/** SqlSessionFactory ¸¦ ¸®ÅÏÇÑ´Ù.
+	/** SqlSessionFactory ë¥¼ ë¦¬í„´í•œë‹¤.
 	 * 
-	 * @return SqlSessionFactory ¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @return SqlSessionFactory ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	SqlSessionFactory CreateSqlSessionFactory()
 	{
@@ -40,10 +40,10 @@ public class TestMyBatisConfig
 		return m_clsFactory;
 	}
 	
-	/** ÇÏ³ªÀÇ ROW ¿¡ Æ÷ÇÔµÈ ÇÏ³ªÀÇ ÄÃ·³À» °¡Á®¿À´Â ¿¹Á¦
+	/** í•˜ë‚˜ì˜ ROW ì— í¬í•¨ëœ í•˜ë‚˜ì˜ ì»¬ëŸ¼ì„ ê°€ì ¸ì˜¤ëŠ” ì˜ˆì œ
 	 * 
-	 * @param iId noticeboard Å×ÀÌºíÀÇ nbId ÄÃ·³°ª
-	 * @return noticeboard Å×ÀÌºíÀÇ nbId ÄÃ·³°ú ÀÏÄ¡ÇÏ´Â nbSubject ÄÃ·³°ªÀ» ¸®ÅÏÇÑ´Ù.
+	 * @param iId noticeboard í…Œì´ë¸”ì˜ nbId ì»¬ëŸ¼ê°’
+	 * @return noticeboard í…Œì´ë¸”ì˜ nbId ì»¬ëŸ¼ê³¼ ì¼ì¹˜í•˜ëŠ” nbSubject ì»¬ëŸ¼ê°’ì„ ë¦¬í„´í•œë‹¤.
 	 */
 	String SelectSubject( int iId )
 	{

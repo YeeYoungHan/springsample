@@ -8,9 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-/** XML ±â¹İ ¸¶ÀÌ¹ÙÆ¼½º Å×½ºÆ® Å¬·¡½º
+/** XML ê¸°ë°˜ ë§ˆì´ë°”í‹°ìŠ¤ í…ŒìŠ¤íŠ¸ í´ë˜ìŠ¤
  * 
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  *
  */
 public class TestMyBatisXml
@@ -18,9 +18,9 @@ public class TestMyBatisXml
 	String m_strConfigPath = "com/test/Config.xml";
 	SqlSessionFactory m_clsFactory = null;
 	
-	/** SqlSessionFactory ¸¦ ¸®ÅÏÇÑ´Ù.
+	/** SqlSessionFactory ë¥¼ ë¦¬í„´í•œë‹¤.
 	 * 
-	 * @return SqlSessionFactory ¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @return SqlSessionFactory ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	SqlSessionFactory CreateSqlSessionFactory()
 	{
@@ -41,10 +41,10 @@ public class TestMyBatisXml
 		return m_clsFactory;
 	}
 	
-	/** ÇÏ³ªÀÇ ROW ¿¡ Æ÷ÇÔµÈ ÇÏ³ªÀÇ ÄÃ·³À» °¡Á®¿À´Â ¿¹Á¦
+	/** í•˜ë‚˜ì˜ ROW ì— í¬í•¨ëœ í•˜ë‚˜ì˜ ì»¬ëŸ¼ì„ ê°€ì ¸ì˜¤ëŠ” ì˜ˆì œ
 	 * 
-	 * @param iId noticeboard Å×ÀÌºíÀÇ nbId ÄÃ·³°ª
-	 * @return noticeboard Å×ÀÌºíÀÇ nbId ÄÃ·³°ú ÀÏÄ¡ÇÏ´Â nbSubject ÄÃ·³°ªÀ» ¸®ÅÏÇÑ´Ù.
+	 * @param iId noticeboard í…Œì´ë¸”ì˜ nbId ì»¬ëŸ¼ê°’
+	 * @return noticeboard í…Œì´ë¸”ì˜ nbId ì»¬ëŸ¼ê³¼ ì¼ì¹˜í•˜ëŠ” nbSubject ì»¬ëŸ¼ê°’ì„ ë¦¬í„´í•œë‹¤.
 	 */
 	String SelectSubject( int iId )
 	{
@@ -57,10 +57,10 @@ public class TestMyBatisXml
 		}
 	}
 	
-	/** ÇÏ³ªÀÇ ROW ¿¡ Æ÷ÇÔµÈ ¸ğµç ÄÃ·³µéÀ» °¡Á®¿À´Â ¿¹Á¦
+	/** í•˜ë‚˜ì˜ ROW ì— í¬í•¨ëœ ëª¨ë“  ì»¬ëŸ¼ë“¤ì„ ê°€ì ¸ì˜¤ëŠ” ì˜ˆì œ
 	 * 
-	 * @param iId noticeboard Å×ÀÌºíÀÇ nbId ÄÃ·³°ª
-	 * @return noticeboard Å×ÀÌºíÀÇ nbId ÄÃ·³°ú ÀÏÄ¡ÇÏ´Â ¸ğµç ÄÃ·³À» ÀúÀåÇÑ NoticeRow °´Ã¼¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @param iId noticeboard í…Œì´ë¸”ì˜ nbId ì»¬ëŸ¼ê°’
+	 * @return noticeboard í…Œì´ë¸”ì˜ nbId ì»¬ëŸ¼ê³¼ ì¼ì¹˜í•˜ëŠ” ëª¨ë“  ì»¬ëŸ¼ì„ ì €ì¥í•œ NoticeRow ê°ì²´ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	NoticeRow SelectRow( int iId )
 	{
@@ -73,10 +73,10 @@ public class TestMyBatisXml
 		}
 	}
 	
-	/** ÇÏ³ªÀÇ ROW ¿¡ Æ÷ÇÔµÈ ¸ğµç ÄÃ·³µéÀ» °¡Á®¿À´Â ¿¹Á¦
+	/** í•˜ë‚˜ì˜ ROW ì— í¬í•¨ëœ ëª¨ë“  ì»¬ëŸ¼ë“¤ì„ ê°€ì ¸ì˜¤ëŠ” ì˜ˆì œ
 	 * 
-	 * @param clsCondition Á¶°ÇÀ» ÀúÀåÇÏ´Â °´Ã¼
-	 * @return NoticeRow °´Ã¼¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @param clsCondition ì¡°ê±´ì„ ì €ì¥í•˜ëŠ” ê°ì²´
+	 * @return NoticeRow ê°ì²´ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	NoticeRow SelectRowCondition( NoticeRow clsCondition )
 	{
@@ -89,9 +89,9 @@ public class TestMyBatisXml
 		}
 	}
 	
-	/** N °³ÀÇ ROW ¸¦ °¡Á®¿À´Â ¿¹Á¦
+	/** N ê°œì˜ ROW ë¥¼ ê°€ì ¸ì˜¤ëŠ” ì˜ˆì œ
 	 * 
-	 * @return N °³ÀÇ ROW ¸¦ ÀúÀåÇÑ °´Ã¼¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @return N ê°œì˜ ROW ë¥¼ ì €ì¥í•œ ê°ì²´ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	List<NoticeRow> SelectRowList( )
 	{
@@ -104,10 +104,10 @@ public class TestMyBatisXml
 		}
 	}
 	
-	/** ÇÏ³ªÀÇ ROW ¸¦ INSERT ÇÏ´Â ¿¹Á¦
+	/** í•˜ë‚˜ì˜ ROW ë¥¼ INSERT í•˜ëŠ” ì˜ˆì œ
 	 * 
-	 * @param clsRow NoticeRow °´Ã¼
-	 * @return ¼º°øÇÏ¸é true ¸¦ ¸®ÅÏÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é false ¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @param clsRow NoticeRow ê°ì²´
+	 * @return ì„±ê³µí•˜ë©´ true ë¥¼ ë¦¬í„´í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	boolean InsertRow( NoticeRow clsRow )
 	{
@@ -126,10 +126,10 @@ public class TestMyBatisXml
 		return false;
 	}
 	
-	/** nbContent ÄÃ·³À» ¼öÁ¤ÇÏ´Â ¿¹Á¦
+	/** nbContent ì»¬ëŸ¼ì„ ìˆ˜ì •í•˜ëŠ” ì˜ˆì œ
 	 * 
-	 * @param clsRow NoticeRow °´Ã¼
-	 * @return ¼º°øÇÏ¸é true ¸¦ ¸®ÅÏÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é false ¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @param clsRow NoticeRow ê°ì²´
+	 * @return ì„±ê³µí•˜ë©´ true ë¥¼ ë¦¬í„´í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	boolean UpdateContent( NoticeRow clsRow )
 	{
@@ -148,10 +148,10 @@ public class TestMyBatisXml
 		return false;
 	}
 	
-	/** ÀÔ·ÂµÈ ID ¿Í ÀÏÄ¡ÇÏ´Â ROW ¸¦ »èÁ¦ÇÑ´Ù.
+	/** ì…ë ¥ëœ ID ì™€ ì¼ì¹˜í•˜ëŠ” ROW ë¥¼ ì‚­ì œí•œë‹¤.
 	 * 
-	 * @param iId noticeboard Å×ÀÌºíÀÇ nbId ÄÃ·³°ª
-	 * @return ¼º°øÇÏ¸é true ¸¦ ¸®ÅÏÇÏ°í ±×·¸Áö ¾ÊÀ¸¸é false ¸¦ ¸®ÅÏÇÑ´Ù.
+	 * @param iId noticeboard í…Œì´ë¸”ì˜ nbId ì»¬ëŸ¼ê°’
+	 * @return ì„±ê³µí•˜ë©´ true ë¥¼ ë¦¬í„´í•˜ê³  ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ false ë¥¼ ë¦¬í„´í•œë‹¤.
 	 */
 	boolean DeleteRow( int iId )
 	{

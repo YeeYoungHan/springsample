@@ -27,9 +27,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 
-/** ¼³Á¤ ÆÄÀÏÀ» ÀĞ´Â bean Å¬·¡½º
+/** ì„¤ì • íŒŒì¼ì„ ì½ëŠ” bean í´ë˜ìŠ¤
  * 
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  */
 @Configuration
 @PropertySource("classpath:/properties/env.properties")
@@ -50,7 +50,7 @@ public class Setup
 	@Value("${BOOL_TEST2}")
 	boolean m_bBoolTest2;
 	
-	// ¼³Á¤ÆÄÀÏ¿¡ Á¸ÀçÇÏÁö ¾Ê´Â °ª¿¡ ´ëÇÑ ±âº»°ª ¼³Á¤ Å×½ºÆ®
+	// ì„¤ì •íŒŒì¼ì— ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê°’ì— ëŒ€í•œ ê¸°ë³¸ê°’ ì„¤ì • í…ŒìŠ¤íŠ¸
 	@Value("${NULL:}")
 	String m_strNull;
 	

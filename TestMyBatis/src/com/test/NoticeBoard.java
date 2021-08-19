@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
 
-/** ¾Ö³ëÅ×ÀÌ¼ÇÀ» »ç¿ëÇÑ ¸ÅÇÎ ±¸¹® ÀúÀå ÀÎÅÍÆäÀÌ½º
+/** ì• ë…¸í…Œì´ì…˜ì„ ì‚¬ìš©í•œ ë§¤í•‘ êµ¬ë¬¸ ì €ì¥ ì¸í„°í˜ì´ìŠ¤
  * 
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  *
  */
 public interface NoticeBoard

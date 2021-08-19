@@ -18,10 +18,10 @@
 
 package com.notice.board;
 
-/** ´ñ±Û ÀúÀå ¿äÃ» Á¤º¸¸¦ ÀúÀåÇÏ´Â Å¬·¡½º
- *  NoticeBoardCommentRow Å¬·¡½ºÀ» »ç¿ëÇÒ ¼öµµ ÀÖÁö¸¸ NoticeBoardCommentRow Å¬·¡½º¸¦ »ç¿ëÇÒ °æ¿ì, NoticeBoardCommentRow ±âº» »ý¼ºÀÚ°¡ ÇÊ¿äÇÏ°í NoticeBoardCommentRow ±âº» »ý¼ºÀÚ°¡ Á¸ÀçÇÏ¸é MyBatis ¿¡¼­ 
- *  ´ñ±Û ¸®½ºÆ®¸¦ °¡Á®¿Ã ¶§¿¡ ±âº» »ý¼ºÀÚ ¶§¹®¿¡ Á¤»óÀûÀ¸·Î µ¿ÀÛÇÏÁö ¾ÊÀ¸¹Ç·Î MyBatis ¿¡¼­ ´ñ±Û ¸®½ºÆ®¸¦ Á¤»óÀûÀ¸·Î °¡Á®¿À±â À§ÇØ¼­ »õ·Î¿î Å¬·¡½º¸¦ »ý¼ºÇÏ¿´´Ù.
- * @author ÀÌ¿µÇÑ ( http://blog.naver.com/websearch )
+/** ëŒ“ê¸€ ì €ìž¥ ìš”ì²­ ì •ë³´ë¥¼ ì €ìž¥í•˜ëŠ” í´ëž˜ìŠ¤
+ *  NoticeBoardCommentRow í´ëž˜ìŠ¤ì„ ì‚¬ìš©í•  ìˆ˜ë„ ìžˆì§€ë§Œ NoticeBoardCommentRow í´ëž˜ìŠ¤ë¥¼ ì‚¬ìš©í•  ê²½ìš°, NoticeBoardCommentRow ê¸°ë³¸ ìƒì„±ìžê°€ í•„ìš”í•˜ê³  NoticeBoardCommentRow ê¸°ë³¸ ìƒì„±ìžê°€ ì¡´ìž¬í•˜ë©´ MyBatis ì—ì„œ 
+ *  ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¬ ë•Œì— ê¸°ë³¸ ìƒì„±ìž ë•Œë¬¸ì— ì •ìƒì ìœ¼ë¡œ ë™ìž‘í•˜ì§€ ì•Šìœ¼ë¯€ë¡œ MyBatis ì—ì„œ ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ë¥¼ ì •ìƒì ìœ¼ë¡œ ê°€ì ¸ì˜¤ê¸° ìœ„í•´ì„œ ìƒˆë¡œìš´ í´ëž˜ìŠ¤ë¥¼ ìƒì„±í•˜ì˜€ë‹¤.
+ * @author ì´ì˜í•œ ( http://blog.naver.com/websearch )
  */
 public class NoticeBoardCommentData
 {
