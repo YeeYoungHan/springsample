@@ -3,6 +3,7 @@ package com.test;
 import java.io.InputStream;
 import java.util.List;
 
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -74,7 +75,7 @@ public class TestMyBatisAnnotation
 		}
 	}
 	
-	/** 하나의 ROW 에 포함된 모든 컬럼들을 가져오는 예제
+	/** @SelectProvider 를 이용한 동적 SQL 문을 생성하여서 하나의 ROW 에 포함된 모든 컬럼들을 가져오는 예제
 	 * 
 	 * @param clsCondition 조건을 저장하는 객체
 	 * @return NoticeRow 객체를 리턴한다.
@@ -87,6 +88,23 @@ public class TestMyBatisAnnotation
 		try( SqlSession clsSession = clsFactory.openSession( ) )
 		{
 			return clsSession.getMapper( NoticeBoard.class ).SelectRowCondition( clsCondition );
+		}
+	}
+	
+	/** @Param 을 이용한 동적 SQL 문을 생성하여서 하나의 ROW 에 포함된 모든 컬럼들을 가져오는 예제
+	 * 
+	 * @param iId					아이디
+	 * @param strSubject	제목
+	 * @return NoticeRow 객체를 리턴한다.
+	 */
+	NoticeRow SelectArg( int iId, String strSubject )
+	{
+		SqlSessionFactory clsFactory = CreateSqlSessionFactory();
+		if( clsFactory == null ) return null;
+		
+		try( SqlSession clsSession = clsFactory.openSession( ) )
+		{
+			return clsSession.getMapper( NoticeBoard.class ).SelectArg( iId, strSubject );
 		}
 	}
 	
@@ -194,13 +212,19 @@ public class TestMyBatisAnnotation
 		System.out.println( clsRow.toString() );
 		*/
 		
+		NoticeRow clsRow = clsTest.SelectArg( 2, null );
+		System.out.println( clsRow.toString() );
+		
+		clsRow = clsTest.SelectArg( 0, "subject" );
+		System.out.println( clsRow.toString() );
+		
+		/*
 		List<NoticeRow> clsList = clsTest.SelectRowList();
 		for( NoticeRow clsRow : clsList )
 		{
 			System.out.println( clsRow.toString() );
 		}
 		
-		/*
 		NoticeRow clsRow = new NoticeRow();
 		clsRow.m_strSubject = "MyBatis annotation";
 		clsRow.m_strContent = "MyBatis annotation Content";

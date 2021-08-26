@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.Update;
@@ -23,6 +24,14 @@ public interface NoticeBoard
 	
 	@SelectProvider(type=NoticeBoardProvider.class, method="SelectRowCondition")
 	NoticeRow SelectRowCondition( NoticeRow clsCondition );
+	
+	@Select({"SELECT nbSubject AS m_strSubject, nbContent AS m_strContent, nbReadCount AS m_iReadCount, nbInsertDate AS m_clsInsertDate, nbCommentCount AS m_iCommentCount " + 
+		"FROM noticeboard " +
+		"WHERE 1=1 " +
+		"AND if(#{id}=0,1=1,nbId=#{id}) " +
+		"AND if(#{subject} is null,1=1,nbSubject=#{subject})"
+		})
+	NoticeRow SelectArg( @Param("id") int iId, @Param("subject") String strSubject );
 	
 	@Select({"SELECT nbSubject AS m_strSubject, nbContent AS m_strContent, nbReadCount AS m_iReadCount, nbInsertDate AS m_clsInsertDate, nbCommentCount AS m_iCommentCount FROM noticeboard"})
 	List<NoticeRow> SelectRowList( );
