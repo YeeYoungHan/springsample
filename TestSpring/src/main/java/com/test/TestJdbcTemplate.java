@@ -26,6 +26,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -105,6 +106,17 @@ public class TestJdbcTemplate implements TestJdbcTemplateInterface
 		}
 	};
 	
+	/** BeanPropertyRowMapper 클래스를 이용하여서 하나의 ROW 를 가져온다.
+	 * 
+	 * @param iId 키
+	 * @return 하나의 ROW 를 저장한 객체를 리턴한다.
+	 */
+	public Notice SelectAutoMapper( int iId )
+	{
+		return jdbcTemplate.queryForObject( "SELECT nbId, nbSubject, nbContent FROM noticeboard WHERE nbId = ?"
+				, new BeanPropertyRowMapper<Notice>(Notice.class), iId );
+	}
+	
 	/** 하나의 ROW 를 저장할 클래스
 	 * 
 	 * @author 이영한 ( http://blog.naver.com/websearch )
@@ -114,6 +126,21 @@ public class TestJdbcTemplate implements TestJdbcTemplateInterface
 		public int m_iId;
 		public String m_strSubject;
 		public String m_strContent;
+		
+		public void setNbId( int iId )
+		{
+			m_iId = iId;
+		}
+		
+		public void setNbSubject( String strSubject )
+		{
+			m_strSubject = strSubject;
+		}
+		
+		public void setNbContent( String strContent )
+		{
+			m_strContent = strContent;
+		}
 		
 		public String toString()
 		{
@@ -171,8 +198,11 @@ public class TestJdbcTemplate implements TestJdbcTemplateInterface
 		// 하나의 ROW 를 가져오는 테스트
 		try
 		{
-			Notice clsNotice = clsTest.Select( 7 );
+			Notice clsNotice = clsTest.Select( 4 );
 			System.out.println( clsNotice.toString( ) );
+			
+			clsNotice = clsTest.SelectAutoMapper( 3 );
+			System.out.println( "SelectAutoMapper => " + clsNotice.toString( ) );
 		}
 		catch( EmptyResultDataAccessException e )
 		{
