@@ -17,8 +17,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class CreatePdfWithHeader
 {
-public static int COL_COUNT = 4;
-	
 	public static void main( String[] args ) throws Exception
 	{
 		String strWorkFolder = System.getProperty( "user.dir" );
@@ -46,7 +44,6 @@ public static int COL_COUNT = 4;
 	
 	static class MyPageEvent2 extends PdfPageEventHelper
 	{
-
 		@Override
 		public void onEndPage( PdfWriter writer, Document document )
 		{
