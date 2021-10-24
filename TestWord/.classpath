@@ -22,5 +22,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/spire.pdf.free-2.6.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
