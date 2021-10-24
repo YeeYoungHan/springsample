@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 public class CreateExcel
 {
@@ -39,12 +40,11 @@ public class CreateExcel
 		
 		HSSFSheet clsSheet = clsWorkBook.createSheet( );
 		
-		clsSheet.setDefaultRowHeight( (short)350 );
-
 		// 10행 * 5열을 추가한다.
 		for( int iRow = 0; iRow < 10; ++iRow )
 		{
 			HSSFRow clsRow = clsSheet.createRow( iRow );
+			clsRow.setHeight( (short)350 );
 			
 			for( int iCol = 0; iCol < 5; ++iCol )
 			{
@@ -54,6 +54,19 @@ public class CreateExcel
 				clsCell.setCellStyle( clsCellStyle );
 			}
 		}
+		
+		// 마지막 행의 모든 열을 합친다.
+		clsSheet.addMergedRegion( new CellRangeAddress( 9, 9, 0, 4 ) );
+		
+		HSSFRow clsRow = clsSheet.getRow( 9 );
+		clsRow.setHeight( (short)700 );
+		
+		HSSFCell clsCell = clsRow.getCell( 0 );
+		
+		clsCell.setCellValue( "첫번째 라인입니다.\n두번째 라인입니다." );
+		clsCellStyle.setWrapText( true );
+		clsCell.setCellStyle( clsCellStyle );
+		
 		
 		// 컬럼 폭이 자동으로 설정되도록 수정한다.
 		for( int iCol = 0; iCol < 5; ++iCol )
