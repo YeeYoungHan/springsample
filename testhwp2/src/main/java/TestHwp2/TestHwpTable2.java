@@ -1,12 +1,9 @@
 package TestHwp2;
 
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JLabel;
 import kr.dogfoot.hwplib.object.HWPFile;
 import kr.dogfoot.hwplib.object.bodytext.Section;
 import kr.dogfoot.hwplib.object.bodytext.control.ControlTable;
@@ -64,14 +61,110 @@ public class TestHwpTable2
 	// 이 예제는 폰트가 전역으로 설정 합니다.
 	// 폰트 이름과, 스타일, pt 사이즈를 입력합니다.
 	private String fontName = "굴림";
-	private int fontStyle = Font.PLAIN;
 	private int fontSize = 7;
+
+	private int faceNameIndexForBatang;
+
+	public TestHwpTable2( HWPFile hwpFile )
+	{
+		this.hwpFile = hwpFile;
+		faceNameIndexForBatang = createFaceNameForBatang( );
+		charShapeIndexForNormal = createCharShape( false );
+	}
+
+	// 바탕 폰트를 위한 FaceName 객체를 생성한다.(create FaceName Object for 'Batang' font)
+	// '한글' 프로그램에서는 폰트를 적용할 문자를 6개의 부분으로 나눈다.(In 'Hangul' programs, the characters
+	// to be applied to the font are divided into six parts.)
+	private int createFaceNameForBatang()
+	{
+		FaceName fn;
+
+		// 한글 부분을 위한 FaceName 객체를 생성한다. (create FaceName Object for hangul part.)
+		fn = hwpFile.getDocInfo( ).addNewHangulFaceName( );
+		setFaceNameForBatang( fn );
+
+		// 영어 부분을 위한 FaceName 객체를 생성한다. (create FaceName Object for english part.)
+		fn = hwpFile.getDocInfo( ).addNewEnglishFaceName( );
+		setFaceNameForBatang( fn );
+
+		// 한자 부분을 위한 FaceName 객체를 생성한다. (create FaceName Object for hanja(Chinese)
+		// part.)
+		fn = hwpFile.getDocInfo( ).addNewHanjaFaceName( );
+		setFaceNameForBatang( fn );
+
+		// 일본어 부분을 위한 FaceName 객체를 생성한다.(create FaceName Object for japanse part.)
+		fn = hwpFile.getDocInfo( ).addNewJapaneseFaceName( );
+		setFaceNameForBatang( fn );
+
+		// 기타 문자 부분을 위한 FaceName 객체를 생성한다.(create FaceName Object for etc part.)
+		fn = hwpFile.getDocInfo( ).addNewEtcFaceName( );
+		setFaceNameForBatang( fn );
+
+		// 기호 문자 부분을 위한 FaceName 객체를 생성한다.(create FaceName Object for symbol part.)
+		fn = hwpFile.getDocInfo( ).addNewSymbolFaceName( );
+		setFaceNameForBatang( fn );
+
+		// 사용자 정의 문자 부분을 위한 FaceName 객체를 생성한다.(create FaceName Object for user
+		// part.)
+		fn = hwpFile.getDocInfo( ).addNewUserFaceName( );
+		setFaceNameForBatang( fn );
+
+		return hwpFile.getDocInfo( ).getHangulFaceNameList( ).size( ) - 1;
+	}
+
+	private void setFaceNameForBatang( FaceName fn )
+	{
+		String fontName = "바탕";
+		fn.getProperty( ).setHasBaseFont( false );
+		fn.getProperty( ).setHasFontInfo( false );
+		fn.getProperty( ).setHasSubstituteFont( false );
+		fn.setName( fontName );
+	}
+
+	private int createCharShape( boolean bold )
+	{
+		CharShape cs = hwpFile.getDocInfo( ).addNewCharShape( );
+		// 바탕 폰트를 위한 FaceName 객체를 링크한다. (link FaceName Object for 'Batang' font.)
+		cs.getFaceNameIds( ).setForAll( faceNameIndexForBatang );
+
+		cs.getRatios( ).setForAll( (short)100 );
+		cs.getCharSpaces( ).setForAll( (byte)0 );
+		cs.getRelativeSizes( ).setForAll( (short)100 );
+		cs.getCharOffsets( ).setForAll( (byte)0 );
+		cs.setBaseSize( ptToBaseSize( 11 ) );
+
+		cs.getProperty( ).setItalic( false );
+		cs.getProperty( ).setBold( bold );
+		cs.getProperty( ).setUnderLineSort( UnderLineSort.None );
+		cs.getProperty( ).setOutterLineSort( OutterLineSort.None );
+		cs.getProperty( ).setShadowSort( ShadowSort.None );
+		cs.getProperty( ).setEmboss( false );
+		cs.getProperty( ).setEngrave( false );
+		cs.getProperty( ).setSuperScript( false );
+		cs.getProperty( ).setSubScript( false );
+		cs.getProperty( ).setStrikeLine( false );
+		cs.getProperty( ).setEmphasisSort( EmphasisSort.None );
+		cs.getProperty( ).setUsingSpaceAppropriateForFont( false );
+		cs.getProperty( ).setStrikeLineShape( BorderType.None );
+		cs.getProperty( ).setKerning( false );
+
+		cs.setShadowGap1( (byte)0 );
+		cs.setShadowGap2( (byte)0 );
+		cs.getCharColor( ).setValue( 0x00000000 );
+		cs.getUnderLineColor( ).setValue( 0x00000000 );
+		cs.getShadeColor( ).setValue( -1 );
+		cs.getShadowColor( ).setValue( 0x00b2b2b2 );
+		cs.setBorderFillId( 0 );
+
+		return hwpFile.getDocInfo( ).getCharShapeList( ).size( ) - 1;
+	}
 
 	public void makeTable( List<List<TableCellDTO>> rowList )
 	{
 		int maxRow = rowList.size( );
 		int maxCol = rowList.get( 0 ).size( );
-		ControlTable table = createTableControlAtFirstParagraph( ); // 첫 문단에 테이블을
+		//ControlTable table = createTableControlAtFirstParagraph( ); // 첫 문단에 테이블을
+		ControlTable table = CreateTable();
 																																// 생성합니다.
 		setCtrlHeaderRecord( table ); // 테이블의 헤더를 설정합니다.
 		setTableRecord( table, maxRow, maxCol ); // 테이블 레코드 정보를 설정합니다.
@@ -88,6 +181,17 @@ public class TestHwpTable2
 	{
 		Section firstSection = hwpFile.getBodyText( ).getSectionList( ).get( 0 );
 		Paragraph firstParagraph = firstSection.getParagraph( 0 );
+
+		// 문단에서 표 컨트롤의 위치를 표현하기 위한 확장 문자를 넣는다.
+		firstParagraph.getText( ).addExtendCharForTable( );
+
+		// 문단에 표 컨트롤 추가한다.
+		return (ControlTable)firstParagraph.addNewControl( ControlType.Table );
+	}
+	
+	ControlTable CreateTable()
+	{
+		Paragraph firstParagraph = createTestParagraph( "" );
 
 		// 문단에서 표 컨트롤의 위치를 표현하기 위한 확장 문자를 넣는다.
 		firstParagraph.getText( ).addExtendCharForTable( );
@@ -486,35 +590,116 @@ public class TestHwpTable2
 		fn.setName( fontName );
 	}
 
+	Paragraph createTestParagraph( String strText )
+	{
+		Paragraph p = hwpFile.getBodyText( ).getSectionList( ).get( 0 ).addNewParagraph( );
+		setParaHeader2( p );
+		setParaText( p, strText );
+		setParaCharShape2( p );
+		setParaLineSeg2( p );
+		
+		return p;
+	}
+
+	void setParaHeader2( Paragraph p )
+	{
+		ParaHeader ph = p.getHeader( );
+		ph.setLastInList( true );
+		// 문단 모양을 이미 만들어진 문단 모양으로 사용함
+		ph.setParaShapeId( 1 );
+		// 이미 만들어진 스타일으로 사용함
+		ph.setStyleId( (short)1 );
+		ph.getDivideSort( ).setDivideSection( false );
+		ph.getDivideSort( ).setDivideMultiColumn( false );
+		ph.getDivideSort( ).setDividePage( false );
+		ph.getDivideSort( ).setDivideColumn( false );
+		ph.setCharShapeCount( 1 );
+		ph.setRangeTagCount( 0 );
+		ph.setLineAlignCount( 1 );
+		ph.setInstanceID( 0 );
+		ph.setIsMergedByTrack( 0 );
+	}
+
+	private int charShapeIndexForNormal;
+
+	private void setParaCharShape2( Paragraph p )
+	{
+		int paragraphStartPos = 0;
+
+		p.createCharShape( );
+
+		ParaCharShape pcs = p.getCharShape( );
+		pcs.addParaCharShape( paragraphStartPos, charShapeIndexForNormal );
+	}
+
+	private void setParaLineSeg2( Paragraph p )
+	{
+		p.createLineSeg( );
+
+		ParaLineSeg pls = p.getLineSeg( );
+		LineSegItem lsi = pls.addNewLineSegItem( );
+
+		lsi.setTextStartPosition( 0 );
+		lsi.setLineVerticalPosition( 0 );
+		lsi.setLineHeight( ptToLineHeight( 11.0 ) );
+		lsi.setTextPartHeight( ptToLineHeight( 11.0 ) );
+		lsi.setDistanceBaseLineToLineVerticalPosition( ptToLineHeight( 11.0 * 0.85 ) );
+		lsi.setLineSpace( ptToLineHeight( 4.0 ) );
+		lsi.setStartPositionFromColumn( 0 );
+		lsi.setSegmentWidth( (int)mmToHwp( 50.0 ) );
+		lsi.getTag( ).setFirstSegmentAtLine( true );
+		lsi.getTag( ).setLastSegmentAtLine( true );
+	}
+
+	static int m_iPragraph = 0;
+
+	static void PrintText( TestHwpTable2 clsTable, HWPFile hwpFile, String strText ) throws Exception
+	{
+		Section s = hwpFile.getBodyText( ).getSectionList( ).get( 0 );
+
+		if( m_iPragraph != 0 )
+		{
+			clsTable.createTestParagraph( strText );
+		}
+		else
+		{
+			Paragraph firstParagraph = s.getParagraph( m_iPragraph );
+			firstParagraph.getText( ).addString( strText );
+		}
+
+		++m_iPragraph;
+	}
+
 	public static void main( String[] args ) throws Exception
 	{
-		List<List<TableCellDTO>> arrRow = new ArrayList<List<TableCellDTO>>();
-		
+		List<List<TableCellDTO>> arrRow = new ArrayList<List<TableCellDTO>>( );
+
 		for( int iRow = 0; iRow < 5; ++iRow )
 		{
-			List<TableCellDTO> arrCol = new ArrayList<TableCellDTO>();
-			
+			List<TableCellDTO> arrCol = new ArrayList<TableCellDTO>( );
+
 			for( int iCol = 0; iCol < 8; ++iCol )
 			{
-				TableCellDTO clsCell = new TableCellDTO();
-				
-				//clsCell.setWidth( 30 );
-				//clsCell.setHeight( 30 );
+				TableCellDTO clsCell = new TableCellDTO( );
 				clsCell.setText( "행(" + iRow + ") 열(" + iCol + ")" );
-				
+
 				arrCol.add( clsCell );
 			}
-			
+
 			arrRow.add( arrCol );
 		}
-		
-		TestHwpTable2 clsTable = new TestHwpTable2();
-		
+
 		String strHwpPath = System.getProperty( "user.dir" ) + "/test-blank.hwp";
-		clsTable.hwpFile = HWPReader.fromFile( strHwpPath );
-		
+		HWPFile hwpFile = HWPReader.fromFile( strHwpPath );
+
+		TestHwpTable2 clsTable = new TestHwpTable2( hwpFile );
+
+		PrintText( clsTable, clsTable.hwpFile, "주제" );
+		PrintText( clsTable, clsTable.hwpFile, "부주제" );
+		PrintText( clsTable, clsTable.hwpFile, "* 날짜" );
+
 		clsTable.makeTable( arrRow );
-		
+
 		HWPWriter.toFile( clsTable.hwpFile, "c:/temp/3.hwp" );
 	}
 }
