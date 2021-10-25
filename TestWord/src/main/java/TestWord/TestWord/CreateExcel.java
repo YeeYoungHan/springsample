@@ -32,7 +32,7 @@ public class CreateExcel
 		clsCellStyle.setTopBorderColor( IndexedColors.BLACK.getIndex() );
 		
 		// 중앙 정렬
-		clsCellStyle.setAlignment( HorizontalAlignment.CENTER );
+		clsCellStyle.setAlignment( HorizontalAlignment.LEFT );
 		clsCellStyle.setVerticalAlignment( VerticalAlignment.CENTER );
 		
 		// multi-line

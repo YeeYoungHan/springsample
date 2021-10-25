@@ -4,7 +4,8 @@ public class TestPdf
 {
 	public static void main( String[] args ) throws Exception
 	{
-		Pdf clsPdf = new Pdf( "1234" );
+		//DownloadDoc clsPdf = new Pdf( "c:/temp/10.pdf" );
+		DownloadDoc clsPdf = new Excel( "c:/temp/10.xls" );
 		
 		clsPdf.AddString( "제목", true );
 		clsPdf.AddString( "소제목 : ", true );

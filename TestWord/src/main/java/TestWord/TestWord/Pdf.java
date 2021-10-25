@@ -17,13 +17,19 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 
-public class Pdf
+public class Pdf implements DownloadDoc
 {
 	Document m_clsDoc;
 	Font m_clsFont;
 	PdfPTable m_clsTable = null;
 	
 	public Pdf( String strFileName ) throws Exception
+	{
+		Open( strFileName );
+	}
+	
+	@Override
+	public void Open( String strFileName ) throws Exception
 	{
 		String strFontPath = System.getProperty( "user.dir" ) + "/NanumBarunGothic-Regular.ttf";
 		BaseFont clsBaseFont = BaseFont.createFont( strFontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED );
@@ -34,7 +40,7 @@ public class Pdf
 		// landscape
 		m_clsDoc.setPageSize( PageSize.A4.rotate( ) );
 		
-		PdfWriter clsWriter = PdfWriter.getInstance( m_clsDoc, new FileOutputStream( "c:/temp/10.pdf" ) );
+		PdfWriter clsWriter = PdfWriter.getInstance( m_clsDoc, new FileOutputStream( strFileName ) );
 		PdfPageEvent clsPageEvent = new PdfPageEvent();
 		clsWriter.setPageEvent( clsPageEvent );
 		
