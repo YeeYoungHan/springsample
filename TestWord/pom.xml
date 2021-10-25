@@ -46,6 +46,13 @@
 	    <artifactId>itextpdf</artifactId>
 	    <version>5.5.13</version>
 	</dependency>
-			
+	
+	<!-- hwp -->
+	<dependency>
+	    <groupId>kr.dogfoot</groupId>
+	    <artifactId>hwplib</artifactId>
+	    <version>1.0.3</version>
+	</dependency>
+	
   </dependencies>
 </project>

@@ -23,7 +23,8 @@ public class TestPdf
 	public static void main( String[] args ) throws Exception
 	{
 		//DownloadDoc clsPdf = new Pdf( "c:/temp/10.pdf" );
-		DownloadDoc clsPdf = new Excel( "c:/temp/10.xls" );
+		//DownloadDoc clsPdf = new Excel( "c:/temp/10.xls" );
+		DownloadDoc clsPdf = new Hwp( "c:/temp/10.hwp" );
 		
 		clsPdf.AddString( "제목", true );
 		clsPdf.AddString( "소제목 : ", true );
@@ -51,7 +52,7 @@ public class TestPdf
 		int iBlankColCount = iColCount - 6;
 		
 		clsPdf.AddCol( "", iBlankColCount );
-		
+				
 		for( int i = 0; i < ( iColCount - iBlankColCount ); ++i )
 		{
 			clsPdf.AddCol( "결론_" + ( i+1 ) );
