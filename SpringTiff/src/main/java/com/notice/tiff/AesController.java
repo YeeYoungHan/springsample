@@ -42,6 +42,7 @@ public class AesController
 		return "aes";
 	}
 
+	// https://stackoverflow.com/questions/41432896/cryptojs-aes-encryption-and-java-aes-decryption/41434590
 	public static byte[] GetKey( int iKeyLen, byte[] arrSalt, byte[] arrPassWord ) throws Exception
 	{
 		MessageDigest clsMd5 = MessageDigest.getInstance( "MD5" );
