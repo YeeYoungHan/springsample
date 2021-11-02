@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,10 +17,8 @@
 		    }
 		}
 	
-		//var strOutput = CryptoJS.AES.encrypt( "1234", "password", {format: CryptoJSAesJson}).toString();
 		var strOutput = CryptoJS.AES.encrypt( "안녕하세요1234abcdefghijklmn", "password", {format: CryptoJSAesJson}).toString();
 		
-		// {"ct":"sGC5jcmHRN9CLBdHmrcKUw==","iv":"a69dafb05c630cacbaca285b3fad53b7","s":"bdc796439ff43078"}
 		document.write( strOutput );
 	</script>
 </body>
