@@ -14,6 +14,11 @@
 * 이메일: websearch@naver.com
 * 블로그: http://blog.naver.com/websearch
 
+### 개발환경
+
+* Java 8
+* STS
+
 ### MySQL 설정 방법
 
 * MySQL 서버가 설치되어 있지 않다면 MySQL 서버를 설치한다.
@@ -39,4 +44,6 @@
 * TestSpringWeb
   * Simple Spring Web Maven 프로젝트 테스트
 
+### 주의사항
 
+* Java 9 이상에서는 import 문제가 발생할 수 있는 것 같습니다.
