@@ -20,6 +20,7 @@
 * SpringNoticeBoard/sql/CreateTable.sql 을 이용하여서 spring 데이터베이스 및 spring 테이블을 생성한다.
 * spring 데이터베이스에 접근할 수 있는 spring 계정을 생성한다.
   * spring 계정의 비밀번호를 spring 으로 설정한다.
+  * SpringNoticeBoard/src/main/webapp/WEB-INF/spring/root-context.xml 파일에 데어터베이스 접속 정보를 수정한다.
 
 ### 폴더 설명
 
