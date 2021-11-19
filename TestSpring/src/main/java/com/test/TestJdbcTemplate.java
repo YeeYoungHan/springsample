@@ -18,8 +18,10 @@
 
 package com.test;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -29,6 +31,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -52,6 +56,19 @@ public class TestJdbcTemplate implements TestJdbcTemplateInterface
 	public void setTransactionManager( PlatformTransactionManager transactionManager )
 	{
 		this.transactionManager = transactionManager; 
+	}
+	
+	public long Insert( String strSubject, String strContent )
+	{
+		KeyHolder clsKey = new GeneratedKeyHolder();
+		jdbcTemplate.update( connection -> {
+        PreparedStatement ps = connection.prepareStatement( "INSERT INTO noticeboard( nbSubject, nbContent, nbInsertDate ) VALUES( ?, ?, now() )", Statement.RETURN_GENERATED_KEYS );
+        ps.setString( 1, strSubject );
+        ps.setString( 2, strContent );
+          return ps;
+        }, clsKey );
+		
+		return (long)clsKey.getKey();
 	}
 	
 	/** 하나의 ROW 를 삭제한다.
@@ -186,6 +203,11 @@ public class TestJdbcTemplate implements TestJdbcTemplateInterface
 		ApplicationContext context = new GenericXmlApplicationContext("com/test/bean.xml");
 		
 		TestJdbcTemplate clsTest = context.getBean( "testJdbcTemplate", TestJdbcTemplate.class );
+		
+		// INSERT 테스트
+		long iId = clsTest.Insert( "test", "test1234" );
+		
+		System.out.println( "id=" + iId );
 		
 		// ROW 삭제 테스트
 		clsTest.Delete( 7 );
