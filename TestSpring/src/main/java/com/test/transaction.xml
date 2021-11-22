@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="url" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/spring?useUnicode=yes&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Seoul"></property>
+		<property name="username" value="spring"></property>
+		<property name="password" value="spring"></property>
+	</bean>
+		
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="testJdbcTemplate" class="com.test.TestJdbcTemplateTransaction" >
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+
+</beans>
