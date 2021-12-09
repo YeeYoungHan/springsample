@@ -54,6 +54,7 @@ public class LoginController
 		{
 			// 로그인 성공 => HTTP 세션에 로그인 정보를 저장한다.
 			clsSession.setAttribute( LoginInterceptor.LOGIN, "ok" );
+			clsSession.setMaxInactiveInterval( 10 );
 			
 			return "redirect:html_a";
 		}

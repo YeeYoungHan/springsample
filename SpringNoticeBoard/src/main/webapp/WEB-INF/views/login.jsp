@@ -17,13 +17,13 @@
 			<div class="form-inline form-group" >
 				<label for="num" class="col-sm-2 control-label">아이디:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="id" name="id" size="20">
+					<input type="text" class="form-control" id="id" name="id" size="20" value="admin">
 				</div>
 			</div>
 			<div class="form-inline form-group" >
 				<label for="num" class="col-sm-2 control-label">비밀번호:</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="pw" name="pw" size="20">
+					<input type="text" class="form-control" id="pw" name="pw" size="20" value="spring">
 				</div>
 			</div>
 			
