@@ -177,6 +177,7 @@ public class TestHwpTable2
 	 * 
 	 * @return
 	 */
+	/*
 	private ControlTable createTableControlAtFirstParagraph()
 	{
 		Section firstSection = hwpFile.getBodyText( ).getSectionList( ).get( 0 );
@@ -188,6 +189,7 @@ public class TestHwpTable2
 		// 문단에 표 컨트롤 추가한다.
 		return (ControlTable)firstParagraph.addNewControl( ControlType.Table );
 	}
+	*/
 	
 	ControlTable CreateTable()
 	{
