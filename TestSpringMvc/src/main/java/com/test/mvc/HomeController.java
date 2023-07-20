@@ -68,8 +68,8 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/get_user", method = RequestMethod.GET)
 	@ResponseBody
+	@RequestMapping(value = "/get_user", method = RequestMethod.GET)
 	public User GetUser()
 	{
 		User clsUser = new User();

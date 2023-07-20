@@ -6,5 +6,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
 </beans>
