@@ -19,7 +19,9 @@
 package com.test.mvc;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -72,17 +74,32 @@ public class HomeController {
 	@RequestMapping(value = "/get_user", method = RequestMethod.GET)
 	public User GetUser()
 	{
-		User clsUser = new User();
-		
-		clsUser.m_strName = "Kim";
-		clsUser.m_strValue = "Test";
-		
+		User clsUser = new User( "Kim", "Test ");
+				
 		return clsUser;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/get_user_list", method = RequestMethod.GET)
+	public List<User> GetUserList()
+	{
+		List<User> arrList = new ArrayList<User>();
+		
+		arrList.add( new User( "Kim1", "Test1" ) );
+		arrList.add( new User( "Kim2", "Test2" ) );
+		
+		return arrList;
 	}
 	
 	class User
 	{
 		public String m_strName;
 		public String m_strValue;
+		
+		public User( String strName, String strValue )
+		{
+			m_strName = strName;
+			m_strValue = strValue;
+		}
 	}
 }
