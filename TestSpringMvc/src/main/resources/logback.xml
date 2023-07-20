@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration scan="true" scanPeriod="30 seconds">
+	<!-- <include resource="org/springframework/boot/logging/logback/base.xml" />  -->
+		
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
+			</layout>
+		</encoder>
+	</appender>
+	
+	<!--
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${catalina.base}/logs/notice.log</file>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
+			</layout>
+		</encoder>
+	</appender>
+	-->
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.base}/logs/notice.log</file>
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %level [%file:%line] %msg%n</pattern>
+			</layout>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		  <fileNamePattern>${catalina.base}/logs/notice.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+		  <maxHistory>10</maxHistory>
+		  <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+		    <maxFileSize>5MB</maxFileSize>
+		  </timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	<!-- Application Loggers -->
+	<logger name="com.notice.board" level="info" />
+	
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core" level="info" />
+	<logger name="org.springframework.beans" level="info" />
+	<logger name="org.springframework.context" level="info" />
+	<logger name="org.springframework.web" level="info" />
+
+	<!-- SQL -->	
+	<logger name="jdbc.sqlonly" level="info" />
+	<logger name="jdbc.sqltiming" level="warn" />
+	<logger name="jdbc.audit" level="warn" />
+	<logger name="jdbc.resultset" level="error" />
+	<logger name="jdbc.resultsettable" level="error" />
+	<logger name="jdbc.connection" level="error" />
+	
+	<!-- Root Logger -->
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</root>
+	
+</configuration>

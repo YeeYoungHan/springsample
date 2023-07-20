@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Handles requests for the application home page.
@@ -67,4 +68,21 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/get_user", method = RequestMethod.GET)
+	@ResponseBody
+	public User GetUser()
+	{
+		User clsUser = new User();
+		
+		clsUser.m_strName = "Kim";
+		clsUser.m_strValue = "Test";
+		
+		return clsUser;
+	}
+	
+	class User
+	{
+		public String m_strName;
+		public String m_strValue;
+	}
 }
