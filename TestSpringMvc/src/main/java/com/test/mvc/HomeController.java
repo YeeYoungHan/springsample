@@ -35,6 +35,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Handles requests for the application home page.
  */
@@ -115,5 +117,35 @@ public class HomeController {
 			m_strName = strName;
 			m_strValue = strValue;
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/put_user2", method = RequestMethod.POST)
+	public String PutUser2( @RequestBody User2 clsUser )
+	{
+		String strHtml = "name = " + clsUser.m_strName + ", value = " + clsUser.m_strValue;
+		
+		return strHtml;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/get_user2", method = RequestMethod.GET)
+	public User2 GetUser2( )
+	{
+		User2 clsUser = new User2();
+		
+		clsUser.m_strName = "name@1";
+		clsUser.m_strValue = "value#1";
+		
+		return clsUser;
+	}
+	
+	static class User2
+	{
+		@JsonProperty("name")
+		public String m_strName;
+		
+		@JsonProperty("value")
+		public String m_strValue;
 	}
 }
