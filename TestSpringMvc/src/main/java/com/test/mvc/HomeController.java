@@ -30,6 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -91,10 +92,23 @@ public class HomeController {
 		return arrList;
 	}
 	
-	class User
+	@ResponseBody
+	@RequestMapping(value = "/put_user", method = RequestMethod.POST)
+	public String PutUser( @RequestBody User clsUser )
+	{
+		String strHtml = "name = " + clsUser.m_strName + ", value = " + clsUser.m_strValue;
+		
+		return strHtml;
+	}
+	
+	static class User
 	{
 		public String m_strName;
 		public String m_strValue;
+		
+		public User()
+		{
+		}
 		
 		public User( String strName, String strValue )
 		{
