@@ -19,9 +19,7 @@
 package com.test.mvc;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -30,12 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Handles requests for the application home page.
@@ -71,81 +65,5 @@ public class HomeController {
 		System.out.println( "Setup member => bBoolNull[" + m_clsSetup.m_bBoolNull + "]" );
 		
 		return "home";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/get_user", method = RequestMethod.GET)
-	public User GetUser()
-	{
-		User clsUser = new User( "Kim", "Test ");
-				
-		return clsUser;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/get_user_list", method = RequestMethod.GET)
-	public List<User> GetUserList()
-	{
-		List<User> arrList = new ArrayList<User>();
-		
-		arrList.add( new User( "Kim1", "Test1" ) );
-		arrList.add( new User( "Kim2", "Test2" ) );
-		
-		return arrList;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/put_user", method = RequestMethod.POST)
-	public String PutUser( @RequestBody User clsUser )
-	{
-		String strHtml = "name = " + clsUser.m_strName + ", value = " + clsUser.m_strValue;
-		
-		return strHtml;
-	}
-	
-	static class User
-	{
-		public String m_strName;
-		public String m_strValue;
-		
-		public User()
-		{
-		}
-		
-		public User( String strName, String strValue )
-		{
-			m_strName = strName;
-			m_strValue = strValue;
-		}
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/put_user2", method = RequestMethod.POST)
-	public String PutUser2( @RequestBody User2 clsUser )
-	{
-		String strHtml = "name = " + clsUser.m_strName + ", value = " + clsUser.m_iValue;
-		
-		return strHtml;
-	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/get_user2", method = RequestMethod.GET)
-	public User2 GetUser2( )
-	{
-		User2 clsUser = new User2();
-		
-		clsUser.m_strName = "name@1";
-		clsUser.m_iValue = 1234;
-		
-		return clsUser;
-	}
-	
-	static class User2
-	{
-		@JsonProperty("name")
-		public String m_strName;
-		
-		@JsonProperty("value")
-		public int m_iValue;
 	}
 }
