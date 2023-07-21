@@ -72,15 +72,17 @@ public class JsonStrategyController
 	
 	public static class MyClassStrategy extends PropertyNamingStrategyBase
   {
-      @Override
-      public String translate( String strInput )
-      {
-      	if( strInput.startsWith( "m_" ) )
-      	{
-      		return strInput.substring( 2 );
-      	}
-      	
-      	return strInput;
-      }
+		private static final long serialVersionUID = 1L;
+
+		@Override
+    public String translate( String strInput )
+    {
+    	if( strInput.startsWith( "m_" ) )
+    	{
+    		return strInput.substring( 2 );
+    	}
+    	
+    	return strInput;
+    }
   }
 }
