@@ -123,7 +123,7 @@ public class HomeController {
 	@RequestMapping(value = "/put_user2", method = RequestMethod.POST)
 	public String PutUser2( @RequestBody User2 clsUser )
 	{
-		String strHtml = "name = " + clsUser.m_strName + ", value = " + clsUser.m_strValue;
+		String strHtml = "name = " + clsUser.m_strName + ", value = " + clsUser.m_iValue;
 		
 		return strHtml;
 	}
@@ -135,7 +135,7 @@ public class HomeController {
 		User2 clsUser = new User2();
 		
 		clsUser.m_strName = "name@1";
-		clsUser.m_strValue = "value#1";
+		clsUser.m_iValue = 1234;
 		
 		return clsUser;
 	}
@@ -146,6 +146,6 @@ public class HomeController {
 		public String m_strName;
 		
 		@JsonProperty("value")
-		public String m_strValue;
+		public int m_iValue;
 	}
 }
