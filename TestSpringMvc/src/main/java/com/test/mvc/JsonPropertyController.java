@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Controller
 public class JsonPropertyController
 {
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/put_user2", method = RequestMethod.POST)
 	public String PutUser2( @RequestBody User2 clsUser )
