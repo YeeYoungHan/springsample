@@ -23,7 +23,7 @@
 	
 	<script>
 		var iLoginTime = 0;
-		var iSessionTimeout = 10;
+		var iSessionTimeout = 30;
 		
 		function GetSecond()
 		{

@@ -18,8 +18,12 @@
 
 package com.notice.login;
 
+import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +39,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController
 {
+	@Inject
+	Provider<LoginUser> m_clsUser;
+	
+	private static Logger LOG = LoggerFactory.getLogger( LoginController.class );
+	
 	/** 로그인 화면을 보여준다. 
 	 * @return 로그인 화면 JSP 페이지 이름
 	 */
@@ -50,11 +59,13 @@ public class LoginController
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login( @RequestParam("id") String strUserId, @RequestParam("pw") String strPassWord, HttpSession clsSession )
 	{
-		if( strUserId.equals( "admin" ) && strPassWord.equals( "spring" ) )
+		if( strUserId.equals( "admin" ) )
 		{
 			// 로그인 성공 => HTTP 세션에 로그인 정보를 저장한다.
 			clsSession.setAttribute( LoginInterceptor.LOGIN, "ok" );
-			clsSession.setMaxInactiveInterval( 10 );
+			clsSession.setMaxInactiveInterval( 30 );
+			
+			m_clsUser.get( ).m_strPassWord = strPassWord;
 			
 			return "redirect:html_a";
 		}
@@ -65,6 +76,8 @@ public class LoginController
 	@RequestMapping(value = "html_a", method = RequestMethod.GET)
 	public String html_a( )
 	{
+		LOG.error( "password[" + m_clsUser.get( ).m_strPassWord + "]" );
+		
 		return "html_a";
 	}
 	
