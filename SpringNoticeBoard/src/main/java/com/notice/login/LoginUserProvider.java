@@ -18,14 +18,19 @@
 
 package com.notice.login;
 
-import org.springframework.context.annotation.Scope;
-//import org.springframework.context.annotation.ScopedProxyMode;
+import javax.inject.Inject;
+import javax.inject.Provider;
+
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
 
 @Component
-@Scope( value = WebApplicationContext.SCOPE_SESSION )
-public class LoginUser
+public class LoginUserProvider
 {
-	public String m_strPassWord;
+	@Inject
+	private Provider<LoginUser> m_clsUser;
+	
+	public LoginUser GetUser()
+	{
+		return m_clsUser.get( );
+	}
 }

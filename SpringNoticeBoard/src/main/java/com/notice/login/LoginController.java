@@ -19,7 +19,6 @@
 package com.notice.login;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -39,8 +38,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LoginController
 {
+	/*
 	@Inject
 	Provider<LoginUser> m_clsUser;
+	*/
+	
+	@Inject
+	LoginUserProvider m_clsUserProvider;
 	
 	private static Logger LOG = LoggerFactory.getLogger( LoginController.class );
 	
@@ -64,8 +68,8 @@ public class LoginController
 			// 로그인 성공 => HTTP 세션에 로그인 정보를 저장한다.
 			clsSession.setAttribute( LoginInterceptor.LOGIN, "ok" );
 			clsSession.setMaxInactiveInterval( 30 );
-			
-			m_clsUser.get( ).m_strPassWord = strPassWord;
+						
+			m_clsUserProvider.GetUser( ).m_strPassWord = strPassWord;
 			
 			return "redirect:html_a";
 		}
@@ -76,7 +80,7 @@ public class LoginController
 	@RequestMapping(value = "html_a", method = RequestMethod.GET)
 	public String html_a( )
 	{
-		LOG.error( "password[" + m_clsUser.get( ).m_strPassWord + "]" );
+		LOG.error( "password[" + m_clsUserProvider.GetUser( ).m_strPassWord + "]" );
 		
 		return "html_a";
 	}
